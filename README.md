@@ -1,88 +1,157 @@
 # Researcher-AI
 
-Researcher‑AI is an evidence‑first research assistance platform that combines deterministic tooling, selective multi‑agent reasoning, and explicit provenance to accelerate and structure the academic research lifecycle.
+**Researcher-AI** is an agentic research assistant designed to accelerate and strengthen academic research by automating the most time-consuming and cognitively demanding stages of the research lifecycle—without sacrificing rigor, traceability, or human judgment.
 
-> Designed to think with researchers — mapping literature, extracting evidence, generating + critiquing hypotheses, and producing reproducible artifacts.
-
-## What it is
-
-Researcher‑AI is not a generic chatbot. It's a workflow system for researchers that emphasizes:
-
-- Traceability: every claim links back to source snippets and trace metadata.
-- Modularity: small, testable tool services communicate via a common MCP interface.
-- Selective agentic reasoning: agent-to-agent critique is used only when it adds value.
-
-## Key Features
-
-- Semantic literature mapping and cluster labeling
-- Claim extraction and contradiction detection with provenance
-- Iterative hypothesis generation + critic loops with confidence scoring
-- Multimodal evidence extraction (tables, figures, captions) → structured outputs
-- Proposal & artifact generation with explicit citations and rationale
-
-## Architecture (summary)
-
-Core components:
-
-- `Orchestrator`: task planning, session management, trace aggregation
-- `MCP Tool Services`: ingestion, RAG, mapping, extraction, artifact generation (FastAPI)
-- `Agents`: Hypothesis, Critic, and task‑specific reasoners communicating via MCP
-
-See `docs/architecture.md` and `docs/components.md` for full details and interfaces.
-
-## Quick conceptual setup
-
-1. Start core services (ingestion, RAG/vector DB, mapping, extraction, orchestrator).
-2. Configure the orchestrator with MCP manifests for each service.
-3. Ingest a seed corpus and index embeddings.
-4. Run mapping → hypothesis generation → critic loop → extraction → artifact generation.
-
-## Developer notes
-
-- Implement services as small FastAPI apps exposing `GET /manifest` and `POST /call`.
-- Use unit tests for deterministic services and integration tests with mocked LLMs for agent loops.
-- Keep prompt templates and schemas under version control.
-
-## Example MCP call (ingest)
-
-Request to `POST /call` on `ingestion-service`:
-
-```json
-{
-	"operation": "ingest_pdf",
-	"inputs": {"pdf_base64": "..."},
-	"session_id": "sess-123"
-}
-```
-
-Response (minimal):
-
-```json
-{
-	"status": "ok",
-	"outputs": {"document_id":"doc-123","chunks":42},
-	"trace": {"service_version":"0.1.0","timestamp":"..."}
-}
-```
-
-## Running locally (suggested)
-
-- Provide a `docker-compose.yml` that launches the minimal stack: ingestion, RAG/Chroma, mapping, extraction, orchestrator.
-- For tests, use small local LLMs or a hosted provider; ensure trace logging is enabled and prompt templates are tested.
-
-## Tests & evaluation
-
-- Unit test deterministic tools (parsing, extraction, embedding pipeline).
-- Integration tests for end‑to‑end flows using a tiny corpus and mocked agent LLM responses.
-
-## Contributing
-
-See `docs/contributing.md`. Helpful contributions:
-
-- Add MCP manifests for tools.
-- Implement deterministic services and tests.
-- Add deployment manifests and operator runbooks.
+Unlike generic AI chatbots or paper summarizers, Researcher-AI treats **research as a structured process**, not a single prompt.
 
 ---
 
-If you want, I can add a `docker-compose.yml`, minimal service stubs, or an SVG architecture diagram in `docs/`.
+## Why Researcher-AI Exists
+
+Academic research is slow not because researchers lack intelligence, but because the workflow is inherently high-friction:
+
+- Literature is massive, fragmented, and often contradictory
+- Understanding a field requires synthesis, not linear reading
+- Hypotheses fail due to unseen counter-evidence, not lack of creativity
+- Extracting evidence from papers is manual and error-prone
+- Turning ideas into formal artifacts (proposals, drafts) is repetitive and costly
+
+Most AI tools optimize for **text generation**.  
+Researcher-AI is built to support **research thinking**.
+
+---
+
+## What Researcher-AI Does
+
+Researcher-AI provides a **one-stop research assistance system** that supports researchers across disciplines and experience levels—from undergraduates to PhD scholars.
+
+At a high level, it enables users to:
+
+- Map and understand research landscapes
+- Identify consensus, disagreement, and open questions
+- Generate and critically evaluate hypotheses
+- Extract structured evidence from papers
+- Produce formal research artifacts with provenance
+
+The system is **human-in-the-loop by design** and does not operate autonomously.
+
+---
+
+## Core Capabilities
+
+Researcher-AI is built around **five locked core capabilities**, each addressing a critical research bottleneck:
+
+1. **Contextual Literature Mapping**  
+   Builds a semantic, clustered overview of related work instead of flat paper lists.
+
+2. **Contradiction & Consensus Finder**  
+   Identifies where literature agrees, disagrees, or remains inconclusive.
+
+3. **Interactive Hypothesis Generation & Critique**  
+   Uses selective multi-agent reasoning to propose and challenge hypotheses.
+
+4. **Multimodal Evidence Extraction**  
+   Converts tables, metrics, and figures from PDFs into structured data.
+
+5. **Grant / Proposal Assistant**  
+   Transforms validated hypotheses into proposal-ready research artifacts.
+
+A detailed explanation of each capability is available in  
+**`CAPABILITIES.md`**.
+
+---
+
+## System Architecture (High Level)
+
+Researcher-AI uses a **hybrid architecture**:
+
+- A central **Orchestrator** coordinates execution
+- **Deterministic tool services** handle ingestion, retrieval, mapping, extraction, and drafting
+- **Selective multi-agent reasoning** is used only where adversarial critique improves outcomes
+- All components communicate via a uniform **Model Context Protocol (MCP)** interface
+
+This design avoids monolithic agents while preserving modularity, debuggability, and extensibility.
+
+A full technical breakdown is available in  
+**`ARCHITECTURE.md`**.
+
+---
+
+## Design Principles
+
+- Research-first, not AI-first
+- Evidence-bound outputs with provenance
+- Selective agentic reasoning
+- Local-first and self-hostable
+- Composable, inspectable components
+- Human judgment always in control
+
+---
+
+## Intended Users
+
+Researcher-AI is designed to be useful across the research spectrum:
+
+- **Undergraduates** learning how to read and reason about research
+- **Graduate students** synthesizing literature and designing studies
+- **PhD researchers** stress-testing hypotheses and preparing proposals
+
+The system adapts by task intent, not academic title.
+
+---
+
+## Project Status
+
+**Active Development**
+
+- Core architecture and capability definitions are locked
+- Environment setup and service scaffolding are in progress
+- Initial focus: literature mapping → hypothesis generation → critique loop
+
+The project is currently optimized for **local development and experimentation**.
+
+---
+
+## Repository Structure (High Level)
+
+researcher-ai/
+├─ README.md
+├─ CAPABILITIES.md
+├─ ARCHITECTURE.md
+├─ services/          # Deterministic MCP tool services
+├─ agents/            # Hypothesis and Critic agents
+├─ orchestrator/      # Planner / controller
+├─ infra/             # Docker and infrastructure configs
+├─ tests/
+└─ docs/
+
+## Non-Goals
+
+Researcher-AI explicitly does not aim to:
+
+- Replace researchers or advisors
+- Operate autonomously without oversight
+- Generate claims without evidence
+- Execute experiments automatically
+- Optimize for conversational fluency over correctness
+
+## Contributing
+
+This project prioritizes clarity, correctness, and reproducibility.
+
+Contributions are welcome, especially in:
+- Literature mapping and clustering
+- Evidence extraction and provenance tracking
+- Agent reasoning and critique strategies
+- Developer tooling and observability
+
+Please open an issue before submitting major changes.
+
+## License
+License information will be added as the project stabilizes.
+
+## Summary
+
+Researcher-AI is an agentic research system that supports how researchers actually think—by mapping literature, exposing disagreement, stress-testing ideas, extracting evidence, and producing real research artifacts with full traceability.
+
+It is designed to accelerate research without eroding scientific rigor.
