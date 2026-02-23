@@ -73,7 +73,7 @@ Researcher-AI uses a **hybrid architecture**:
 This design avoids monolithic agents while preserving modularity, debuggability, and extensibility.
 
 A full technical breakdown is available in  
-**`ARCHITECTURE.md`**.
+**`DESIGN.md`**.
 
 ---
 
@@ -117,7 +117,7 @@ The project is currently optimized for **local development and experimentation**
 researcher-ai/
 ├─ README.md
 ├─ CAPABILITIES.md
-├─ ARCHITECTURE.md
+├─ DESIGN.md
 ├─ services/          # Deterministic MCP tool services
 ├─ agents/            # Hypothesis and Critic agents
 ├─ orchestrator/      # Planner / controller

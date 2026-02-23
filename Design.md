@@ -39,6 +39,17 @@ The system supports local inference and self-hosted infrastructure to reduce cos
 
 ---
 
+## Deprecations (Epistemic Re-Anchor)
+
+The following legacy assumptions are explicitly deprecated and must not be revived in new components:
+
+- Claim condition overlap as a primary comparator (superseded by ExperimentalContext identity).
+- Paragraph-level chunking as an epistemic unit (superseded by sentence-level atoms).
+
+These deprecations are binding for all subsequent design and implementation work.
+
+---
+
 ## High-Level System Architecture
 
 Researcher-AI uses a **hybrid architecture** consisting of:

@@ -1,0 +1,33 @@
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = """
+    -v
+    --strict-markers
+    --tb=short
+    --cov=core
+    --cov-report=term-missing
+    --cov-report=html
+"""
+markers = [
+    "unit: Unit tests for schemas",
+    "validator: Validator tests",
+    "serialization: Serialization tests",
+    "failure: Failure mode tests",
+]
+
+[tool.coverage.run]
+source = ["core"]
+omit = ["*/tests/*", "*/__pycache__/*"]
+
+[tool.coverage.report]
+precision = 2
+show_missing = true
+skip_covered = false
+
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
