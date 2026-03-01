@@ -1,0 +1,1077 @@
+{
+  "total_papers": 150,
+  "domains": {
+    "cs.LG": 8,
+    "cs.AI": 7,
+    "cs.CL": 7,
+    "cs.CV": 8,
+    "cs.RO": 7,
+    "cs.NI": 8,
+    "cs.DC": 7,
+    "cs.DB": 7,
+    "cs.SE": 8,
+    "stat.ML": 8,
+    "physics.*": 8,
+    "cond-mat.*": 7,
+    "astro-ph.*": 8,
+    "math.*": 7,
+    "q-bio.*": 7,
+    "q-fin.*": 8,
+    "eess.*": 7,
+    "econ.*": 8,
+    "stat.*": 7,
+    "chem.*": 8
+  },
+  "papers": [
+    {
+      "arxiv_id": "2602.02607v1",
+      "domain": "q-fin.*",
+      "title": "The Innovation Tax: Generative AI Adoption, Productivity Paradox, and Systemic Risk in the U.S. Banking Sector",
+      "published_date": "2026-02-02T08:10:06Z",
+      "file_path": "data/brutal_150/2602.02607v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.06424v1",
+      "domain": "q-fin.*",
+      "title": "Single- and Multi-Level Fourier-RQMC Methods for Multivariate Shortfall Risk",
+      "published_date": "2026-02-06T06:43:47Z",
+      "file_path": "data/brutal_150/2602.06424v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.07020v1",
+      "domain": "q-fin.*",
+      "title": "Financial Bond Similarity Search Using Representation Learning",
+      "published_date": "2026-02-02T00:45:55Z",
+      "file_path": "data/brutal_150/2602.07020v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.07048v1",
+      "domain": "q-fin.*",
+      "title": "LLM as a Risk Manager: LLM Semantic Filtering for Lead-Lag Trading in Prediction Markets",
+      "published_date": "2026-02-04T12:34:19Z",
+      "file_path": "data/brutal_150/2602.07048v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.07096v1",
+      "domain": "q-fin.*",
+      "title": "RealFin: How Well Do LLMs Reason About Finance When Users Leave Things Unsaid?",
+      "published_date": "2026-02-06T13:47:54Z",
+      "file_path": "data/brutal_150/2602.07096v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.09306v1",
+      "domain": "cs.DB",
+      "title": "Empowering Contrastive Federated Sequential Recommendation with LLMs",
+      "published_date": "2026-02-10T00:47:43Z",
+      "file_path": "data/brutal_150/2602.09306v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.10029v1",
+      "domain": "cs.NI",
+      "title": "Resilient Topology-Aware Coordination for Dynamic 3D UAV Networks under Node Failure",
+      "published_date": "2026-02-10T17:51:14Z",
+      "file_path": "data/brutal_150/2602.10029v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.12541v1",
+      "domain": "cs.NI",
+      "title": "Adaptive Meta-Aggregation Federated Learning for Intrusion Detection in Heterogeneous Internet of Things",
+      "published_date": "2026-02-13T02:42:27Z",
+      "file_path": "data/brutal_150/2602.12541v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.13085v1",
+      "domain": "cs.NI",
+      "title": "TENORAN: Automating Fine-grained Energy Efficiency Profiling in Open RAN Systems",
+      "published_date": "2026-02-13T16:46:54Z",
+      "file_path": "data/brutal_150/2602.13085v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.13453v1",
+      "domain": "econ.*",
+      "title": "Post-Matching Two-Way Fixed Effects Estimation",
+      "published_date": "2026-02-13T20:56:28Z",
+      "file_path": "data/brutal_150/2602.13453v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.13879v1",
+      "domain": "econ.*",
+      "title": "When to Request Evidence?",
+      "published_date": "2026-02-14T20:40:39Z",
+      "file_path": "data/brutal_150/2602.13879v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.14263v1",
+      "domain": "cs.DB",
+      "title": "Towards a Hybrid Quantum-Classical Computing Framework for Database Optimization Problems in Real Time Setup",
+      "published_date": "2026-02-15T18:25:07Z",
+      "file_path": "data/brutal_150/2602.14263v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.14328v1",
+      "domain": "q-bio.*",
+      "title": "Conformational landscapes in cryo-ET data based on MD simulations",
+      "published_date": "2026-02-15T22:51:11Z",
+      "file_path": "data/brutal_150/2602.14328v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.14372v2",
+      "domain": "cs.NI",
+      "title": "Bitcoin Under Stress: Measuring Infrastructure Resilience 2014-2025",
+      "published_date": "2026-02-16T00:46:55Z",
+      "file_path": "data/brutal_150/2602.14372v2.pdf"
+    },
+    {
+      "arxiv_id": "2602.14787v1",
+      "domain": "physics.*",
+      "title": "Exact Multi-Valley Envelope Function Theory of Valley Splitting in Si/SiGe Nanostructures",
+      "published_date": "2026-02-16T14:36:48Z",
+      "file_path": "data/brutal_150/2602.14787v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.14828v1",
+      "domain": "q-bio.*",
+      "title": "Exploring the limits of pre-trained embeddings in machine-guided protein design: a case study on predicting AAV vector viability",
+      "published_date": "2026-02-16T15:21:11Z",
+      "file_path": "data/brutal_150/2602.14828v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.14849v1",
+      "domain": "cs.DC",
+      "title": "Atomix: Timely, Transactional Tool Use for Reliable Agentic Workflows",
+      "published_date": "2026-02-16T15:46:19Z",
+      "file_path": "data/brutal_150/2602.14849v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.15177v1",
+      "domain": "q-fin.*",
+      "title": "Optimal investment under capital gains taxes",
+      "published_date": "2026-02-16T20:30:28Z",
+      "file_path": "data/brutal_150/2602.15177v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.15312v1",
+      "domain": "econ.*",
+      "title": "Extracting Consumer Insight from Text: A Large Language Model Approach to Emotion and Evaluation Measurement",
+      "published_date": "2026-02-17T02:33:51Z",
+      "file_path": "data/brutal_150/2602.15312v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.15559v1",
+      "domain": "econ.*",
+      "title": "Fixed-Horizon Self-Normalized Inference for Adaptive Experiments via Martingale AIPW/DML with Logged Propensities",
+      "published_date": "2026-02-17T13:12:31Z",
+      "file_path": "data/brutal_150/2602.15559v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.15973v1",
+      "domain": "cs.DB",
+      "title": "LAND: A Longitudinal Analysis of Neuromorphic Datasets",
+      "published_date": "2026-02-17T19:46:33Z",
+      "file_path": "data/brutal_150/2602.15973v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.16255v2",
+      "domain": "q-bio.*",
+      "title": "Piecewise integrability of the discrete Hasimoto map for analytic prediction and design of helical peptides",
+      "published_date": "2026-02-18T08:11:23Z",
+      "file_path": "data/brutal_150/2602.16255v2.pdf"
+    },
+    {
+      "arxiv_id": "2602.16585v1",
+      "domain": "cs.DB",
+      "title": "DataJoint 2.0: A Computational Substrate for Agentic Scientific Workflows",
+      "published_date": "2026-02-18T16:35:47Z",
+      "file_path": "data/brutal_150/2602.16585v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.16751v1",
+      "domain": "physics.*",
+      "title": "Asymptotic Effects of Incident Angle and Lateral Conduction in Electromagnetic Skin Heating",
+      "published_date": "2026-02-18T05:55:29Z",
+      "file_path": "data/brutal_150/2602.16751v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.16870v1",
+      "domain": "cs.DB",
+      "title": "Boreas Road Trip: A Multi-Sensor Autonomous Driving Dataset on Challenging Roads",
+      "published_date": "2026-02-18T20:53:59Z",
+      "file_path": "data/brutal_150/2602.16870v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.17381v1",
+      "domain": "cs.NI",
+      "title": "End-to-End Latency Measurement Methodology for Connected and Autonomous Vehicle Teleoperation",
+      "published_date": "2026-02-19T14:07:25Z",
+      "file_path": "data/brutal_150/2602.17381v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.17426v1",
+      "domain": "cs.SE",
+      "title": "The Runtime Dimension of Ethics in Self-Adaptive Systems",
+      "published_date": "2026-02-19T14:57:30Z",
+      "file_path": "data/brutal_150/2602.17426v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.17808v1",
+      "domain": "cs.DC",
+      "title": "Collaborative Processing for Multi-Tenant Inference on Memory-Constrained Edge TPUs",
+      "published_date": "2026-02-19T20:17:18Z",
+      "file_path": "data/brutal_150/2602.17808v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.18012v1",
+      "domain": "cs.SE",
+      "title": "DeCEAT: Decoding Carbon Emissions for AI-driven Software Testing",
+      "published_date": "2026-02-20T05:54:58Z",
+      "file_path": "data/brutal_150/2602.18012v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.18208v1",
+      "domain": "cs.NI",
+      "title": "A traffic incident management framework for vehicular ad hoc networks",
+      "published_date": "2026-02-20T13:35:57Z",
+      "file_path": "data/brutal_150/2602.18208v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.18689v1",
+      "domain": "cs.SE",
+      "title": "Automatic, Expressive, and Scalable Fuzzing with Stitching",
+      "published_date": "2026-02-21T01:48:17Z",
+      "file_path": "data/brutal_150/2602.18689v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.18715v1",
+      "domain": "q-bio.*",
+      "title": "A Data-Driven Method to Map the Functional Organisation of Human Brain White Matter",
+      "published_date": "2026-02-21T04:20:41Z",
+      "file_path": "data/brutal_150/2602.18715v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.18736v1",
+      "domain": "physics.*",
+      "title": "Extremely Low Thermal Resistance Architectures for AlxGaN1-x Semiconductor Devices",
+      "published_date": "2026-02-21T07:00:20Z",
+      "file_path": "data/brutal_150/2602.18736v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.19138v1",
+      "domain": "q-bio.*",
+      "title": "CRCC: Contrast-Based Robust Cross-Subject and Cross-Site Representation Learning for EEG",
+      "published_date": "2026-02-22T12:00:49Z",
+      "file_path": "data/brutal_150/2602.19138v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.19218v1",
+      "domain": "cs.SE",
+      "title": "Gecko: A Simulation Environment with Stateful Feedback for Refining Agent Tool Calls",
+      "published_date": "2026-02-22T15:02:00Z",
+      "file_path": "data/brutal_150/2602.19218v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.19360v1",
+      "domain": "cs.SE",
+      "title": "Compliance Management for Federated Data Processing",
+      "published_date": "2026-02-22T22:10:25Z",
+      "file_path": "data/brutal_150/2602.19360v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.19483v1",
+      "domain": "stat.ML",
+      "title": "Making Conformal Predictors Robust in Healthcare Settings: a Case Study on EEG Classification",
+      "published_date": "2026-02-23T03:59:32Z",
+      "file_path": "data/brutal_150/2602.19483v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.19520v1",
+      "domain": "stat.*",
+      "title": "Decomposing Crowd Wisdom: Domain-Specific Calibration Dynamics in Prediction Markets",
+      "published_date": "2026-02-23T05:20:54Z",
+      "file_path": "data/brutal_150/2602.19520v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.19645v1",
+      "domain": "econ.*",
+      "title": "Pre-averaging estimators of the ex-post covariance matrix in noisy diffusion models with non-synchronous data",
+      "published_date": "2026-02-23T09:43:18Z",
+      "file_path": "data/brutal_150/2602.19645v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.19950v1",
+      "domain": "econ.*",
+      "title": "Identification in Stochastic Choice",
+      "published_date": "2026-02-23T15:17:49Z",
+      "file_path": "data/brutal_150/2602.19950v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.20029v1",
+      "domain": "stat.*",
+      "title": "Covariance estimation for derivatives of functional data using an additive penalty in P-splines",
+      "published_date": "2026-02-23T16:37:00Z",
+      "file_path": "data/brutal_150/2602.20029v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.20105v1",
+      "domain": "cs.NI",
+      "title": "Adaptive Underwater Acoustic Communications with Limited Feedback: An AoI-Aware Hierarchical Bandit Approach",
+      "published_date": "2026-02-23T18:23:29Z",
+      "file_path": "data/brutal_150/2602.20105v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.20293v1",
+      "domain": "stat.ML",
+      "title": "Discrete Diffusion with Sample-Efficient Estimators for Conditionals",
+      "published_date": "2026-02-23T19:20:37Z",
+      "file_path": "data/brutal_150/2602.20293v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.20356v1",
+      "domain": "econ.*",
+      "title": "Prevalence of Food and Housing Insecurity among Direct Support Professionals in New York",
+      "published_date": "2026-02-23T21:03:31Z",
+      "file_path": "data/brutal_150/2602.20356v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.20406v1",
+      "domain": "physics.*",
+      "title": "DC-to-GHz Modulation In Microring Modulators Using Ferroelectric Nematic Liquid Crystal-on-Silicon in a Foundry Photonic Process",
+      "published_date": "2026-02-23T23:05:07Z",
+      "file_path": "data/brutal_150/2602.20406v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.20415v1",
+      "domain": "q-fin.*",
+      "title": "Markets are competitive if and only if P != NP",
+      "published_date": "2026-02-23T23:31:43Z",
+      "file_path": "data/brutal_150/2602.20415v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.20485v1",
+      "domain": "physics.*",
+      "title": "Propagation of elastic waves in a flexomagnetic solid",
+      "published_date": "2026-02-24T02:28:07Z",
+      "file_path": "data/brutal_150/2602.20485v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.20512v1",
+      "domain": "cs.RO",
+      "title": "Conflict-Based Search for Multi-Agent Path Finding with Elevators",
+      "published_date": "2026-02-24T03:29:27Z",
+      "file_path": "data/brutal_150/2602.20512v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.20651v1",
+      "domain": "stat.ML",
+      "title": "Sparse Bayesian Deep Functional Learning with Structured Region Selection",
+      "published_date": "2026-02-24T07:53:59Z",
+      "file_path": "data/brutal_150/2602.20651v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.20958v1",
+      "domain": "cs.RO",
+      "title": "EKF-Based Depth Camera and Deep Learning Fusion for UAV-Person Distance Estimation and Following in SAR Operations",
+      "published_date": "2026-02-24T14:37:36Z",
+      "file_path": "data/brutal_150/2602.20958v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.20998v1",
+      "domain": "chem.*",
+      "title": "Observation of sequential quantum oscillations induced by mini-Landau bands in a three-dimensional Dirac semiconductor",
+      "published_date": "2026-02-24T15:18:16Z",
+      "file_path": "data/brutal_150/2602.20998v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21006v1",
+      "domain": "physics.*",
+      "title": "Lost in Projection? Gaussian Filtering Recovers Hidden Conformational States",
+      "published_date": "2026-02-24T15:25:38Z",
+      "file_path": "data/brutal_150/2602.21006v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21007v1",
+      "domain": "cs.NI",
+      "title": "Telemetry-Based Server Selection in the Quantum Internet via Cross-Layer Runtime Estimation",
+      "published_date": "2026-02-24T15:25:55Z",
+      "file_path": "data/brutal_150/2602.21007v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21026v1",
+      "domain": "cs.SE",
+      "title": "A Modular Multi-Document Framework for Scientific Visualization and Simulation in Java",
+      "published_date": "2026-02-24T15:48:39Z",
+      "file_path": "data/brutal_150/2602.21026v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21029v1",
+      "domain": "stat.*",
+      "title": "On the non-uniformity of the 2026 FIFA World Cup draw",
+      "published_date": "2026-02-24T15:51:29Z",
+      "file_path": "data/brutal_150/2602.21029v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21101v2",
+      "domain": "cs.RO",
+      "title": "Event-Aided Sharp Radiance Field Reconstruction for Fast-Flying Drones",
+      "published_date": "2026-02-24T17:02:56Z",
+      "file_path": "data/brutal_150/2602.21101v2.pdf"
+    },
+    {
+      "arxiv_id": "2602.21140v1",
+      "domain": "cs.DC",
+      "title": "ReviveMoE: Fast Recovery for Hardware Failures in Large-Scale MoE LLM Inference Deployments",
+      "published_date": "2026-02-24T17:39:41Z",
+      "file_path": "data/brutal_150/2602.21140v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21203v1",
+      "domain": "cs.RO",
+      "title": "Squint: Fast Visual Reinforcement Learning for Sim-to-Real Robotics",
+      "published_date": "2026-02-24T18:58:11Z",
+      "file_path": "data/brutal_150/2602.21203v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21243v1",
+      "domain": "physics.*",
+      "title": "Quantum and Classical mechanics vs QFT",
+      "published_date": "2026-02-14T14:54:53Z",
+      "file_path": "data/brutal_150/2602.21243v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21357v1",
+      "domain": "stat.ML",
+      "title": "Conditional neural control variates for variance reduction in Bayesian inverse problems",
+      "published_date": "2026-02-24T20:40:20Z",
+      "file_path": "data/brutal_150/2602.21357v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21450v1",
+      "domain": "eess.*",
+      "title": "Constructive Vector Fields for Path Following in Fully-Actuated Systems on Matrix Lie Groups",
+      "published_date": "2026-02-25T00:06:08Z",
+      "file_path": "data/brutal_150/2602.21450v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21479v1",
+      "domain": "stat.ML",
+      "title": "Global Sequential Testing for Multi-Stream Auditing",
+      "published_date": "2026-02-25T01:10:45Z",
+      "file_path": "data/brutal_150/2602.21479v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21490v1",
+      "domain": "stat.*",
+      "title": "Connection Probabilities Estimation in Multi-layer Networks via Iterative Neighborhood Smoothing",
+      "published_date": "2026-02-25T01:43:26Z",
+      "file_path": "data/brutal_150/2602.21490v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21502v1",
+      "domain": "astro-ph.*",
+      "title": "A Decade-Long Increasing Mid-Infrared Luminosity in Galaxy NGC6447: a Turning-On Candidate of Active Galactic Nucleus",
+      "published_date": "2026-02-25T02:28:02Z",
+      "file_path": "data/brutal_150/2602.21502v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21619v1",
+      "domain": "cs.CL",
+      "title": "When More Is Less: A Systematic Analysis of Spatial and Commonsense Information for Visual Spatial Reasoning",
+      "published_date": "2026-02-25T06:22:48Z",
+      "file_path": "data/brutal_150/2602.21619v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21625v1",
+      "domain": "cs.RO",
+      "title": "Tacmap: Bridging the Tactile Sim-to-Real Gap via Geometry-Consistent Penetration Depth Map",
+      "published_date": "2026-02-25T06:40:59Z",
+      "file_path": "data/brutal_150/2602.21625v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21715v1",
+      "domain": "eess.*",
+      "title": "Two-Stage Active Distribution Network Voltage Control via LLM-RL Collaboration: A Hybrid Knowledge-Data-Driven Approach",
+      "published_date": "2026-02-25T09:22:27Z",
+      "file_path": "data/brutal_150/2602.21715v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21717v1",
+      "domain": "cs.DB",
+      "title": "C$^{2}$TC: A Training-Free Framework for Efficient Tabular Data Condensation",
+      "published_date": "2026-02-25T09:25:24Z",
+      "file_path": "data/brutal_150/2602.21717v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21728v1",
+      "domain": "cs.CL",
+      "title": "Explore-on-Graph: Incentivizing Autonomous Exploration of Large Language Models on Knowledge Graphs with Path-refined Reward Modeling",
+      "published_date": "2026-02-25T09:35:18Z",
+      "file_path": "data/brutal_150/2602.21728v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21753v1",
+      "domain": "math.*",
+      "title": "A dual lumping procedure for static condensation in mixed NURBS-based isogeometric elements with optimal convergence rates for arbitrary open knot vectors",
+      "published_date": "2026-02-25T10:07:23Z",
+      "file_path": "data/brutal_150/2602.21753v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21801v1",
+      "domain": "eess.*",
+      "title": "Cross-Pilot Superposition for Fractional Parameter Estimation in DoA-Aided OTFS Receivers",
+      "published_date": "2026-02-25T11:29:18Z",
+      "file_path": "data/brutal_150/2602.21801v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21812v1",
+      "domain": "cond-mat.*",
+      "title": "ML-guided screening of chalcogenide perovskites as solar energy materials",
+      "published_date": "2026-02-25T11:39:23Z",
+      "file_path": "data/brutal_150/2602.21812v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21817v1",
+      "domain": "chem.*",
+      "title": "From raw data to processed spectra: A step-by-step guide",
+      "published_date": "2026-02-25T11:45:02Z",
+      "file_path": "data/brutal_150/2602.21817v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21843v1",
+      "domain": "econ.*",
+      "title": "The economic alignment problem of artificial intelligence",
+      "published_date": "2026-02-25T12:22:46Z",
+      "file_path": "data/brutal_150/2602.21843v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21863v1",
+      "domain": "astro-ph.*",
+      "title": "Impact and interplay of $\u039b$CDM analysis choices for LSST cosmic shear",
+      "published_date": "2026-02-25T12:44:02Z",
+      "file_path": "data/brutal_150/2602.21863v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21864v1",
+      "domain": "cs.CL",
+      "title": "DynamicGTR: Leveraging Graph Topology Representation Preferences to Boost VLM Capabilities on Graph QAs",
+      "published_date": "2026-02-25T12:45:45Z",
+      "file_path": "data/brutal_150/2602.21864v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21869v1",
+      "domain": "q-fin.*",
+      "title": "A Bayesian approach to out-of-sample network reconstruction",
+      "published_date": "2026-02-25T12:53:31Z",
+      "file_path": "data/brutal_150/2602.21869v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21871v1",
+      "domain": "cond-mat.*",
+      "title": "Interplay between Relativistic Spin-Momentum Locking and Breaking of Inversion Symmetry: conditions for p-wave magnetism",
+      "published_date": "2026-02-25T12:56:04Z",
+      "file_path": "data/brutal_150/2602.21871v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21884v1",
+      "domain": "cond-mat.*",
+      "title": "Stress Relaxation in Monodisperse Entangled Polymer Melts: Correlation Between Viscoelastic Response and Single-Chain Relaxation via Molecular Dynamics Simulations",
+      "published_date": "2026-02-25T13:07:51Z",
+      "file_path": "data/brutal_150/2602.21884v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21897v1",
+      "domain": "cs.DC",
+      "title": "A task-based data-flow methodology for programming heterogeneous systems with multiple accelerator APIs",
+      "published_date": "2026-02-25T13:27:44Z",
+      "file_path": "data/brutal_150/2602.21897v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21900v1",
+      "domain": "eess.*",
+      "title": "EmoOmni: Bridging Emotional Understanding and Expression in Omni-Modal LLMs",
+      "published_date": "2026-02-25T13:30:27Z",
+      "file_path": "data/brutal_150/2602.21900v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21969v1",
+      "domain": "stat.*",
+      "title": "Estimation of the complexity of a network under a Gaussian graphical model",
+      "published_date": "2026-02-25T14:52:45Z",
+      "file_path": "data/brutal_150/2602.21969v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21981v1",
+      "domain": "math.*",
+      "title": "Fractal dimension of singular times for SPDEs: Energy bounds, criticality, and weak-strong uniqueness",
+      "published_date": "2026-02-25T14:59:48Z",
+      "file_path": "data/brutal_150/2602.21981v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21989v1",
+      "domain": "cond-mat.*",
+      "title": "Intrinsic Instabilities and Mechanical Anisotropy in Halide Perovskite Monolayers",
+      "published_date": "2026-02-25T15:09:46Z",
+      "file_path": "data/brutal_150/2602.21989v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.21993v1",
+      "domain": "q-bio.*",
+      "title": "Prediction of source nutrients for microorganisms using metabolic networks",
+      "published_date": "2026-02-25T15:13:07Z",
+      "file_path": "data/brutal_150/2602.21993v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22056v1",
+      "domain": "cs.RO",
+      "title": "FlowCorrect: Efficient Interactive Correction of Generative Flow Policies for Robotic Manipulation",
+      "published_date": "2026-02-25T16:06:49Z",
+      "file_path": "data/brutal_150/2602.22056v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22062v1",
+      "domain": "stat.*",
+      "title": "Robust Model Selection for Discovery of Latent Mechanistic Processes",
+      "published_date": "2026-02-25T16:10:24Z",
+      "file_path": "data/brutal_150/2602.22062v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22088v1",
+      "domain": "cs.RO",
+      "title": "Force Policy: Learning Hybrid Force-Position Control Policy under Interaction Frame for Contact-Rich Manipulation",
+      "published_date": "2026-02-25T16:35:24Z",
+      "file_path": "data/brutal_150/2602.22088v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22103v1",
+      "domain": "cs.DC",
+      "title": "PASTA: A Modular Program Analysis Tool Framework for Accelerators",
+      "published_date": "2026-02-25T16:51:24Z",
+      "file_path": "data/brutal_150/2602.22103v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22117v1",
+      "domain": "chem.*",
+      "title": "Loss Mechanisms in High-coherence Multimode Mechanical Resonators Coupled to Superconducting Circuits",
+      "published_date": "2026-02-25T17:04:50Z",
+      "file_path": "data/brutal_150/2602.22117v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22138v1",
+      "domain": "physics.*",
+      "title": "Spatiotemporal Thermal Modulation and Patterning using a Programmable 1024 Element Microheater Array",
+      "published_date": "2026-02-25T17:40:39Z",
+      "file_path": "data/brutal_150/2602.22138v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22156v1",
+      "domain": "chem.*",
+      "title": "High-Pressure X-Ray Diffraction Study of Scheelite-type Perrhenates",
+      "published_date": "2026-02-25T18:03:50Z",
+      "file_path": "data/brutal_150/2602.22156v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22165v1",
+      "domain": "astro-ph.*",
+      "title": "Whistler-Alfv\u00e9n turbulence in a non-neutral ultrarelativistic pair plasma",
+      "published_date": "2026-02-25T18:14:29Z",
+      "file_path": "data/brutal_150/2602.22165v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22178v1",
+      "domain": "math.*",
+      "title": "Confidence in confidence distributions!",
+      "published_date": "2026-02-25T18:25:35Z",
+      "file_path": "data/brutal_150/2602.22178v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22195v2",
+      "domain": "cs.DC",
+      "title": "Hybrid Consensus with Quantum Sybil Resistance",
+      "published_date": "2026-02-25T18:44:24Z",
+      "file_path": "data/brutal_150/2602.22195v2.pdf"
+    },
+    {
+      "arxiv_id": "2602.22236v1",
+      "domain": "q-bio.*",
+      "title": "CrossLLM-Mamba: Multimodal State Space Fusion of LLMs for RNA Interaction Prediction",
+      "published_date": "2026-02-23T19:57:11Z",
+      "file_path": "data/brutal_150/2602.22236v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22272v1",
+      "domain": "astro-ph.*",
+      "title": "Fluctuating polytropic processes, turbulence, and heating",
+      "published_date": "2026-02-25T08:48:12Z",
+      "file_path": "data/brutal_150/2602.22272v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22283v1",
+      "domain": "chem.*",
+      "title": "Phononic enhancement and detection of hidden spin-nematicity and dynamics in quantum magnets",
+      "published_date": "2026-02-25T12:31:28Z",
+      "file_path": "data/brutal_150/2602.22283v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22299v1",
+      "domain": "cs.CL",
+      "title": "Decoding the Hook: A Multimodal LLM Framework for Analyzing the Hooking Period of Video Ads",
+      "published_date": "2026-02-25T18:24:06Z",
+      "file_path": "data/brutal_150/2602.22299v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22334v1",
+      "domain": "stat.ML",
+      "title": "A 1/R Law for Kurtosis Contrast in Balanced Mixtures",
+      "published_date": "2026-02-25T19:01:01Z",
+      "file_path": "data/brutal_150/2602.22334v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22396v1",
+      "domain": "astro-ph.*",
+      "title": "Current-carrying string network evolution in an external magnetic field",
+      "published_date": "2026-02-25T20:45:15Z",
+      "file_path": "data/brutal_150/2602.22396v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22423v1",
+      "domain": "cs.DC",
+      "title": "CARAT: Client-Side Adaptive RPC and Cache Co-Tuning for Parallel File Systems",
+      "published_date": "2026-02-25T21:34:59Z",
+      "file_path": "data/brutal_150/2602.22423v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22492v1",
+      "domain": "stat.ML",
+      "title": "From Shallow Bayesian Neural Networks to Gaussian Processes: General Convergence, Identifiability and Scalable Inference",
+      "published_date": "2026-02-26T00:02:54Z",
+      "file_path": "data/brutal_150/2602.22492v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22499v1",
+      "domain": "eess.*",
+      "title": "Small HVAC Control Demonstrations in Larger Buildings Often Overestimate Savings",
+      "published_date": "2026-02-26T00:34:00Z",
+      "file_path": "data/brutal_150/2602.22499v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22530v1",
+      "domain": "cs.CL",
+      "title": "Dynamic Level Sets",
+      "published_date": "2026-02-26T02:09:43Z",
+      "file_path": "data/brutal_150/2602.22530v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22551v1",
+      "domain": "math.*",
+      "title": "A Fast and Practical Column Generation Approach for Identifying Carcinogenic Multi-Hit Gene Combinations",
+      "published_date": "2026-02-26T02:45:04Z",
+      "file_path": "data/brutal_150/2602.22551v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22560v1",
+      "domain": "cs.LG",
+      "title": "Operationalizing Fairness: Post-Hoc Threshold Optimization Under Hard Resource Limits",
+      "published_date": "2026-02-26T02:56:36Z",
+      "file_path": "data/brutal_150/2602.22560v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22570v1",
+      "domain": "cs.AI",
+      "title": "Guidance Matters: Rethinking the Evaluation Pitfall for Text-to-Image Generation",
+      "published_date": "2026-02-26T03:24:11Z",
+      "file_path": "data/brutal_150/2602.22570v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22587v1",
+      "domain": "astro-ph.*",
+      "title": "Shadows of Giants: Constraints on Stupendously Large Black Holes from Negative Sources against the Cosmic Microwave Background",
+      "published_date": "2026-02-26T03:46:12Z",
+      "file_path": "data/brutal_150/2602.22587v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22614v1",
+      "domain": "astro-ph.*",
+      "title": "A Multi-Diagnostic Observational Framework for Magnetosonic Solitary Waves During Geomagnetic Storms in Solar Cycles 24 and 25 using Cluster II Mission",
+      "published_date": "2026-02-26T04:39:35Z",
+      "file_path": "data/brutal_150/2602.22614v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22622v1",
+      "domain": "chem.*",
+      "title": "Single Pair of Charge-two Weyl Fermions in Chiral Boron Allotropes",
+      "published_date": "2026-02-26T04:54:48Z",
+      "file_path": "data/brutal_150/2602.22622v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22648v1",
+      "domain": "stat.*",
+      "title": "A General (Non-Markovian) Framework for Covariate Adaptive Randomization: Achieving Balance While Eliminating the Shift",
+      "published_date": "2026-02-26T06:05:51Z",
+      "file_path": "data/brutal_150/2602.22648v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22659v1",
+      "domain": "cs.CV",
+      "title": "Scaling Audio-Visual Quality Assessment Dataset via Crowdsourcing",
+      "published_date": "2026-02-26T06:18:11Z",
+      "file_path": "data/brutal_150/2602.22659v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22661v1",
+      "domain": "cs.CL",
+      "title": "dLLM: Simple Diffusion Language Modeling",
+      "published_date": "2026-02-26T06:26:02Z",
+      "file_path": "data/brutal_150/2602.22661v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22689v1",
+      "domain": "cs.CV",
+      "title": "No Caption, No Problem: Caption-Free Membership Inference via Model-Fitted Embeddings",
+      "published_date": "2026-02-26T07:07:11Z",
+      "file_path": "data/brutal_150/2602.22689v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22697v1",
+      "domain": "cs.CL",
+      "title": "Reinforcing Real-world Service Agents: Balancing Utility and Cost in Task-oriented Dialogue",
+      "published_date": "2026-02-26T07:19:57Z",
+      "file_path": "data/brutal_150/2602.22697v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22712v1",
+      "domain": "cs.CV",
+      "title": "UFO-DETR: Frequency-Guided End-to-End Detector for UAV Tiny Objects",
+      "published_date": "2026-02-26T07:37:45Z",
+      "file_path": "data/brutal_150/2602.22712v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22716v1",
+      "domain": "cs.AI",
+      "title": "SoPE: Spherical Coordinate-Based Positional Embedding for Enhancing Spatial Perception of 3D LVLMs",
+      "published_date": "2026-02-26T07:42:15Z",
+      "file_path": "data/brutal_150/2602.22716v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22717v1",
+      "domain": "cs.CV",
+      "title": "IRSDE-Despeckle: A Physics-Grounded Diffusion Model for Generalizable Ultrasound Despeckling",
+      "published_date": "2026-02-26T07:42:25Z",
+      "file_path": "data/brutal_150/2602.22717v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22729v1",
+      "domain": "cs.SE",
+      "title": "RandSet: Randomized Corpus Reduction for Fuzzing Seed Scheduling",
+      "published_date": "2026-02-26T08:11:38Z",
+      "file_path": "data/brutal_150/2602.22729v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22737v1",
+      "domain": "cond-mat.*",
+      "title": "Anti-Thermal Quenching Phosphors based on Metal Halides",
+      "published_date": "2026-02-26T08:23:25Z",
+      "file_path": "data/brutal_150/2602.22737v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22775v1",
+      "domain": "cs.AI",
+      "title": "TherapyProbe: Generating Design Knowledge for Relational Safety in Mental Health Chatbots Through Adversarial Simulation",
+      "published_date": "2026-02-26T09:11:34Z",
+      "file_path": "data/brutal_150/2602.22775v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22791v1",
+      "domain": "cs.CV",
+      "title": "Robust Human Trajectory Prediction via Self-Supervised Skeleton Representation Learning",
+      "published_date": "2026-02-26T09:25:52Z",
+      "file_path": "data/brutal_150/2602.22791v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22842v1",
+      "domain": "cs.AI",
+      "title": "The AI Research Assistant: Promise, Peril, and a Proof of Concept",
+      "published_date": "2026-02-26T10:29:05Z",
+      "file_path": "data/brutal_150/2602.22842v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22884v1",
+      "domain": "cs.LG",
+      "title": "Unsupervised Continual Learning for Amortized Bayesian Inference",
+      "published_date": "2026-02-26T11:22:46Z",
+      "file_path": "data/brutal_150/2602.22884v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22913v1",
+      "domain": "cs.LG",
+      "title": "SIGMA: A Semantic-Grounded Instruction-Driven Generative Multi-Task Recommender at AliExpress",
+      "published_date": "2026-02-26T12:00:46Z",
+      "file_path": "data/brutal_150/2602.22913v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22914v1",
+      "domain": "eess.*",
+      "title": "Continuous Blood Monitoring with Particle-based Integrated Sensing and Communication (ISAC)",
+      "published_date": "2026-02-26T12:01:18Z",
+      "file_path": "data/brutal_150/2602.22914v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22935v1",
+      "domain": "cs.AI",
+      "title": "A Holistic Framework for Robust Bangla ASR and Speaker Diarization with Optimized VAD and CTC Alignment",
+      "published_date": "2026-02-26T12:26:04Z",
+      "file_path": "data/brutal_150/2602.22935v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22937v1",
+      "domain": "cs.LG",
+      "title": "MSINO: Curvature-Aware Sobolev Optimization for Manifold Neural Networks",
+      "published_date": "2026-02-26T12:27:00Z",
+      "file_path": "data/brutal_150/2602.22937v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22939v1",
+      "domain": "math.*",
+      "title": "Steady State Covariance Steering via Sparse Intervention",
+      "published_date": "2026-02-26T12:29:43Z",
+      "file_path": "data/brutal_150/2602.22939v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22941v1",
+      "domain": "cs.CV",
+      "title": "Velocity and stroke rate reconstruction of canoe sprint team boats based on panned and zoomed video recordings",
+      "published_date": "2026-02-26T12:31:30Z",
+      "file_path": "data/brutal_150/2602.22941v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22971v1",
+      "domain": "cs.AI",
+      "title": "SPM-Bench: Benchmarking Large Language Models for Scanning Probe Microscopy",
+      "published_date": "2026-02-26T13:08:56Z",
+      "file_path": "data/brutal_150/2602.22971v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22974v1",
+      "domain": "eess.*",
+      "title": "An automatic counting algorithm for the quantification and uncertainty analysis of the number of microglial cells trainable in small and heterogeneous datasets",
+      "published_date": "2026-02-26T13:13:43Z",
+      "file_path": "data/brutal_150/2602.22974v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.22997v1",
+      "domain": "math.*",
+      "title": "A Reduced Magnetic Vector Potential Approach with Higher-Order Splines",
+      "published_date": "2026-02-26T13:39:00Z",
+      "file_path": "data/brutal_150/2602.22997v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.23023v1",
+      "domain": "stat.ML",
+      "title": "Low-degree Lower bounds for clustering in moderate dimension",
+      "published_date": "2026-02-26T14:03:55Z",
+      "file_path": "data/brutal_150/2602.23023v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.23028v1",
+      "domain": "cond-mat.*",
+      "title": "Tracking the Lithiation State of Li$_x$Si from Machine-Learned XPS Binding Energies",
+      "published_date": "2026-02-26T14:09:00Z",
+      "file_path": "data/brutal_150/2602.23028v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.23061v1",
+      "domain": "cs.DB",
+      "title": "MoDora: Tree-Based Semi-Structured Document Analysis System",
+      "published_date": "2026-02-26T14:48:49Z",
+      "file_path": "data/brutal_150/2602.23061v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.23088v1",
+      "domain": "cs.CV",
+      "title": "Cytoarchitecture in Words: Weakly Supervised Vision-Language Modeling for Human Brain Microscopy",
+      "published_date": "2026-02-26T15:10:39Z",
+      "file_path": "data/brutal_150/2602.23088v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.23115v1",
+      "domain": "cs.CV",
+      "title": "FLIGHT: Fibonacci Lattice-based Inference for Geometric Heading in real-Time",
+      "published_date": "2026-02-26T15:27:49Z",
+      "file_path": "data/brutal_150/2602.23115v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.23116v1",
+      "domain": "cs.LG",
+      "title": "Regularized Online RLHF with Generalized Bilinear Preferences",
+      "published_date": "2026-02-26T15:27:53Z",
+      "file_path": "data/brutal_150/2602.23116v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.23138v1",
+      "domain": "chem.*",
+      "title": "Engineering in-plane anisotropy in 2D materials via surface-bound ligands",
+      "published_date": "2026-02-26T15:59:17Z",
+      "file_path": "data/brutal_150/2602.23138v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.23142v1",
+      "domain": "cs.LG",
+      "title": "Prediction of Diffusion Coefficients in Mixtures with Tensor Completion",
+      "published_date": "2026-02-26T16:08:50Z",
+      "file_path": "data/brutal_150/2602.23142v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.23180v1",
+      "domain": "math.*",
+      "title": "Hierarchy of bounds in free orthotropic material optimization: From convex relaxations to Hashin-Shtrikman via sequential global programming",
+      "published_date": "2026-02-26T16:39:38Z",
+      "file_path": "data/brutal_150/2602.23180v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.23216v1",
+      "domain": "cs.SE",
+      "title": "Array-Carrying Symbolic Execution for Function Contract Generation",
+      "published_date": "2026-02-26T17:00:10Z",
+      "file_path": "data/brutal_150/2602.23216v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.23223v1",
+      "domain": "chem.*",
+      "title": "Evidence of orbital mixing upon ionization via Cooper minimum photoelectron dynamics in epichlorohydrin. Experiment and Theory",
+      "published_date": "2026-02-26T17:04:29Z",
+      "file_path": "data/brutal_150/2602.23223v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.23303v1",
+      "domain": "cs.LG",
+      "title": "Inferential Mechanics Part 1: Causal Mechanistic Theories of Machine Learning in Chemical Biology with Implications",
+      "published_date": "2026-02-26T18:09:16Z",
+      "file_path": "data/brutal_150/2602.23303v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.23321v1",
+      "domain": "cs.LG",
+      "title": "Deep ensemble graph neural networks for probabilistic cosmic-ray direction and energy reconstruction in autonomous radio arrays",
+      "published_date": "2026-02-26T18:29:48Z",
+      "file_path": "data/brutal_150/2602.23321v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.23329v1",
+      "domain": "cs.AI",
+      "title": "LLM Novice Uplift on Dual-Use, In Silico Biology Tasks",
+      "published_date": "2026-02-26T18:37:23Z",
+      "file_path": "data/brutal_150/2602.23329v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.23346v1",
+      "domain": "cond-mat.*",
+      "title": "Molecular Beam Epitaxy Growth of Wafer-scale SnSe van der Waals Ultrathin Layers",
+      "published_date": "2026-02-26T18:50:04Z",
+      "file_path": "data/brutal_150/2602.23346v1.pdf"
+    },
+    {
+      "arxiv_id": "2602.23356v1",
+      "domain": "astro-ph.*",
+      "title": "Revisiting the Perseus Cluster III: Role of Aspherical Explosions on its Chemical Composition and Extension to Metal-Poor Stars and Galaxies",
+      "published_date": "2026-02-26T18:57:36Z",
+      "file_path": "data/brutal_150/2602.23356v1.pdf"
+    }
+  ]
+}

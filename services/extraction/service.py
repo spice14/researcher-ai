@@ -10,8 +10,8 @@ Purpose:
 - Emit NoClaim for non-quantitative or ambiguous sentences.
 
 Inputs/Outputs:
-- Input: ClaimExtractionRequest
-- Output: ClaimExtractionResult (or list of results for decomposition)
+- Input: List[IngestionChunk]
+- Output: List[Claim]
 
 Schema References:
 - services.extraction.schemas
@@ -36,6 +36,7 @@ from typing import List, Optional, Tuple
 
 from core.schemas.claim import Claim, ClaimEvidence, ClaimSubtype, ClaimType, ConfidenceLevel, Polarity
 from services.extraction.schemas import ClaimExtractionRequest, ClaimExtractionResult, NoClaim, NoClaimReason
+from services.ingestion.schemas import IngestionChunk
 
 # ── PERFORMANCE CLAIM PREDICATES ──
 _VERB_LEXICON = (
@@ -532,16 +533,34 @@ def _compute_retrieval_score(chunk_text: str, metric_names: List[str], numeric_s
 class ClaimExtractor:
     """Deterministic claim extractor supporting performance, efficiency, and structural claims."""
 
-    def extract(self, request: ClaimExtractionRequest) -> ClaimExtractionResult:
-        """Extract a single claim. For multi-claim decomposition, use extract_all."""
-        results = self.extract_all(request)
-        if results:
-            return results[0]
-        return ClaimExtractionResult(
-            no_claim=NoClaim(reason_code=NoClaimReason.NON_CLAIM)
-        )
+    def extract(self, chunks: List[IngestionChunk], include_weak: bool = True) -> List[Claim]:
+        """Extract claims from chunks using the canonical entrypoint.
+        
+        Args:
+            chunks: List of ingestion chunks
+            include_weak: If True, also extract weak-tier claims (inferred context)
+        
+        Returns:
+            List of Claim objects (strong tier only if include_weak=False)
+        """
+        claims: List[Claim] = []
+        
+        # Strong tier extraction
+        for chunk in chunks:
+            request = ClaimExtractionRequest(chunk=chunk)
+            results = self._extract_all(request)
+            for result in results:
+                if result.claim:
+                    claims.append(result.claim)
+        
+        # Weak tier extraction (optional)
+        if include_weak:
+            weak_claims = self._extract_weak_tier(chunks)
+            claims.extend(weak_claims)
+        
+        return claims
 
-    def extract_all(self, request: ClaimExtractionRequest) -> List[ClaimExtractionResult]:
+    def _extract_all(self, request: ClaimExtractionRequest) -> List[ClaimExtractionResult]:
         """Extract all claims from a chunk, including decomposed compound claims.
 
         Returns a list of ClaimExtractionResult. May return:
@@ -605,6 +624,18 @@ class ClaimExtractor:
         # Must have meaningful subject (at least 2 chars)
         if len(subject) < 2:
             return None
+
+        # Guard against schema length limits on subject/object
+        if len(subject) > 500 or len(obj) > 500:
+            return ClaimExtractionResult(
+                no_claim=NoClaim(
+                    reason_code=NoClaimReason.NON_CLAIM,
+                    detail=(
+                        "structural claim too long: "
+                        f"subject_len={len(subject)}, object_len={len(obj)}"
+                    ),
+                )
+            )
 
         # Guard against oversized subjects from table-dense text
         if len(subject) > _TABLE_SUBJECT_MAX_LENGTH:
@@ -894,3 +925,97 @@ class ClaimExtractor:
         subject = _clean_subject(sub)
         obj_clean = _normalize_space(_strip_citations(obj).rstrip(" .;:"))
         return part_predicate, subject, obj_clean
+
+    def _extract_weak_tier(self, chunks: List[IngestionChunk]) -> List[Claim]:
+        """Extract weak-tier claims from chunks.
+        
+        Weak claims accept quantitative delta + measurable property without requiring
+        explicit dataset/metric context. These are tagged as context_inferred=True
+        and kept in a separate tier to prevent mixing with strong claims.
+        
+        Examples of weak claims:
+        - "Latency improved by 34%"
+        - "Error reduced from 0.54 to 0.31"
+        - "2.3x improvement over baseline"
+        - "p < 0.01 for mortality reduction"
+        
+        Returns:
+            List of Claim objects with tier=WEAK and context_inferred=True
+        """
+        from services.extraction.weak_claim_validator import WeakClaimValidator
+        from services.extraction.context_stitcher import (
+            stitch_context,
+            get_inferred_dataset,
+            has_inferred_performancy_context,
+        )
+        from core.schemas.claim import ClaimTier
+        
+        weak_claims: List[Claim] = []
+        enriched_chunks = stitch_context(chunks)
+        enriched_by_id = {ec.chunk.chunk_id: ec for ec in enriched_chunks}
+        
+        for chunk in chunks:
+            text = chunk.text.strip()
+            if not text or len(text) < 10:  # Skip very short chunks
+                continue
+
+            enriched = enriched_by_id.get(chunk.chunk_id)
+            has_context_signal = bool(
+                enriched and has_inferred_performancy_context(enriched)
+            )
+            
+            # Validate against weak claim criteria
+            is_valid, _ = WeakClaimValidator.validate(text)
+            if not is_valid:
+                continue
+
+            # Weak claims still require some local or paragraph-level context signal
+            if not chunk.metric_names and not has_context_signal:
+                continue
+            
+            # Extract numeric value for object representation
+            value = WeakClaimValidator.extract_quantitative_value(text)
+            inferred_dataset = get_inferred_dataset(enriched) if enriched else None
+
+            inferred_metric = None
+            if chunk.metric_names:
+                inferred_metric = sorted(chunk.metric_names)[0]
+            elif enriched and enriched.paragraph_context and enriched.paragraph_context.metric_names:
+                inferred_metric = sorted(enriched.paragraph_context.metric_names)[0]
+
+            subject = "quantitative property"
+            if inferred_dataset:
+                subject = f"quantitative property on {inferred_dataset}"
+            
+            # Construct weak claim
+            try:
+                claim = Claim(
+                    claim_id=f"weak_{chunk.chunk_id}",
+                    context_id=chunk.context_id,
+                    subject=subject,
+                    predicate="changed",
+                    object=f"{value}%" if value else "observed improvement",
+                    claim_type=ClaimType.PERFORMANCE,
+                    claim_subtype=ClaimSubtype.DELTA,
+                    polarity=Polarity.SUPPORTS,
+                    confidence_level=ConfidenceLevel.MEDIUM,
+                    evidence=[
+                        ClaimEvidence(
+                            source_id=chunk.source_id,
+                            page=chunk.page,
+                            snippet=text,
+                            retrieval_score=0.8,  # Weak claims get lower confidence
+                        )
+                    ],
+                    tier=ClaimTier.WEAK,
+                    context_explicit=False,
+                    context_inferred=True,
+                    dataset_explicit=None,
+                    metric_explicit=inferred_metric,
+                )
+                weak_claims.append(claim)
+            except Exception:
+                # Skip malformed claims
+                continue
+        
+        return weak_claims

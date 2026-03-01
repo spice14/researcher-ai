@@ -14,7 +14,7 @@ from services.belief.schemas import (
     NormalizedValueSummary,
     QualitativeConfidence,
 )
-from services.normalization.schemas import NormalizedClaim
+from core.schemas.normalized_claim import NormalizedClaim
 
 
 class BeliefEngine:

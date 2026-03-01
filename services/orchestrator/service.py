@@ -9,7 +9,6 @@ from services.belief.schemas import BeliefRequest
 from services.belief.service import BeliefEngine
 from services.contradiction.schemas import AnalysisRequest
 from services.contradiction.relation_engine import EpistemicRelationEngine
-from services.extraction.schemas import ClaimExtractionRequest
 from services.extraction.service import ClaimExtractor
 from services.ingestion.schemas import IngestionRequest
 from services.ingestion.service import IngestionService
@@ -155,16 +154,10 @@ class Orchestrator:
             from services.ingestion.schemas import IngestionChunk
 
             chunks_data = input_data.get("chunks", [])
-            # Extract from all chunks
-            all_claims = []
-            for chunk_data in chunks_data:
-                # Reconstruct IngestionChunk
-                chunk = IngestionChunk(**chunk_data)
-                extract_req = ClaimExtractionRequest(chunk=chunk)
-                extract_result = self.extraction.extract(extract_req)
-                if extract_result.claim:
-                    all_claims.append(extract_result.claim.model_dump())
-            return {"claims": all_claims}
+            # Extract from all chunks via canonical interface
+            reconstructed_chunks = [IngestionChunk(**chunk_data) for chunk_data in chunks_data]
+            claims = self.extraction.extract(reconstructed_chunks)
+            return {"claims": [claim.model_dump() for claim in claims]}
 
         elif component == "normalization":
             # Input is extraction output

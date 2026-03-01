@@ -52,6 +52,14 @@ class Polarity(str, Enum):
     NEUTRAL = "neutral"
 
 
+class ClaimTier(str, Enum):
+    """Hierarchical claim acceptance tiers based on context explicitness."""
+    
+    STRONG = "strong"      # Explicit dataset + metric context (high confidence in aggregation)
+    WEAK = "weak"          # Inferred context (quantitative but missing explicit dataset/metric)
+    REJECTED = "rejected"  # Does not meet acceptance criteria
+
+
 class ConfidenceLevel(str, Enum):
     """Qualitative confidence level for claims.
     
@@ -196,6 +204,28 @@ class Claim(BaseModel):
     )
     polarity: Polarity = Field(..., description="Polarity: supports, refutes, or neutral")
     confidence_level: ConfidenceLevel = Field(..., description="Qualitative confidence: low, medium, high")
+    
+    # Claim tier and context explicitness tracking (v2 extraction)
+    tier: ClaimTier = Field(
+        default=ClaimTier.STRONG,
+        description="Claim tier: strong (explicit context) or weak (inferred context)"
+    )
+    context_explicit: bool = Field(
+        default=True,
+        description="Whether dataset and metric context are explicitly stated"
+    )
+    context_inferred: bool = Field(
+        default=False,
+        description="Whether context was inferred (quantitative delta without explicit dataset)"
+    )
+    dataset_explicit: Optional[str] = Field(
+        default=None,
+        description="Explicitly named dataset if present"
+    )
+    metric_explicit: Optional[str] = Field(
+        default=None,
+        description="Explicitly named metric if present"
+    )
 
     @field_validator("claim_id", "subject", "predicate", "object")
     @classmethod

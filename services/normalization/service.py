@@ -5,6 +5,11 @@ Purpose:
 - Bind numeric values to metrics using positional proximity.
 - Reject year and reference numbers deterministically.
 
+PHASE B ENHANCEMENT:
+- Integrate metric ontology for improved semantic recall.
+- Use domain-specific synonym mapping when explicit metric not found.
+- Maintain determinism and strict misbinding gates.
+
 Inputs/Outputs:
 - Input: NormalizationRequest
 - Output: NormalizationResult
@@ -41,6 +46,11 @@ from services.normalization.schemas import (
 from services.normalization.diagnostics import (
     NormalizationFailureReason,
     NormalizationDiagnostic,
+)
+# PHASE B: Import metric ontology for semantic recall expansion
+from services.normalization.metric_ontology import (
+    resolve_metric_from_context,
+    find_metric_candidates_in_text,
 )
 
 def _normalize_metric_key(token: str) -> str:
@@ -499,21 +509,80 @@ def _metric_proximate_value(
     return raw_display, norm_value, canon_unit, had_any_candidates
 
 
+def _find_first_valid_value(text: str) -> Optional[Tuple[str, float, Optional[str]]]:
+    """Find first valid numeric value when metric position is unknown.
+    
+    Used for ontology-detected metrics where we don't have a metric token position.
+    Applies same rejection filters but doesn't use proximity.
+    
+    Returns:
+        Tuple of (raw_display, normalized_value, canonical_unit) or None
+    """
+    for m in _VALUE_PATTERN.finditer(text):
+        value_str = m.group("value")
+        numeric = float(value_str)
+        
+        # Apply rejection filters
+        if _is_year(value_str, numeric):
+            continue
+        if _is_citation_year(text, m.start(), m.start() + len(value_str)):
+            continue
+        if _is_reference_number(text, m.start()):
+            continue
+        if _is_embedded_in_token(text, m.start()):
+            continue
+        if _is_dataset_year(text, value_str, numeric, m.start()):
+            continue
+        if _is_temporal_year_context(text, m.start(), value_str, numeric):
+            continue
+        
+        # First valid value found
+        unit = m.group("unit")
+        converted = _convert_unit(value_str, numeric, unit)
+        if converted is not None:
+            return converted
+    
+    return None
+
+
 class NormalizationService:
-    """Deterministic normalization implementation with metric-proximate binding."""
+    """Deterministic normalization implementation with metric-proximate binding.
+    
+    PHASE B: Enhanced with metric ontology for improved semantic recall.
+    """
 
     def normalize(self, request: NormalizationRequest, debug_mode: bool = False) -> NormalizationResult:
         claim = request.claim
         metric = _canonical_metric(claim.object)
         
-        # Classify rejection if needed
+        # PHASE B: If regex-based metric detection fails, try ontology-based detection
+        ontology_used = False
+        metric_candidates = []
+        if not metric:
+            # Try ontology-based metric resolution
+            metric = resolve_metric_from_context(
+                metric_text=None,  # No explicit metric field in current schema
+                context_text=claim.object
+            )
+            if metric:
+                ontology_used = True
+            
+            # For diagnostics: capture all candidate metrics found
+            if debug_mode:
+                metric_candidates = find_metric_candidates_in_text(claim.object)
+        
+        # Classify rejection if metric still not found
         if not metric:
             diagnostic = None
             if debug_mode:
+                # Check if numeric values exist (for missing_metric_with_numeric counter)
+                has_numeric = bool(_VALUE_PATTERN.search(claim.object))
                 diagnostic = {
                     "claim_id": claim.claim_id,
                     "reason": NormalizationFailureReason.MISSING_METRIC.value,
                     "metric_candidate": None,
+                    "metric_candidates": metric_candidates,  # All candidates found (could be multiple)
+                    "has_numeric_value": has_numeric,  # New diagnostic field
                     "dataset_candidate": claim.conditions.dataset if claim.conditions else None,
                     "numeric_values_detected": [],
                     "context_id": claim.context_id,
@@ -525,6 +594,14 @@ class NormalizationService:
             )
 
         result = _metric_proximate_value(claim.object)
+
+        # PHASE B: If regex-based proximity failed but ontology found metric,
+        # try simple first-valid-value fallback
+        if result is None and ontology_used:
+            fallback = _find_first_valid_value(claim.object)
+            if fallback is not None:
+                raw_display, norm_value, canon_unit = fallback
+                result = (raw_display, norm_value, canon_unit, False)
 
         if result is None:
             # Distinguish: were there ANY numbers at all?
@@ -542,6 +619,7 @@ class NormalizationService:
                     "claim_id": claim.claim_id,
                     "reason": reason.value,
                     "metric_candidate": metric,
+                    "ontology_used": ontology_used,  # PHASE B: Track ontology usage
                     "dataset_candidate": claim.conditions.dataset if claim.conditions else None,
                     "numeric_values_detected": numeric_values,
                     "context_id": claim.context_id,
@@ -561,6 +639,8 @@ class NormalizationService:
 
         raw_value, value_normalized, unit_normalized, _ = result
 
+        # PHASE B: Metric resolved (either regex or ontology)
+        # ontology_used flag tracks if semantic expansion was used
         normalized = NormalizedClaim(
             claim_id=claim.claim_id,
             context_id=claim.context_id,

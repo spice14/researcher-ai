@@ -14,6 +14,7 @@ Unstructured text is permitted only at ingestion and artifact generation boundar
 
 from core.schemas.evidence import EvidenceRecord, EvidenceContext, EvidenceProvenance
 from core.schemas.claim import Claim, ClaimEvidence, ClaimConditions, Polarity, ConfidenceLevel
+from core.schemas.normalized_claim import NormalizedClaim, NoNormalization, NoNormalizationReason
 from core.schemas.hypothesis import Hypothesis, HypothesisRevision
 from core.schemas.experimental_context import (
     ExperimentalContext,
@@ -30,6 +31,9 @@ __all__ = [
     "Claim",
     "ClaimEvidence",
     "ClaimConditions",
+    "NormalizedClaim",
+    "NoNormalization",
+    "NoNormalizationReason",
     "Hypothesis",
     "HypothesisRevision",
     "ConfidenceLevel",

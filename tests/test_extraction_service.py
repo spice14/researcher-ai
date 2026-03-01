@@ -12,6 +12,21 @@ from services.extraction.service import ClaimExtractor
 from services.ingestion.schemas import IngestionChunk
 
 
+def extract_from_request(extractor: ClaimExtractor, request: ClaimExtractionRequest) -> ClaimExtractionResult:
+    """Test helper: execute extraction using the canonical engine internals."""
+    results = extractor._extract_all(request)
+    if results:
+        return results[0]
+    return ClaimExtractionResult(no_claim=NoClaim(reason_code=NoClaimReason.NON_CLAIM))
+
+
+def extract_all_from_request(
+    extractor: ClaimExtractor, request: ClaimExtractionRequest
+) -> list[ClaimExtractionResult]:
+    """Test helper: return all extraction results for a chunk."""
+    return extractor._extract_all(request)
+
+
 @pytest.fixture
 def extractor():
     """Fixture providing a ClaimExtractor instance."""
@@ -119,7 +134,7 @@ class TestPerformanceExtraction:
     def test_extract_performance_claim_basic(self, extractor, basic_performance_chunk):
         """Test extraction of basic performance claim."""
         request = ClaimExtractionRequest(chunk=basic_performance_chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         assert result.claim is not None
         assert result.no_claim is None
@@ -132,7 +147,7 @@ class TestPerformanceExtraction:
     def test_extract_all_performance_single_result(self, extractor, basic_performance_chunk):
         """Test extract_all returns list with single performance claim."""
         request = ClaimExtractionRequest(chunk=basic_performance_chunk)
-        results = extractor.extract_all(request)
+        results = extract_all_from_request(extractor, request)
         
         assert isinstance(results, list)
         assert len(results) >= 1
@@ -142,7 +157,7 @@ class TestPerformanceExtraction:
     def test_performance_claim_has_evidence(self, extractor, basic_performance_chunk):
         """Test that extracted performance claim has evidence attached."""
         request = ClaimExtractionRequest(chunk=basic_performance_chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         assert result.claim is not None
         assert result.claim.evidence is not None
@@ -152,10 +167,10 @@ class TestPerformanceExtraction:
     def test_performance_claim_has_deterministic_id(self, extractor, basic_performance_chunk):
         """Test claim_id is deterministic (same input → same ID)."""
         request1 = ClaimExtractionRequest(chunk=basic_performance_chunk)
-        result1 = extractor.extract(request1)
+        result1 = extract_from_request(extractor, request1)
         
         request2 = ClaimExtractionRequest(chunk=basic_performance_chunk)
-        result2 = extractor.extract(request2)
+        result2 = extract_from_request(extractor, request2)
         
         assert result1.claim is not None
         assert result2.claim is not None
@@ -164,7 +179,7 @@ class TestPerformanceExtraction:
     def test_performance_supports_polarity(self, extractor, basic_performance_chunk):
         """Test performance claim typically has SUPPORTS polarity."""
         request = ClaimExtractionRequest(chunk=basic_performance_chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         assert result.claim is not None
         assert result.claim.polarity in [Polarity.SUPPORTS, Polarity.REFUTES, Polarity.NEUTRAL]
@@ -181,7 +196,7 @@ class TestEfficiencyExtraction:
     def test_extract_efficiency_claim_training_time(self, extractor, efficiency_chunk):
         """Test extraction of training time efficiency claim."""
         request = ClaimExtractionRequest(chunk=efficiency_chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         # Either extracts efficiency or rejects with valid reason
         if result.claim is not None:
@@ -211,7 +226,7 @@ class TestEfficiencyExtraction:
             metric_names=[],
         )
         request = ClaimExtractionRequest(chunk=chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         # Without numeric value, should not extract performance claim
         if result.claim is not None and result.claim.claim_type == ClaimType.PERFORMANCE:
@@ -229,7 +244,7 @@ class TestStructuralExtraction:
     def test_extract_structural_claim_basic(self, extractor, structural_chunk):
         """Test extraction of basic structural claim."""
         request = ClaimExtractionRequest(chunk=structural_chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         # Should extract structural claim (no metric/numeric requirement)
         if result.claim is not None:
@@ -255,7 +270,7 @@ class TestStructuralExtraction:
             metric_names=[],
         )
         request = ClaimExtractionRequest(chunk=chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         # Without structural entity (model, architecture, etc.), may be rejected
         # This is acceptable behavior
@@ -273,7 +288,7 @@ class TestHedgingAndRejection:
     def test_hedged_statement_rejected(self, extractor, hedged_statement_chunk):
         """Test hedged statements are rejected."""
         request = ClaimExtractionRequest(chunk=hedged_statement_chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         # Hedged statements should be rejected
         if result.no_claim is not None:
@@ -285,7 +300,7 @@ class TestHedgingAndRejection:
     def test_non_claim_chunk_rejected(self, extractor, non_claim_chunk):
         """Test non-claim chunk is rejected appropriately."""
         request = ClaimExtractionRequest(chunk=non_claim_chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         # Non-claim should result in NoClaim
         assert result.no_claim is not None or result.claim is None
@@ -306,7 +321,7 @@ class TestHedgingAndRejection:
             metric_names=["accuracy"],
         )
         request = ClaimExtractionRequest(chunk=chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         # Result should be valid (either claim or rejection reason)
         assert result.claim is not None or result.no_claim is not None
@@ -324,8 +339,8 @@ class TestExtractMethods:
         """Test extract() returns first result of extract_all()."""
         request = ClaimExtractionRequest(chunk=basic_performance_chunk)
         
-        single = extractor.extract(request)
-        multiple = extractor.extract_all(request)
+        single = extract_from_request(extractor, request)
+        multiple = extract_all_from_request(extractor, request)
         
         assert len(multiple) >= 1
         
@@ -352,8 +367,8 @@ class TestExtractMethods:
         )
         request = ClaimExtractionRequest(chunk=chunk)
         
-        single = extractor.extract(request)
-        multiple = extractor.extract_all(request)
+        single = extract_from_request(extractor, request)
+        multiple = extract_all_from_request(extractor, request)
         
         # Single should correspond to multiple
         assert single is not None or multiple is not None
@@ -370,7 +385,7 @@ class TestXORValidation:
     def test_result_xor_claim_or_no_claim(self, extractor, basic_performance_chunk):
         """Test result always has exactly one of claim or no_claim."""
         request = ClaimExtractionRequest(chunk=basic_performance_chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         # XOR: exactly one should be set
         has_claim = result.claim is not None
@@ -380,7 +395,7 @@ class TestXORValidation:
     def test_result_never_both_claim_and_no_claim(self, extractor, non_claim_chunk):
         """Test result never has both claim and no_claim."""
         request = ClaimExtractionRequest(chunk=non_claim_chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         assert not (result.claim is not None and result.no_claim is not None)
 
@@ -410,7 +425,7 @@ class TestEdgeCases:
             metric_names=[],
         )
         request = ClaimExtractionRequest(chunk=chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         # Should handle gracefully
         assert result.claim is not None or result.no_claim is not None
@@ -433,7 +448,7 @@ class TestEdgeCases:
             metric_names=[],
         )
         request = ClaimExtractionRequest(chunk=chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         # Should handle without crashing
         assert result.claim is not None or result.no_claim is not None
@@ -454,7 +469,7 @@ class TestEdgeCases:
             metric_names=["GLUE"],
         )
         request = ClaimExtractionRequest(chunk=chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         # Should handle special characters gracefully
         assert result.claim is not None or result.no_claim is not None
@@ -475,7 +490,7 @@ class TestEdgeCases:
             metric_names=["accuracy"],
         )
         request = ClaimExtractionRequest(chunk=chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         # Should extract or identify reason for rejection
         assert result.claim is not None or result.no_claim is not None
@@ -492,7 +507,7 @@ class TestSchemaConsistency:
     def test_claim_result_schema_valid(self, extractor, basic_performance_chunk):
         """Test ClaimExtractionResult instances are valid Pydantic models."""
         request = ClaimExtractionRequest(chunk=basic_performance_chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         # Should be valid ClaimExtractionResult
         assert isinstance(result, ClaimExtractionResult)
@@ -505,7 +520,7 @@ class TestSchemaConsistency:
     def test_claim_has_required_fields(self, extractor, basic_performance_chunk):
         """Test extracted Claim has all required fields."""
         request = ClaimExtractionRequest(chunk=basic_performance_chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         if result.claim is not None:
             claim = result.claim
@@ -521,7 +536,7 @@ class TestSchemaConsistency:
     def test_no_claim_has_required_fields(self, extractor, non_claim_chunk):
         """Test NoClaim results have reason_code."""
         request = ClaimExtractionRequest(chunk=non_claim_chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         if result.no_claim is not None:
             no_claim = result.no_claim
@@ -541,9 +556,9 @@ class TestDeterminism:
         """Test same input always produces same output."""
         request = ClaimExtractionRequest(chunk=basic_performance_chunk)
         
-        result1 = extractor.extract(request)
-        result2 = extractor.extract(request)
-        result3 = extractor.extract(request)
+        result1 = extract_from_request(extractor, request)
+        result2 = extract_from_request(extractor, request)
+        result3 = extract_from_request(extractor, request)
         
         # All three should be identical
         if result1.claim is not None and result2.claim is not None and result3.claim is not None:
@@ -554,8 +569,8 @@ class TestDeterminism:
         """Test rejection reasons are consistent."""
         request = ClaimExtractionRequest(chunk=hedged_statement_chunk)
         
-        result1 = extractor.extract(request)
-        result2 = extractor.extract(request)
+        result1 = extract_from_request(extractor, request)
+        result2 = extract_from_request(extractor, request)
         
         if result1.no_claim is not None and result2.no_claim is not None:
             assert result1.no_claim.reason_code == result2.no_claim.reason_code
@@ -574,7 +589,7 @@ class TestRequestValidation:
         request = ClaimExtractionRequest(chunk=basic_performance_chunk)
         
         # Should not raise any exception
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         assert result is not None
 
     def test_request_with_valid_chunk(self, extractor):
@@ -593,7 +608,7 @@ class TestRequestValidation:
             metric_names=[],
         )
         request = ClaimExtractionRequest(chunk=chunk)
-        result = extractor.extract(request)
+        result = extract_from_request(extractor, request)
         
         # Should handle valid request
         assert result is not None
