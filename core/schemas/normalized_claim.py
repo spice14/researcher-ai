@@ -5,7 +5,7 @@ Located in core/schemas to enforce clean domain separation.
 """
 
 from enum import Enum
-from typing import Optional
+from typing import Optional, List, Dict, Any
 from pydantic import BaseModel, Field
 
 from core.schemas.claim import ClaimSubtype, Polarity
@@ -36,6 +36,18 @@ class NormalizedClaim(BaseModel):
     """
 
     claim_id: str = Field(..., description="Original claim identifier")
+    normalized_claim_id: Optional[str] = Field(None, description="Stable identifier for normalized claim cluster")
+    canonical_text: Optional[str] = Field(None, description="Canonical normalized claim text")
+    source_claim_ids: List[str] = Field(default_factory=list, description="Source claim identifiers")
+    domain: Optional[str] = Field(None, description="Claim domain")
+    metric: Optional[str] = Field(None, description="Compatibility alias for metric_canonical")
+    conditions: Dict[str, Any] = Field(default_factory=dict, description="Structured conditions for claim applicability")
+    evidence_strength: Optional[float] = Field(
+        None,
+        ge=0.0,
+        le=1.0,
+        description="Optional evidence strength score",
+    )
     context_id: Optional[str] = Field(None, description="Experimental context identifier")
     subject: str = Field(..., description="Claim subject")
     predicate: str = Field(..., description="Claim predicate")

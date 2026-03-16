@@ -1,9 +1,15 @@
-"""Deterministic DAG orchestrator with bounded workflows."""
+"""Deterministic DAG orchestrator with bounded workflows.
+
+Deprecated:
+This legacy orchestrator imports and calls domain services directly.
+Phase 4 uses MCP-based orchestration in services/orchestrator/mcp_orchestrator.py.
+"""
 
 import hashlib
 import json
 import time
 from typing import Any, Dict, List
+import warnings
 
 from services.belief.schemas import BeliefRequest
 from services.belief.service import BeliefEngine
@@ -36,6 +42,12 @@ class Orchestrator:
 
     def __init__(self):
         """Initialize orchestrator with service instances."""
+        warnings.warn(
+            "services.orchestrator.service.Orchestrator is deprecated. "
+            "Use services.orchestrator.mcp_orchestrator.MCPOrchestrator instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         self.ingestion = IngestionService()
         self.extraction = ClaimExtractor()
         self.normalization = NormalizationService()

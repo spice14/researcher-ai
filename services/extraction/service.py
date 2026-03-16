@@ -40,6 +40,7 @@ from services.ingestion.schemas import IngestionChunk
 
 # ── PERFORMANCE CLAIM PREDICATES ──
 _VERB_LEXICON = (
+    # Active voice
     "achieves",
     "attains",
     "obtains",
@@ -58,6 +59,34 @@ _VERB_LEXICON = (
     "shows",
     "exhibits",
     "sets",
+    # Passive voice
+    "achieved",
+    "attained",
+    "obtained",
+    "reached",
+    "reported",
+    "observed",
+    "measured",
+    "recorded",
+    "found",
+    # Informal/comparative
+    "beats",
+    "exceeds",
+    "rivals",
+    "matches",
+    "gets",
+    "gave",
+    "gives",
+    "leads to",
+    "resulted in",
+    "results in",
+    # Evaluation verbs
+    "evaluates to",
+    "evaluated at",
+    "performs at",
+    "performs",
+    "performed",
+    "scored",
 )
 
 # ── EFFICIENCY CLAIM PREDICATES ──
@@ -72,6 +101,15 @@ _EFFICIENCY_VERBS = (
     "uses",
     "reduces",
     "needs",
+    "completes",
+    "completed",
+    "finished",
+    "converges",
+    "converged",
+    "runs",
+    "ran",
+    "executes",
+    "processed",
 )
 
 # ── STRUCTURAL CLAIM PREDICATES ──
@@ -118,11 +156,29 @@ _STRUCTURAL_ENTITIES = (
     "layer",
     "module",
     "framework",
+    "method",
+    "approach",
+    "algorithm",
+    "system",
+    "pipeline",
+    "representation",
+    "embedding",
+    "convolution",
+    "recurrent",
+    "residual",
+    "normalization",
+    "objective",
+    "policy",
+    "agent",
+    "optimizer",
 )
 
 # ── EFFICIENCY UNITS ──
 _EFFICIENCY_UNITS = re.compile(
-    r"\b(hours?|days?|GPUs?|TPUs?|FLOPs?|parameters?|P100|V100|A100)\b",
+    r"\b(hours?|days?|minutes?|seconds?|ms|GPUs?|TPUs?|FLOPs?|parameters?|"
+    r"P100|V100|A100|H100|A6000|RTX|gigabytes?|GB|MB|TB|"
+    r"watts?|joules?|kWh|samples?\s+per\s+second|tokens?\s+per\s+second|"
+    r"iterations?|steps?|wall[\s-]?clock)\b",
     re.IGNORECASE,
 )
 
@@ -150,17 +206,31 @@ _NON_PERFORMANCE_TERMS = (
     "split",
 )
 
-# ── METRIC PATTERN FOR IMPLICIT PREDICATE DETECTION ──
+# ── EXPANDED METRIC LIST (shared across all patterns) ──
+_METRICS_LIST = (
+    r"accuracy|f1-macro|f1-score|f1|bleu|rouge-l|rouge-1|rouge-2|rouge|map|mAP|mrr|auc"
+    r"|precision|recall|wer|cer|latency|perplexity"
+    r"|top-1 accuracy|top-5 accuracy|top-1|top-5|iou|ap50|ap75"
+    r"|meteor|spice|cider|bertscore|sacrebleu|ter"
+    r"|ndcg|hit rate"
+    r"|mse|rmse|mae|mape|r-squared"
+    r"|psnr|ssim|fid|inception score"
+    r"|em|exact match|squad-f1"
+    r"|loss|error rate|misclassification"
+    r"|throughput|fps|samples per second|tokens per second"
+    r"|reward|return|episode reward|mean reward|average reward|score"
+    r"|spearman|pearson|kendall|correlation"
+    r"|dice|jaccard|sensitivity|specificity"
+)
+
 _METRIC_PATTERN = re.compile(
-    r"\b(accuracy|f1-macro|f1-score|f1|bleu|rouge-l|rouge|map|mAP|mrr|auc|precision|recall|wer|cer|latency|perplexity"
-    r"|top-1 accuracy|top-5 accuracy|top-1|top-5|iou|ap50|ap75)\b",
+    rf"\b({_METRICS_LIST})\b",
     re.IGNORECASE,
 )
 
 # ── IMPLICIT PREDICATE: "BLEU score of 41.0" or "BLEU of 41.0" ──
 _IMPLICIT_METRIC_OF = re.compile(
-    r"\b(accuracy|f1-macro|f1-score|f1|bleu|rouge-l|rouge|map|mAP|mrr|auc|precision|recall|wer|cer|latency|perplexity"
-    r"|top-1 accuracy|top-5 accuracy|top-1|top-5|iou|ap50|ap75)"
+    rf"\b({_METRICS_LIST})"
     r"\s+(?:score\s+)?of\s+(\d+(?:\.\d+)?)",
     re.IGNORECASE,
 )
@@ -168,8 +238,7 @@ _IMPLICIT_METRIC_OF = re.compile(
 # ── IMPLICIT PREDICATE: "28.4 BLEU" ──
 _IMPLICIT_VALUE_METRIC = re.compile(
     r"(\d+(?:\.\d+)?)\s*(%\s+)?"
-    r"(accuracy|f1-macro|f1-score|f1|bleu|rouge-l|rouge|map|mAP|mrr|auc|precision|recall|wer|cer|latency|perplexity"
-    r"|top-1 accuracy|top-5 accuracy|top-1|top-5|iou|ap50|ap75)\b",
+    rf"({_METRICS_LIST})\b",
     re.IGNORECASE,
 )
 
@@ -250,6 +319,30 @@ def _find_implicit_predicate(text: str) -> Optional[Tuple[str, str, str]]:
         if subject_text:
             return "scores", subject_text, object_text
 
+    # Check "N% accuracy" pattern — percentage followed by metric
+    pct_match = re.search(
+        r"(\d+(?:\.\d+)?)\s*%\s*(" + _METRICS_LIST + r")\b",
+        text,
+        re.IGNORECASE,
+    )
+    if pct_match:
+        subject_text = text[:pct_match.start()].strip()
+        object_text = text[pct_match.start():].strip()
+        if subject_text:
+            return "scores", subject_text, object_text
+
+    # Check "N% on DATASET" pattern — percentage followed by context
+    pct_on_match = re.search(
+        r"(\d+(?:\.\d+)?)\s*%\s+(?:on|for|in)\s+",
+        text,
+        re.IGNORECASE,
+    )
+    if pct_on_match and _METRIC_PATTERN.search(text):
+        subject_text = text[:pct_on_match.start()].strip()
+        object_text = text[pct_on_match.start():].strip()
+        if subject_text:
+            return "scores", subject_text, object_text
+
     return None
 
 
@@ -303,8 +396,23 @@ def _is_quantitative_candidate(numbers: List[str], metrics: List[str]) -> bool:
 
 
 def _is_hedged_statement(text: str) -> bool:
+    """Check if text is hedged AND lacks strong quantitative signal.
+    
+    Hedging alone doesn't reject: "may achieve 28.4 BLEU" is still a valid claim
+    because it has a specific metric and number. Only reject hedging when
+    the claim is purely qualitative.
+    """
     lowered = text.lower()
-    return any(marker in lowered for marker in _HEDGE_MARKERS)
+    if not any(marker in lowered for marker in _HEDGE_MARKERS):
+        return False
+    
+    # If there's a strong quantitative signal (number + metric), allow it
+    has_number = bool(re.search(r'\d+(?:\.\d+)?', text))
+    has_metric = bool(_METRIC_PATTERN.search(text))
+    if has_number and has_metric:
+        return False  # Strong quantitative claim — hedging is fine
+    
+    return True
 
 
 def _is_non_performance_adjacent(text: str, numbers: List[str]) -> bool:
@@ -641,6 +749,9 @@ class ClaimExtractor:
         if len(subject) > _TABLE_SUBJECT_MAX_LENGTH:
             return None
 
+        # Truncate object to schema max_length (500 chars)
+        obj = obj[:500]
+
         context_id = chunk.context_id if chunk.context_id and chunk.context_id != "ctx_unknown" else "ctx_structural"
 
         claim_id = _hash_claim(context_id, subject, predicate, obj)
@@ -703,6 +814,9 @@ class ClaimExtractor:
         if len(subject) > _TABLE_SUBJECT_MAX_LENGTH:
             return None
 
+        # Truncate object to schema max_length (500 chars)
+        obj = obj[:500]
+
         # Verify efficiency content is in the object
         if not _EFFICIENCY_UNITS.search(obj):
             return None
@@ -736,14 +850,24 @@ class ClaimExtractor:
 
     def _try_performance(self, chunk) -> List[ClaimExtractionResult]:
         """Try to extract performance claim(s) from chunk."""
-        # Context gate: performance claims require context
-        if not chunk.context_id or chunk.context_id == "ctx_unknown":
-            return [ClaimExtractionResult(
-                no_claim=NoClaim(
-                    reason_code=NoClaimReason.CONTEXT_MISSING,
-                    detail="context_id missing or unknown",
-                )
-            )]
+        # Context gate: performance claims prefer context, but allow extraction
+        # with inferred context when strong metric+number signal exists
+        has_context = chunk.context_id and chunk.context_id != "ctx_unknown"
+
+        if not has_context:
+            # Check if there's strong enough signal to extract anyway
+            has_metric = bool(chunk.metric_names) or bool(_METRIC_PATTERN.search(chunk.text))
+            has_number = bool(chunk.numeric_strings)
+            has_predicate = bool(_find_predicate(chunk.text)) or bool(_find_implicit_predicate(chunk.text))
+
+            if not (has_metric and has_number and has_predicate):
+                return [ClaimExtractionResult(
+                    no_claim=NoClaim(
+                        reason_code=NoClaimReason.CONTEXT_MISSING,
+                        detail="context_id missing and insufficient metric+number+predicate signal",
+                    )
+                )]
+            # Proceed with inferred context
 
         rejection = self._check_performance_rejections(chunk)
         if rejection:
@@ -782,13 +906,20 @@ class ClaimExtractor:
         return None
 
     def _check_quantitative_requirements(self, chunk) -> Optional[ClaimExtractionResult]:
-        """Check that chunk has both numbers and metrics."""
-        if not _is_quantitative_candidate(chunk.numeric_strings, chunk.metric_names):
-            if not chunk.numeric_strings:
-                return ClaimExtractionResult(no_claim=NoClaim(reason_code=NoClaimReason.NO_NUMBER))
-            if not chunk.metric_names:
-                return ClaimExtractionResult(no_claim=NoClaim(reason_code=NoClaimReason.NO_METRIC))
-            return ClaimExtractionResult(no_claim=NoClaim(reason_code=NoClaimReason.NON_CLAIM))
+        """Check that chunk has both numbers and metrics.
+        
+        Uses both ingestion-time metric_names AND live text re-scan with the
+        expanded metric pattern (handles cases where ingestion used a narrower list).
+        """
+        has_numbers = bool(chunk.numeric_strings)
+        has_metrics = bool(chunk.metric_names) or bool(_METRIC_PATTERN.search(chunk.text))
+        
+        if has_numbers and has_metrics:
+            return None
+        if not has_numbers:
+            return ClaimExtractionResult(no_claim=NoClaim(reason_code=NoClaimReason.NO_NUMBER))
+        if not has_metrics:
+            return ClaimExtractionResult(no_claim=NoClaim(reason_code=NoClaimReason.NO_METRIC))
         return None
 
     def _handle_compound(self, chunk, predicate: str) -> List[ClaimExtractionResult]:
@@ -827,7 +958,10 @@ class ClaimExtractor:
                 )
             )]
 
-        claim_id = _hash_claim(chunk.context_id, subject, predicate, obj)
+        # Truncate object to schema max_length (500 chars)
+        obj = obj[:500]
+
+        claim_id = _hash_claim(chunk.context_id or "ctx_inferred", subject, predicate, obj)
         retrieval_score = _compute_retrieval_score(chunk.text, chunk.metric_names, chunk.numeric_strings)
 
         evidence = ClaimEvidence(
@@ -837,9 +971,12 @@ class ClaimExtractor:
             retrieval_score=retrieval_score,
         )
 
+        # Use context_id if available, else inferred
+        context_id = chunk.context_id if chunk.context_id and chunk.context_id != "ctx_unknown" else "ctx_inferred"
+
         claim = Claim(
             claim_id=claim_id,
-            context_id=chunk.context_id,
+            context_id=context_id,
             subject=subject,
             predicate=predicate,
             object=obj,
@@ -869,6 +1006,13 @@ class ClaimExtractor:
             )
             if not subject or not obj_clean:
                 continue
+
+            # Guard against schema length violations in decomposed fragments.
+            if len(subject) > _TABLE_SUBJECT_MAX_LENGTH:
+                continue
+            if len(subject) > 500:
+                continue
+            obj_clean = obj_clean[:500]
 
             carry_subject = subject
             carry_predicate = part_predicate

@@ -40,7 +40,7 @@ class TestPerformanceExtractionVariants:
     """Tests for performance claim extraction variants."""
 
     def test_extract_performance_with_hedging(self, extractor):
-        """Test that hedged performance claims are rejected."""
+        """Hedged claims with strong quantitative signal (metric+number) are now extracted."""
         chunk = IngestionChunk(
             chunk_id="chunk_001",
             source_id="paper_001",
@@ -57,7 +57,8 @@ class TestPerformanceExtractionVariants:
         request = ClaimExtractionRequest(chunk=chunk)
         result = extract_from_request(extractor, request)
         
-        assert result.no_claim is not None or result.claim is None
+        # Hedged + strong quantitative signal → extracted (not rejected)
+        assert result.claim is not None
 
     def test_extract_performance_with_uncertainty(self, extractor):
         """Test performance claims with uncertainty markers."""

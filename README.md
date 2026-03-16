@@ -57,7 +57,7 @@ Researcher-AI is built around **five locked core capabilities**, each addressing
    Transforms validated hypotheses into proposal-ready research artifacts.
 
 A detailed explanation of each capability is available in  
-**`CAPABILITIES.md`**.
+**`capabilities.md`**.
 
 ---
 
@@ -73,7 +73,7 @@ Researcher-AI uses a **hybrid architecture**:
 This design avoids monolithic agents while preserving modularity, debuggability, and extensibility.
 
 A full technical breakdown is available in  
-**`DESIGN.md`**.
+**`Design.md`**.
 
 ---
 
@@ -116,11 +116,10 @@ The project is currently optimized for **local development and experimentation**
 
 researcher-ai/
 ├─ README.md
-├─ CAPABILITIES.md
-├─ DESIGN.md
+├─ capabilities.md
+├─ Design.md
 ├─ services/          # Deterministic MCP tool services
 ├─ agents/            # Hypothesis and Critic agents
-├─ orchestrator/      # Planner / controller
 ├─ infra/             # Docker and infrastructure configs
 ├─ tests/
 └─ docs/

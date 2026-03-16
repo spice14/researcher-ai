@@ -9,7 +9,7 @@ Boundary conditions are mandatory when applicable.
 Revision history must persist across critique cycles.
 """
 
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel, Field, field_validator, model_validator
 from core.schemas.claim import Claim, ConfidenceLevel
 
@@ -67,6 +67,10 @@ class Hypothesis(BaseModel):
         min_length=1,
         max_length=1000,
     )
+    rationale: Optional[str] = Field(
+        None,
+        description="Optional explicit rationale for Phase 1 compatibility",
+    )
     assumptions: List[str] = Field(
         ...,
         min_length=1,
@@ -93,6 +97,29 @@ class Hypothesis(BaseModel):
     contradicting_claims: List[Claim] = Field(
         default_factory=list,
         description="Claims from literature that contradict this hypothesis",
+    )
+    supporting_citations: List[str] = Field(
+        default_factory=list,
+        description="Citation identifiers supporting the hypothesis",
+    )
+    known_risks: List[str] = Field(
+        default_factory=list,
+        description="Known risks or failure modes associated with the hypothesis",
+    )
+    confidence_score: Optional[float] = Field(
+        None,
+        ge=0.0,
+        le=1.0,
+        description="Optional numeric confidence score for compatibility with Phase 1 contract",
+    )
+    grounding_claim_ids: List[str] = Field(
+        default_factory=list,
+        description="Claim identifiers grounding this hypothesis",
+    )
+    iteration_number: int = Field(
+        1,
+        ge=1,
+        description="Current revision iteration number",
     )
     novelty_basis: str = Field(
         ...,
@@ -147,6 +174,8 @@ class Hypothesis(BaseModel):
                     f"Revision history iterations must be sequential starting from 1. "
                     f"Got {iterations}, expected {expected}"
                 )
+                if self.rationale is not None and len(self.rationale.strip()) == 0:
+                    raise ValueError("rationale must be non-empty when provided")
         return self
 
     def add_revision(self, changes: str, rationale: str) -> None:

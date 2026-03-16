@@ -53,12 +53,48 @@ _DATASET_TASK_MAP: Dict[str, TaskType] = {
     "superglue": TaskType.CLASSIFICATION,
     "mnli": TaskType.CLASSIFICATION,
     "cola": TaskType.CLASSIFICATION,
+    "sst-2": TaskType.CLASSIFICATION,
+    "sst 2": TaskType.CLASSIFICATION,
+    "mrpc": TaskType.CLASSIFICATION,
+    "qqp": TaskType.CLASSIFICATION,
+    "qnli": TaskType.CLASSIFICATION,
+    "rte": TaskType.CLASSIFICATION,
+    "wnli": TaskType.CLASSIFICATION,
     "squad": TaskType.QUESTION_ANSWERING,
     "imagenet": TaskType.CLASSIFICATION,
+    "cifar-10": TaskType.CLASSIFICATION,
+    "cifar 10": TaskType.CLASSIFICATION,
+    "cifar-100": TaskType.CLASSIFICATION,
+    "cifar 100": TaskType.CLASSIFICATION,
+    "coco": TaskType.OTHER,
+    "ms-coco": TaskType.OTHER,
+    "ms coco": TaskType.OTHER,
+    "pascal voc": TaskType.OTHER,
     "cnn": TaskType.SUMMARIZATION,
     "dailymail": TaskType.SUMMARIZATION,
+    "xsum": TaskType.SUMMARIZATION,
+    "samsum": TaskType.SUMMARIZATION,
     "penn treebank": TaskType.SEQUENCE_LABELING,
+    "ptb": TaskType.SEQUENCE_LABELING,
     "conll": TaskType.SEQUENCE_LABELING,
+    "librispeech": TaskType.OTHER,
+    "mmlu": TaskType.QUESTION_ANSWERING,
+    "truthfulqa": TaskType.QUESTION_ANSWERING,
+    "hellaswag": TaskType.CLASSIFICATION,
+    "arc": TaskType.CLASSIFICATION,
+    "winogrande": TaskType.CLASSIFICATION,
+    "gsm8k": TaskType.QUESTION_ANSWERING,
+    "atari": TaskType.OTHER,
+    "mujoco": TaskType.OTHER,
+    "vtab": TaskType.CLASSIFICATION,
+    "kitti": TaskType.OTHER,
+    "cityscapes": TaskType.OTHER,
+    "ade20k": TaskType.OTHER,
+    "ms-marco": TaskType.QUESTION_ANSWERING,
+    "ms marco": TaskType.QUESTION_ANSWERING,
+    "natural questions": TaskType.QUESTION_ANSWERING,
+    "triviaqa": TaskType.QUESTION_ANSWERING,
+    "hotpotqa": TaskType.QUESTION_ANSWERING,
 }
 
 # Known metric → direction mappings
@@ -70,6 +106,8 @@ _METRIC_DIRECTION: Dict[str, bool] = {
     "bleu": True,
     "rouge": True,
     "rouge-l": True,
+    "rouge-1": True,
+    "rouge-2": True,
     "map": True,
     "mrr": True,
     "auc": True,
@@ -79,19 +117,64 @@ _METRIC_DIRECTION: Dict[str, bool] = {
     "cer": False,
     "latency": False,
     "perplexity": False,
+    "loss": False,
+    "error rate": False,
+    "mse": False,
+    "rmse": False,
+    "mae": False,
+    "psnr": True,
+    "ssim": True,
+    "fid": False,
+    "meteor": True,
+    "spice": True,
+    "cider": True,
+    "ndcg": True,
+    "throughput": True,
+    "fps": True,
+    "reward": True,
+    "return": True,
+    "mean reward": True,
+    "score": True,
+    "em": True,
+    "exact match": True,
+    "iou": True,
+    "dice": True,
+    "top-1": True,
+    "top-5": True,
+    "sensitivity": True,
+    "specificity": True,
 }
 
 # Dataset name detection
 _DATASET_PATTERN = re.compile(
     r"\b(WMT(?:\s*20\d{2})?|GLUE|SuperGLUE|MNLI|CoLA|SQuAD|ImageNet|"
-    r"CNN|DailyMail|Penn Treebank|CoNLL)\b",
+    r"CNN|DailyMail|Penn Treebank|CoNLL"
+    r"|CIFAR[-\s]?10|CIFAR[-\s]?100|COCO|MS[-\s]?COCO|Pascal\s?VOC"
+    r"|PTB|WikiText|C4|The Pile|CommonCrawl"
+    r"|LibriSpeech|Common Voice|TIMIT|VoxCeleb"
+    r"|ARC|HellaSwag|MMLU|TruthfulQA|Winogrande|GSM8K"
+    r"|LAMBADA|StoryCloze|BoolQ|PIQA|OpenBookQA"
+    r"|Atari|MuJoCo|HalfCheetah|Hopper|Walker|Humanoid|Ant|Reacher|Swimmer"
+    r"|KITTI|Cityscapes|ADE20K|LSUN|CelebA|FFHQ"
+    r"|VTAB|Oxford Flowers|Stanford Cars|SVHN"
+    r"|MS[-\s]?MARCO|Natural Questions|TriviaQA|HotpotQA"
+    r"|XSum|SAMSum"
+    r"|SST[-\s]?2|MRPC|QQP|QNLI|RTE|WNLI|STS[-\s]?B)\b",
     re.IGNORECASE,
 )
 
 # Metric name detection
 _METRIC_PATTERN = re.compile(
-    r"\b(accuracy|f1-macro|f1-score|f1|bleu|rouge-l|rouge|map|mrr|auc|"
-    r"precision|recall|wer|cer|perplexity|latency)\b",
+    r"\b(accuracy|f1-macro|f1-score|f1|bleu|rouge-l|rouge-1|rouge-2|rouge|map|mrr|auc|"
+    r"precision|recall|wer|cer|perplexity|latency"
+    r"|meteor|spice|cider|bertscore|sacrebleu|ter"
+    r"|ndcg|hit rate"
+    r"|mse|rmse|mae|psnr|ssim|fid"
+    r"|loss|error rate|throughput|fps"
+    r"|reward|return|mean reward|average reward|score"
+    r"|top-1|top-5|iou|em|exact match"
+    r"|spearman|pearson|correlation"
+    r"|dice|jaccard|sensitivity|specificity)\b",
     re.IGNORECASE,
 )
 

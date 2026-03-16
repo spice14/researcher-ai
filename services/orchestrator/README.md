@@ -4,6 +4,16 @@
 
 Deterministic DAG execution engine for bounded workflows.
 
+## Repository Direction
+
+MCP orchestrator is the canonical execution path:
+- `services/orchestrator/mcp_orchestrator.py`
+
+Legacy direct orchestration path is deprecated:
+- `services/orchestrator/service.py`
+
+New integration and feature work should target the MCP path only.
+
 Executes pre-defined task graphs with topological ordering.
 
 **No dynamic planning.**  

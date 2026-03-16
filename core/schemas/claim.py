@@ -157,6 +157,27 @@ class Claim(BaseModel):
     """
 
     claim_id: str = Field(..., description="Unique identifier for this claim", min_length=1)
+    paper_id: Optional[str] = Field(None, description="Source paper identifier")
+    chunk_id: Optional[str] = Field(None, description="Origin chunk identifier")
+    text: Optional[str] = Field(None, description="Original claim text as extracted from source")
+    metric_refs: List[str] = Field(
+        default_factory=list,
+        description="Metric identifiers or names referenced by this claim",
+    )
+    condition_refs: List[str] = Field(
+        default_factory=list,
+        description="Condition or context identifiers referenced by this claim",
+    )
+    confidence: Optional[float] = Field(
+        None,
+        ge=0.0,
+        le=1.0,
+        description="Optional numeric confidence for compatibility with Phase 1 contract",
+    )
+    extraction_method: Optional[str] = Field(
+        None,
+        description="Extraction method used to produce the claim",
+    )
     
     # Experimental context reference (THE MISSING PRIMITIVE)
     context_id: Optional[str] = Field(
@@ -241,6 +262,8 @@ class Claim(BaseModel):
         # Basic check: ensure components don't contain only whitespace
         if not (self.subject.strip() and self.predicate.strip() and self.object.strip()):
             raise ValueError("Subject, predicate, and object must all be meaningful strings")
+        if self.text is not None and len(self.text.strip()) == 0:
+            raise ValueError("text must be non-empty when provided")
         return self
 
     def to_statement(self) -> str:

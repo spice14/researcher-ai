@@ -208,5 +208,14 @@ __marimo__/
 data
 
 ## Custom definitions to ignore files/directories specific to this project
-run_minimal_e2e.py
+# Runtime outputs and audit artifacts
+outputs/
+.local/
 
+# Archive documents (session-specific implementation records)
+archive/
+
+# Local runner artifacts
+run_minimal_e2e.py
+pytest_cache
+researcher_ai

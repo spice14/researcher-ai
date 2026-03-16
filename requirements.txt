@@ -3,3 +3,4 @@ pdfminer.six>=20221105
 pydantic>=2.5.0
 pytest>=7.4.0
 pytest-cov>=4.1.0
+matplotlib>=3.8.0

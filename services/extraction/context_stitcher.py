@@ -33,12 +33,19 @@ class ParagraphContext:
     numeric_comparison: bool  # Contains comparative language
 
 
-# Dataset name patterns (common ML/NLP/CV datasets)
+# Dataset name patterns (common ML/NLP/CV/RL datasets)
 DATASET_PATTERNS = [
-    r'\b(ImageNet|MNIST|CIFAR[-\s]?10|CIFAR[-\s]?100|COCO|Pascal\s+VOC|WMT[-\s]?\d+)\b',
-    r'\b(SQuAD|GLUE|SuperGLUE|CoNLL|Penn\s+Treebank)\b',
-    r'\b(LibriSpeech|CommonVoice|TIMIT)\b',
-    r'\b(MS[-\s]?MARCO|Natural\s+Questions|TriviaQA)\b',
+    r'\b(ImageNet|MNIST|CIFAR[-\s]?10|CIFAR[-\s]?100|COCO|MS[-\s]?COCO|Pascal\s+VOC|WMT[-\s]?\d+)\b',
+    r'\b(SQuAD|GLUE|SuperGLUE|CoNLL|Penn\s+Treebank|PTB|WikiText)\b',
+    r'\b(LibriSpeech|Common\s*Voice|TIMIT|VoxCeleb)\b',
+    r'\b(MS[-\s]?MARCO|Natural\s+Questions|TriviaQA|HotpotQA)\b',
+    r'\b(ARC|HellaSwag|MMLU|TruthfulQA|Winogrande|GSM8K)\b',
+    r'\b(LAMBADA|StoryCloze|BoolQ|PIQA|OpenBookQA)\b',
+    r'\b(Atari|MuJoCo|HalfCheetah|Hopper|Walker|Humanoid|Ant|Reacher|Swimmer)\b',
+    r'\b(KITTI|Cityscapes|ADE20K|LSUN|CelebA|FFHQ|VTAB|SVHN)\b',
+    r'\b(SST[-\s]?2|MRPC|QQP|QNLI|RTE|WNLI|STS[-\s]?B)\b',
+    r'\b(XSum|SAMSum|CNN|DailyMail)\b',
+    r'\b(C4|The\s+Pile|CommonCrawl)\b',
 ]
 
 # Baseline/comparison indicators

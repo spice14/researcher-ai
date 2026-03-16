@@ -42,12 +42,34 @@ _UNIT_PATTERN = re.compile(
 )
 _CONTEXT_PATTERN = re.compile(r"\bctx_[a-zA-Z0-9_-]+\b")
 _METRIC_PATTERN = re.compile(
-    r"\b(accuracy|f1-macro|f1-score|f1|bleu|rouge|rouge-l|map|mAP|mrr|auc|precision|recall|wer|cer|latency"
-    r"|top-1 accuracy|top-5 accuracy|top-1|top-5|iou|ap50|ap75|perplexity)\b",
+    r"\b(accuracy|f1-macro|f1-score|f1|bleu|rouge|rouge-l|rouge-1|rouge-2|map|mAP|mrr|auc"
+    r"|precision|recall|wer|cer|latency|perplexity"
+    r"|top-1 accuracy|top-5 accuracy|top-1|top-5|iou|ap50|ap75"
+    r"|meteor|spice|cider|bertscore|sacrebleu|ter"
+    r"|ndcg|hit rate|hit@\d+|hits@\d+"
+    r"|mse|rmse|mae|mape|r2|r-squared"
+    r"|psnr|ssim|fid|inception score|is score"
+    r"|em|exact match|squad-f1"
+    r"|loss|error rate|misclassification"
+    r"|throughput|fps|samples per second|tokens per second"
+    r"|reward|return|episode reward|mean reward|average reward"
+    r"|spearman|pearson|kendall|correlation"
+    r"|dice|jaccard|sensitivity|specificity)\b",
     re.IGNORECASE,
 )
 _DATASET_PATTERN = re.compile(
-    r"\b(GLUE|SuperGLUE|MNLI|CoLA|SQuAD|ImageNet|WMT)\b",
+    r"\b(GLUE|SuperGLUE|MNLI|CoLA|SQuAD|ImageNet|WMT"
+    r"|CIFAR-?\s?10|CIFAR-?\s?100|COCO|MS-?\s?COCO|Pascal\s?VOC"
+    r"|Penn Treebank|PTB|WikiText|C4|The Pile|CommonCrawl"
+    r"|LibriSpeech|Common Voice|TIMIT|VoxCeleb"
+    r"|ARC|HellaSwag|MMLU|TruthfulQA|Winogrande|GSM8K"
+    r"|LAMBADA|StoryCloze|BoolQ|PIQA|OpenBookQA"
+    r"|Atari|MuJoCo|HalfCheetah|Hopper|Walker|Humanoid|Ant|Reacher|Swimmer"
+    r"|KITTI|Cityscapes|ADE20K|LSUN|CelebA|FFHQ"
+    r"|VTAB|Oxford Flowers|Stanford Cars|SVHN"
+    r"|MS-?\s?MARCO|Natural Questions|TriviaQA|HotpotQA"
+    r"|CNN|DailyMail|XSum|SAMSum"
+    r"|SST-?\s?2|MRPC|QQP|QNLI|RTE|WNLI|STS-?\s?B)\b",
     re.IGNORECASE,
 )
 

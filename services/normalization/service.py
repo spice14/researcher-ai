@@ -59,6 +59,7 @@ def _normalize_metric_key(token: str) -> str:
 
 _METRIC_ALIASES = {
     # Accuracy (Top-1 collapsed)
+    # Accuracy (Top-1 collapsed)
     "accuracy": "ACCURACY",
     "acc": "ACCURACY",
     "classificationaccuracy": "ACCURACY",
@@ -94,6 +95,40 @@ _METRIC_ALIASES = {
     "auc": "AUC",
     "precision": "PRECISION",
     "recall": "RECALL",
+    # Generic score / rate / problem-count metrics
+    "score": "SCORE",
+    "totalscore": "SCORE",
+    "finalscore": "SCORE",
+    "successrate": "SUCCESS_RATE",
+    "solverate": "SOLVE_RATE",
+    "solvedproblems": "SOLVE_COUNT",
+    "problemssolved": "SOLVE_COUNT",
+    "problems": "SOLVE_COUNT",
+    "correct": "ACCURACY",
+    "correctness": "ACCURACY",
+    "errorrate": "ERROR_RATE",
+    "error": "ERROR_RATE",
+    # Throughput / efficiency
+    "throughput": "THROUGHPUT",
+    "tokenspersecond": "THROUGHPUT",
+    "tokenssec": "THROUGHPUT",
+    "imagespersecond": "THROUGHPUT",
+    "samplessec": "THROUGHPUT",
+    "compressionratio": "COMPRESSION_RATIO",
+    "compressionrate": "COMPRESSION_RATIO",
+    # Epidemiological / clinical
+    "incidencerate": "INCIDENCE_RATE",
+    "incidence": "INCIDENCE_RATE",
+    "transmissionrate": "TRANSMISSION_RATE",
+    "hazardratio": "HAZARD_RATIO",
+    "hr": "HAZARD_RATIO",
+    "oddsratio": "ODDS_RATIO",
+    "or": "ODDS_RATIO",
+    "sensitivity": "SENSITIVITY",
+    "specificity": "SPECIFICITY",
+    "reductionrate": "REDUCTION_RATE",
+    "reduction": "REDUCTION_RATE",
+    "decrease": "REDUCTION_RATE",
 }
 
 _VALUE_PATTERN = re.compile(
@@ -107,7 +142,11 @@ _METRIC_PATTERN = re.compile(
     r"top-1 accuracy|top1 accuracy|top-1 acc|top1 acc|top-1|top1|"
     r"top-5 accuracy|top5 accuracy|top-5 acc|top5 acc|top-5|top5|"
     r"accuracy|acc|f1-macro|f1 macro|f1-score|f1|bleu-4|bleu|rouge-l|rouge|"
-    r"latency|perplexity|ppl|map|mAP|iou|ap50|ap75|wer|cer|mrr|auc|precision|recall"
+    r"latency|perplexity|ppl|map|mAP|iou|ap50|ap75|wer|cer|mrr|auc|precision|recall|"
+    r"success rate|solve rate|success|solved|problems|problem|score|correct|error rate|error|"
+    r"throughput|tokens/sec|tokens per second|images/sec|samples/sec|compression ratio|compression rate|"
+    r"incidence rate|incidence|transmission rate|hazard ratio|odds ratio|sensitivity|specificity|"
+    r"reduction rate|reduction|decrease"
     r")\b",
     re.IGNORECASE,
 )
@@ -119,7 +158,7 @@ _REFERENCE_PREFIX_PATTERN = re.compile(
 )
 
 # Maximum character distance between metric token and numeric value
-_MAX_METRIC_VALUE_DISTANCE = 80
+_MAX_METRIC_VALUE_DISTANCE = 150
 
 
 def _canonical_metric(text: str) -> Optional[str]:

@@ -26,12 +26,17 @@ class ContradictionTool(MCPTool):
             input_schema={
                 "type": "object",
                 "properties": {
+                    "normalized_claims": {
+                        "type": "array",
+                        "items": {"type": "object"},
+                        "description": "Normalized claims from previous step"
+                    },
                     "belief_state": {
                         "type": "object",
-                        "description": "Belief state from previous step"
+                        "description": "Optional belief state metadata"
                     }
                 },
-                "required": ["belief_state"]
+                "required": ["normalized_claims"]
             },
             output_schema={
                 "type": "object",
@@ -57,13 +62,17 @@ class ContradictionTool(MCPTool):
         from core.schemas.claim import Polarity, ClaimSubtype
         from services.contradiction.schemas import AnalysisRequest
         
-        belief_state_dict = payload.get("belief_state")
-        if not belief_state_dict:
-            raise ValueError("belief_state is required")
+        normalized_claims = payload.get("normalized_claims", [])
+        if not normalized_claims:
+            return {
+                "contradictions": [],
+                "consensus_groups": [],
+                "warnings": []
+            }
         
         # Reconstruct normalized claims
         claims = [
-            self._build_normalized_claim(c) for c in belief_state_dict.get("claims", [])
+            self._build_normalized_claim(c) for c in normalized_claims
         ]
         
         # Call service
@@ -87,9 +96,12 @@ class ContradictionTool(MCPTool):
             ],
             "consensus_groups": [
                 {
-                    "metric": group.metric_canonical if hasattr(group, 'metric_canonical') else group.get("metric"),
-                    "claim_ids": group.claim_ids if hasattr(group, 'claim_ids') else group.get("claim_ids", []),
-                    "agreement_score": group.agreement_score if hasattr(group, 'agreement_score') else group.get("agreement_score")
+                    "metric": group.metric_canonical,
+                    "claim_ids": group.claim_ids,
+                    "value_mean": group.value_mean,
+                    "value_min": group.value_min,
+                    "value_max": group.value_max,
+                    "contradiction_density": group.contradiction_density,
                 }
                 for group in result.consensus
             ],

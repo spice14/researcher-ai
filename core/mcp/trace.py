@@ -13,6 +13,7 @@ from typing import List, Optional, Dict, Any
 from datetime import datetime
 import hashlib
 import json
+from pathlib import Path
 
 
 class TraceEntry(BaseModel):
@@ -30,6 +31,11 @@ class TraceEntry(BaseModel):
     status: str = Field(..., description="'success' or 'error'")
     error_message: Optional[str] = Field(None, description="Error if present")
     duration_ms: float = Field(..., description="Execution time in milliseconds", ge=0)
+    attempt: int = Field(default=1, description="1-based attempt number for retries", ge=1)
+    phase: Optional[str] = Field(default=None, description="Orchestrator phase label for this step")
+    model_name: Optional[str] = Field(default=None, description="Model name when an LLM-backed agent/tool is invoked")
+    prompt_version: Optional[str] = Field(default=None, description="Prompt version for LLM-backed calls")
+    token_usage: Optional[Dict[str, Any]] = Field(default=None, description="Token usage metadata for LLM-backed calls")
 
 
 class ExecutionTrace(BaseModel):
@@ -72,3 +78,20 @@ def hash_payload(payload: dict) -> str:
     # Sort JSON to ensure deterministic ordering
     json_str = json.dumps(payload, sort_keys=True, separators=(',', ':'))
     return hashlib.sha256(json_str.encode()).hexdigest()
+
+
+class JSONTraceStore:
+    """Persist execution traces to local JSON artifacts.
+
+    Designed for local-first reproducibility and auditability.
+    """
+
+    def __init__(self, base_dir: str = "outputs/traces"):
+        self._base_dir = Path(base_dir)
+        self._base_dir.mkdir(parents=True, exist_ok=True)
+
+    def save(self, trace: ExecutionTrace) -> Path:
+        """Save trace to disk and return file path."""
+        file_path = self._base_dir / f"trace_{trace.session_id}_{int(trace.started_at.timestamp())}.json"
+        file_path.write_text(trace.model_dump_json(indent=2), encoding="utf-8")
+        return file_path
