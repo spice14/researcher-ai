@@ -1,0 +1,42 @@
+name: repo-hygiene
+
+on:
+  pull_request:
+  push:
+    branches: [dev, main]
+
+jobs:
+  hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Block generated artifacts in repo
+        run: |
+          set -e
+          blocked=(
+            "htmlcov"
+            ".coverage"
+            ".pytest_cache"
+            "outputs"
+          )
+          for path in "${blocked[@]}"; do
+            if [ -e "$path" ] && [ "$(find "$path" -mindepth 1 -print -quit 2>/dev/null)" ]; then
+              echo "Blocked generated artifacts present: $path"
+              exit 1
+            fi
+          done
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Determinism/contract smoke tests
+        run: |
+          pytest -q tests/test_mcp_contract_enforcement.py tests/test_mcp_contract_integrity.py

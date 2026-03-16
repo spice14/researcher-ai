@@ -1,0 +1,1580 @@
+{
+  "summary": {
+    "run_at": "2026-03-16T13:19:35.355882+00:00",
+    "total_papers": 25,
+    "success": 19,
+    "partial_success": 6,
+    "failed": 0,
+    "success_rate_pct": 76.0,
+    "partial_rate_pct": 24.0,
+    "total_chunks": 20974,
+    "total_claims_extracted": 655,
+    "total_normalized_claims": 131,
+    "total_contradictions": 182,
+    "total_pipeline_ms": 18361.0,
+    "avg_pipeline_ms": 734.4,
+    "failure_reasons": {}
+  },
+  "papers": [
+    {
+      "paper_id": "10.1038_s41586-021-03819-2",
+      "source_type": "integrity",
+      "path": "outputs/integrity_papers/10.1038_s41586-021-03819-2",
+      "title": "Highly accurate protein structure prediction with AlphaFold",
+      "preflight": {
+        "source_type": "integrity",
+        "selected_text_source": "paper_md",
+        "text_length": 98924,
+        "warnings": [],
+        "paper_id": "10.1038_s41586-021-03819-2"
+      }
+    },
+    {
+      "paper_id": "10.1038_s41586-023-06747-5",
+      "source_type": "integrity",
+      "path": "outputs/integrity_papers/10.1038_s41586-023-06747-5",
+      "title": "Solving olympiad geometry without human demonstrations",
+      "preflight": {
+        "source_type": "integrity",
+        "selected_text_source": "paper_md",
+        "text_length": 113780,
+        "warnings": [],
+        "paper_id": "10.1038_s41586-023-06747-5"
+      }
+    },
+    {
+      "paper_id": "2023.acl-long.1",
+      "source_type": "integrity",
+      "path": "outputs/integrity_papers/2023.acl-long.1",
+      "title": "One Cannot Stand for Everyone! Leveraging Multiple User Simulators to train Task-oriented Dialogue Systems",
+      "preflight": {
+        "source_type": "integrity",
+        "selected_text_source": "paper_md",
+        "text_length": 1748,
+        "warnings": [],
+        "paper_id": "2023.acl-long.1"
+      }
+    },
+    {
+      "paper_id": "2023.emnlp-main.1",
+      "source_type": "integrity",
+      "path": "outputs/integrity_papers/2023.emnlp-main.1",
+      "title": "IAG : Induction-Augmented Generation Framework for Answering Reasoning Questions",
+      "preflight": {
+        "source_type": "integrity",
+        "selected_text_source": "paper_md",
+        "text_length": 1605,
+        "warnings": [],
+        "paper_id": "2023.emnlp-main.1"
+      }
+    },
+    {
+      "paper_id": "2305.10601",
+      "source_type": "integrity",
+      "path": "outputs/integrity_papers/2305.10601",
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "preflight": {
+        "source_type": "integrity",
+        "selected_text_source": "paper_md",
+        "text_length": 58350,
+        "warnings": [],
+        "paper_id": "2305.10601"
+      }
+    },
+    {
+      "paper_id": "2310.06825",
+      "source_type": "integrity",
+      "path": "outputs/integrity_papers/2310.06825",
+      "title": "Mistral 7B",
+      "preflight": {
+        "source_type": "integrity",
+        "selected_text_source": "paper_md",
+        "text_length": 26211,
+        "warnings": [],
+        "paper_id": "2310.06825"
+      }
+    },
+    {
+      "paper_id": "2401.02385",
+      "source_type": "integrity",
+      "path": "outputs/integrity_papers/2401.02385",
+      "title": "TinyLlama: An Open-Source Small Language Model",
+      "preflight": {
+        "source_type": "integrity",
+        "selected_text_source": "paper_md",
+        "text_length": 25878,
+        "warnings": [],
+        "paper_id": "2401.02385"
+      }
+    },
+    {
+      "paper_id": "PMC6993921",
+      "source_type": "integrity",
+      "path": "outputs/integrity_papers/PMC6993921",
+      "title": "Physical interventions to interrupt or reduce the spread of respiratory viruses",
+      "preflight": {
+        "source_type": "integrity",
+        "selected_text_source": "paper_md",
+        "text_length": 490093,
+        "warnings": [],
+        "paper_id": "PMC6993921"
+      }
+    },
+    {
+      "paper_id": "PMC7029158",
+      "source_type": "integrity",
+      "path": "outputs/integrity_papers/PMC7029158",
+      "title": "An updated estimation of the risk of transmission of the novel coronavirus (2019-nCov)",
+      "preflight": {
+        "source_type": "integrity",
+        "selected_text_source": "paper_md",
+        "text_length": 56296,
+        "warnings": [],
+        "paper_id": "PMC7029158"
+      }
+    },
+    {
+      "paper_id": "1706.03762",
+      "source_type": "cached_json",
+      "path": "outputs/ingestion_cache_v3_full62_uncached/1706.03762.json",
+      "title": "Attention Is All You Need",
+      "preflight": {
+        "source_type": "cached_json",
+        "selected_text_source": "raw_text",
+        "text_length": 25746,
+        "title": "Attention Is All You Need",
+        "abstract_length": 1139,
+        "sections_count": 23,
+        "nonempty_sections": 20,
+        "sections_chars": 24004,
+        "warnings": [],
+        "paper_id": "1706.03762"
+      }
+    },
+    {
+      "paper_id": "1810.04805",
+      "source_type": "cached_json",
+      "path": "outputs/ingestion_cache_v3_full62_uncached/1810.04805.json",
+      "title": "BERT : Pre-training of Deep Bidirectional Transformers for Language Understanding",
+      "preflight": {
+        "source_type": "cached_json",
+        "selected_text_source": "raw_text",
+        "text_length": 34583,
+        "title": "BERT : Pre-training of Deep Bidirectional Transformers for Language Understanding",
+        "abstract_length": 1077,
+        "sections_count": 26,
+        "nonempty_sections": 26,
+        "sections_chars": 32694,
+        "warnings": [],
+        "paper_id": "1810.04805"
+      }
+    },
+    {
+      "paper_id": "2005.14165",
+      "source_type": "cached_json",
+      "path": "outputs/ingestion_cache_v3_full62_uncached/2005.14165.json",
+      "title": "Language Models are Few-Shot Learners",
+      "preflight": {
+        "source_type": "cached_json",
+        "selected_text_source": "raw_text",
+        "text_length": 236743,
+        "title": "Language Models are Few-Shot Learners",
+        "abstract_length": 0,
+        "sections_count": 303,
+        "nonempty_sections": 0,
+        "sections_chars": 0,
+        "warnings": [
+          "SECTIONS_EMPTY_CONTENT: sections exist but all section.content values are empty; using top-level full text",
+          "RAWTEXT_SECTION_MISMATCH: large full text present while section content is empty"
+        ],
+        "paper_id": "2005.14165"
+      }
+    },
+    {
+      "paper_id": "2020.acl-main.703",
+      "source_type": "cached_json",
+      "path": "outputs/ingestion_cache_v3_full62_uncached/2020.acl-main.703.json",
+      "title": "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, pages 7871\u20137880",
+      "preflight": {
+        "source_type": "cached_json",
+        "selected_text_source": "raw_text",
+        "text_length": 43454,
+        "title": "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, pages 7871\u20137880",
+        "abstract_length": 0,
+        "sections_count": 132,
+        "nonempty_sections": 0,
+        "sections_chars": 0,
+        "warnings": [
+          "SECTIONS_EMPTY_CONTENT: sections exist but all section.content values are empty; using top-level full text",
+          "LIKELY_PROCEEDINGS_STUB: title indicates proceedings and text volume is modest"
+        ],
+        "paper_id": "2020.acl-main.703"
+      }
+    },
+    {
+      "paper_id": "2021.acl-long.353",
+      "source_type": "cached_json",
+      "path": "outputs/ingestion_cache_v3_full62_uncached/2021.acl-long.353.json",
+      "title": "Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics",
+      "preflight": {
+        "source_type": "cached_json",
+        "selected_text_source": "raw_text",
+        "text_length": 66418,
+        "title": "Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics",
+        "abstract_length": 0,
+        "sections_count": 133,
+        "nonempty_sections": 0,
+        "sections_chars": 0,
+        "warnings": [
+          "SECTIONS_EMPTY_CONTENT: sections exist but all section.content values are empty; using top-level full text",
+          "LIKELY_PROCEEDINGS_STUB: title indicates proceedings and text volume is modest",
+          "RAWTEXT_SECTION_MISMATCH: large full text present while section content is empty"
+        ],
+        "paper_id": "2021.acl-long.353"
+      }
+    },
+    {
+      "paper_id": "2021.naacl-main.10",
+      "source_type": "cached_json",
+      "path": "outputs/ingestion_cache_v3_full62_uncached/2021.naacl-main.10.json",
+      "title": "Proceedings of the 2021 Conference of the North American Chapter of the",
+      "preflight": {
+        "source_type": "cached_json",
+        "selected_text_source": "raw_text",
+        "text_length": 56844,
+        "title": "Proceedings of the 2021 Conference of the North American Chapter of the",
+        "abstract_length": 0,
+        "sections_count": 155,
+        "nonempty_sections": 0,
+        "sections_chars": 0,
+        "warnings": [
+          "SECTIONS_EMPTY_CONTENT: sections exist but all section.content values are empty; using top-level full text",
+          "LIKELY_PROCEEDINGS_STUB: title indicates proceedings and text volume is modest",
+          "RAWTEXT_SECTION_MISMATCH: large full text present while section content is empty"
+        ],
+        "paper_id": "2021.naacl-main.10"
+      }
+    },
+    {
+      "paper_id": "2022.acl-long.1",
+      "source_type": "cached_json",
+      "path": "outputs/ingestion_cache_v3_full62_uncached/2022.acl-long.1.json",
+      "title": "Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics",
+      "preflight": {
+        "source_type": "cached_json",
+        "selected_text_source": "raw_text",
+        "text_length": 63577,
+        "title": "Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics",
+        "abstract_length": 0,
+        "sections_count": 122,
+        "nonempty_sections": 0,
+        "sections_chars": 0,
+        "warnings": [
+          "SECTIONS_EMPTY_CONTENT: sections exist but all section.content values are empty; using top-level full text",
+          "LIKELY_PROCEEDINGS_STUB: title indicates proceedings and text volume is modest",
+          "RAWTEXT_SECTION_MISMATCH: large full text present while section content is empty"
+        ],
+        "paper_id": "2022.acl-long.1"
+      }
+    },
+    {
+      "paper_id": "2022.emnlp-main.43",
+      "source_type": "cached_json",
+      "path": "outputs/ingestion_cache_v3_full62_uncached/2022.emnlp-main.43.json",
+      "title": "Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing, pages 689\u2013705",
+      "preflight": {
+        "source_type": "cached_json",
+        "selected_text_source": "raw_text",
+        "text_length": 65791,
+        "title": "Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing, pages 689\u2013705",
+        "abstract_length": 0,
+        "sections_count": 132,
+        "nonempty_sections": 0,
+        "sections_chars": 0,
+        "warnings": [
+          "SECTIONS_EMPTY_CONTENT: sections exist but all section.content values are empty; using top-level full text",
+          "LIKELY_PROCEEDINGS_STUB: title indicates proceedings and text volume is modest",
+          "RAWTEXT_SECTION_MISMATCH: large full text present while section content is empty"
+        ],
+        "paper_id": "2022.emnlp-main.43"
+      }
+    },
+    {
+      "paper_id": "2023.acl-long.16",
+      "source_type": "cached_json",
+      "path": "outputs/ingestion_cache_v3_full62_uncached/2023.acl-long.16.json",
+      "title": "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics",
+      "preflight": {
+        "source_type": "cached_json",
+        "selected_text_source": "raw_text",
+        "text_length": 65092,
+        "title": "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics",
+        "abstract_length": 0,
+        "sections_count": 99,
+        "nonempty_sections": 0,
+        "sections_chars": 0,
+        "warnings": [
+          "SECTIONS_EMPTY_CONTENT: sections exist but all section.content values are empty; using top-level full text",
+          "LIKELY_PROCEEDINGS_STUB: title indicates proceedings and text volume is modest",
+          "RAWTEXT_SECTION_MISMATCH: large full text present while section content is empty"
+        ],
+        "paper_id": "2023.acl-long.16"
+      }
+    },
+    {
+      "paper_id": "2103.00020",
+      "source_type": "cached_json",
+      "path": "outputs/ingestion_cache_v3_full62_uncached/2103.00020.json",
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "preflight": {
+        "source_type": "cached_json",
+        "selected_text_source": "raw_text",
+        "text_length": 224303,
+        "title": "Learning Transferable Visual Models From Natural Language Supervision",
+        "abstract_length": 0,
+        "sections_count": 299,
+        "nonempty_sections": 0,
+        "sections_chars": 0,
+        "warnings": [
+          "SECTIONS_EMPTY_CONTENT: sections exist but all section.content values are empty; using top-level full text",
+          "RAWTEXT_SECTION_MISMATCH: large full text present while section content is empty"
+        ],
+        "paper_id": "2103.00020"
+      }
+    },
+    {
+      "paper_id": "2203.02155",
+      "source_type": "cached_json",
+      "path": "outputs/ingestion_cache_v3_full62_uncached/2203.02155.json",
+      "title": "Training language models to follow instructions",
+      "preflight": {
+        "source_type": "cached_json",
+        "selected_text_source": "raw_text",
+        "text_length": 181921,
+        "title": "Training language models to follow instructions",
+        "abstract_length": 0,
+        "sections_count": 302,
+        "nonempty_sections": 0,
+        "sections_chars": 0,
+        "warnings": [
+          "SECTIONS_EMPTY_CONTENT: sections exist but all section.content values are empty; using top-level full text",
+          "RAWTEXT_SECTION_MISMATCH: large full text present while section content is empty"
+        ],
+        "paper_id": "2203.02155"
+      }
+    },
+    {
+      "paper_id": "2204.02311",
+      "source_type": "cached_json",
+      "path": "outputs/ingestion_cache_v3_full62_uncached/2204.02311.json",
+      "title": "PaLM: Scaling Language Modeling with Pathways",
+      "preflight": {
+        "source_type": "cached_json",
+        "selected_text_source": "raw_text",
+        "text_length": 288603,
+        "title": "PaLM: Scaling Language Modeling with Pathways",
+        "abstract_length": 0,
+        "sections_count": 460,
+        "nonempty_sections": 0,
+        "sections_chars": 0,
+        "warnings": [
+          "SECTIONS_EMPTY_CONTENT: sections exist but all section.content values are empty; using top-level full text",
+          "RAWTEXT_SECTION_MISMATCH: large full text present while section content is empty"
+        ],
+        "paper_id": "2204.02311"
+      }
+    },
+    {
+      "paper_id": "2205.01068",
+      "source_type": "cached_json",
+      "path": "outputs/ingestion_cache_v3_full62_uncached/2205.01068.json",
+      "title": "OPT: Open Pre-trained Transformer Language Models",
+      "preflight": {
+        "source_type": "cached_json",
+        "selected_text_source": "raw_text",
+        "text_length": 92014,
+        "title": "OPT: Open Pre-trained Transformer Language Models",
+        "abstract_length": 0,
+        "sections_count": 166,
+        "nonempty_sections": 0,
+        "sections_chars": 0,
+        "warnings": [
+          "SECTIONS_EMPTY_CONTENT: sections exist but all section.content values are empty; using top-level full text",
+          "RAWTEXT_SECTION_MISMATCH: large full text present while section content is empty"
+        ],
+        "paper_id": "2205.01068"
+      }
+    },
+    {
+      "paper_id": "2206.07682",
+      "source_type": "cached_json",
+      "path": "outputs/ingestion_cache_v3_full62_uncached/2206.07682.json",
+      "title": "Published in Transactions on Machine Learning Research (08/2022)",
+      "preflight": {
+        "source_type": "cached_json",
+        "selected_text_source": "raw_text",
+        "text_length": 94229,
+        "title": "Published in Transactions on Machine Learning Research (08/2022)",
+        "abstract_length": 0,
+        "sections_count": 88,
+        "nonempty_sections": 0,
+        "sections_chars": 0,
+        "warnings": [
+          "SECTIONS_EMPTY_CONTENT: sections exist but all section.content values are empty; using top-level full text",
+          "RAWTEXT_SECTION_MISMATCH: large full text present while section content is empty"
+        ],
+        "paper_id": "2206.07682"
+      }
+    },
+    {
+      "paper_id": "2210.11610",
+      "source_type": "cached_json",
+      "path": "outputs/ingestion_cache_v3_full62_uncached/2210.11610.json",
+      "title": "LARGE LANGUAGE MODELS CAN SELF-IMPROVE",
+      "preflight": {
+        "source_type": "cached_json",
+        "selected_text_source": "raw_text",
+        "text_length": 64487,
+        "title": "LARGE LANGUAGE MODELS CAN SELF-IMPROVE",
+        "abstract_length": 0,
+        "sections_count": 82,
+        "nonempty_sections": 0,
+        "sections_chars": 0,
+        "warnings": [
+          "SECTIONS_EMPTY_CONTENT: sections exist but all section.content values are empty; using top-level full text",
+          "RAWTEXT_SECTION_MISMATCH: large full text present while section content is empty"
+        ],
+        "paper_id": "2210.11610"
+      }
+    },
+    {
+      "paper_id": "2211.01786",
+      "source_type": "cached_json",
+      "path": "outputs/ingestion_cache_v3_full62_uncached/2211.01786.json",
+      "title": "Crosslingual Generalization through Multitask Finetuning",
+      "preflight": {
+        "source_type": "cached_json",
+        "selected_text_source": "raw_text",
+        "text_length": 220264,
+        "title": "Crosslingual Generalization through Multitask Finetuning",
+        "abstract_length": 0,
+        "sections_count": 334,
+        "nonempty_sections": 0,
+        "sections_chars": 0,
+        "warnings": [
+          "SECTIONS_EMPTY_CONTENT: sections exist but all section.content values are empty; using top-level full text",
+          "RAWTEXT_SECTION_MISMATCH: large full text present while section content is empty"
+        ],
+        "paper_id": "2211.01786"
+      }
+    }
+  ],
+  "results": [
+    {
+      "source_id": "10.1038_s41586-021-03819-2",
+      "outcome": "success",
+      "total_duration_ms": 738.8,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 129.2,
+          "error": null,
+          "chunks": 1045,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 595.5,
+          "error": null,
+          "claims_extracted": 37,
+          "discarded_claims": 1009
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 13.7,
+          "error": null,
+          "normalized_claims": 7,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.2,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "ACCURACY",
+          "consensus_strength": 3.0,
+          "qualitative_confidence": "high"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "contradictions": 8,
+          "consensus_groups": 2
+        }
+      }
+    },
+    {
+      "source_id": "10.1038_s41586-023-06747-5",
+      "outcome": "success",
+      "total_duration_ms": 755.1,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 144.2,
+          "error": null,
+          "chunks": 945,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 601.5,
+          "error": null,
+          "claims_extracted": 23,
+          "discarded_claims": 927
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 9.2,
+          "error": null,
+          "normalized_claims": 2,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "SCORE",
+          "consensus_strength": 1.0,
+          "qualitative_confidence": "low"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.0,
+          "error": null,
+          "contradictions": 0,
+          "consensus_groups": 0
+        }
+      }
+    },
+    {
+      "source_id": "2023.acl-long.1",
+      "outcome": "partial_success",
+      "total_duration_ms": 10.3,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 1.9,
+          "error": null,
+          "chunks": 8,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 7.9,
+          "error": null,
+          "claims_extracted": 1,
+          "discarded_claims": 7
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 0.5,
+          "error": null,
+          "normalized_claims": 0,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.0,
+          "error": null,
+          "belief_state_present": false,
+          "belief_metric": null,
+          "consensus_strength": null,
+          "qualitative_confidence": null
+        },
+        "contradiction": {
+          "status": "skipped",
+          "duration_ms": 0,
+          "error": null,
+          "skip_reason": "No normalized_claims to analyze",
+          "contradictions": 0,
+          "consensus_groups": 0
+        }
+      }
+    },
+    {
+      "source_id": "2023.emnlp-main.1",
+      "outcome": "partial_success",
+      "total_duration_ms": 9.5,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 1.9,
+          "error": null,
+          "chunks": 9,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 7.0,
+          "error": null,
+          "claims_extracted": 1,
+          "discarded_claims": 8
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 0.6,
+          "error": null,
+          "normalized_claims": 0,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.0,
+          "error": null,
+          "belief_state_present": false,
+          "belief_metric": null,
+          "consensus_strength": null,
+          "qualitative_confidence": null
+        },
+        "contradiction": {
+          "status": "skipped",
+          "duration_ms": 0,
+          "error": null,
+          "skip_reason": "No normalized_claims to analyze",
+          "contradictions": 0,
+          "consensus_groups": 0
+        }
+      }
+    },
+    {
+      "source_id": "2305.10601",
+      "outcome": "success",
+      "total_duration_ms": 462.8,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 79.4,
+          "error": null,
+          "chunks": 679,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 377.0,
+          "error": null,
+          "claims_extracted": 13,
+          "discarded_claims": 667
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 6.3,
+          "error": null,
+          "normalized_claims": 1,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "SOLVE_COUNT",
+          "consensus_strength": 1.0,
+          "qualitative_confidence": "low"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.0,
+          "error": null,
+          "contradictions": 0,
+          "consensus_groups": 0
+        }
+      }
+    },
+    {
+      "source_id": "2310.06825",
+      "outcome": "success",
+      "total_duration_ms": 173.4,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 30.7,
+          "error": null,
+          "chunks": 185,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 138.6,
+          "error": null,
+          "claims_extracted": 7,
+          "discarded_claims": 178
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 4.0,
+          "error": null,
+          "normalized_claims": 1,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "COMPRESSION_RATIO",
+          "consensus_strength": 1.0,
+          "qualitative_confidence": "low"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.0,
+          "error": null,
+          "contradictions": 0,
+          "consensus_groups": 0
+        }
+      }
+    },
+    {
+      "source_id": "2401.02385",
+      "outcome": "partial_success",
+      "total_duration_ms": 187.9,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 35.4,
+          "error": null,
+          "chunks": 299,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 150.4,
+          "error": null,
+          "claims_extracted": 4,
+          "discarded_claims": 295
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 2.1,
+          "error": null,
+          "normalized_claims": 0,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.0,
+          "error": null,
+          "belief_state_present": false,
+          "belief_metric": null,
+          "consensus_strength": null,
+          "qualitative_confidence": null
+        },
+        "contradiction": {
+          "status": "skipped",
+          "duration_ms": 0,
+          "error": null,
+          "skip_reason": "No normalized_claims to analyze",
+          "contradictions": 0,
+          "consensus_groups": 0
+        }
+      }
+    },
+    {
+      "source_id": "PMC6993921",
+      "outcome": "success",
+      "total_duration_ms": 2993.9,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 596.7,
+          "error": null,
+          "chunks": 2750,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 2381.8,
+          "error": null,
+          "claims_extracted": 33,
+          "discarded_claims": 2734
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 14.3,
+          "error": null,
+          "normalized_claims": 4,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.7,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "REDUCTION_RATE",
+          "consensus_strength": 4.0,
+          "qualitative_confidence": "high"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.3,
+          "error": null,
+          "contradictions": 4,
+          "consensus_groups": 1
+        }
+      }
+    },
+    {
+      "source_id": "PMC7029158",
+      "outcome": "success",
+      "total_duration_ms": 367.0,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 74.1,
+          "error": null,
+          "chunks": 365,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 285.7,
+          "error": null,
+          "claims_extracted": 18,
+          "discarded_claims": 353
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 7.0,
+          "error": null,
+          "normalized_claims": 2,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "REDUCTION_RATE",
+          "consensus_strength": 2.0,
+          "qualitative_confidence": "medium"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "contradictions": 0,
+          "consensus_groups": 1
+        }
+      }
+    },
+    {
+      "source_id": "1706.03762",
+      "outcome": "success",
+      "total_duration_ms": 180.3,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 33.6,
+          "error": null,
+          "chunks": 160,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 137.1,
+          "error": null,
+          "claims_extracted": 25,
+          "discarded_claims": 135
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 9.2,
+          "error": null,
+          "normalized_claims": 4,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.2,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "BLEU",
+          "consensus_strength": 3.0,
+          "qualitative_confidence": "high"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "contradictions": 3,
+          "consensus_groups": 1
+        }
+      }
+    },
+    {
+      "source_id": "1810.04805",
+      "outcome": "success",
+      "total_duration_ms": 227.9,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 42.9,
+          "error": null,
+          "chunks": 228,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 171.8,
+          "error": null,
+          "claims_extracted": 37,
+          "discarded_claims": 193
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 12.8,
+          "error": null,
+          "normalized_claims": 8,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.2,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "F1",
+          "consensus_strength": 1.0,
+          "qualitative_confidence": "low"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "contradictions": 6,
+          "consensus_groups": 1
+        }
+      }
+    },
+    {
+      "source_id": "2005.14165",
+      "outcome": "success",
+      "total_duration_ms": 1600.6,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 337.6,
+          "error": null,
+          "chunks": 1719,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 1238.2,
+          "error": null,
+          "claims_extracted": 71,
+          "discarded_claims": 1659
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 24.0,
+          "error": null,
+          "normalized_claims": 23,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.3,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "F1",
+          "consensus_strength": 1.0,
+          "qualitative_confidence": "low"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.5,
+          "error": null,
+          "contradictions": 76,
+          "consensus_groups": 2
+        }
+      }
+    },
+    {
+      "source_id": "2020.acl-main.703",
+      "outcome": "success",
+      "total_duration_ms": 308.4,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 58.3,
+          "error": null,
+          "chunks": 351,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 237.4,
+          "error": null,
+          "claims_extracted": 35,
+          "discarded_claims": 317
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 12.4,
+          "error": null,
+          "normalized_claims": 7,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.2,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "ROUGE",
+          "consensus_strength": 1.0,
+          "qualitative_confidence": "low"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "contradictions": 0,
+          "consensus_groups": 0
+        }
+      }
+    },
+    {
+      "source_id": "2021.acl-long.353",
+      "outcome": "success",
+      "total_duration_ms": 491.2,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 96.4,
+          "error": null,
+          "chunks": 601,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 386.3,
+          "error": null,
+          "claims_extracted": 21,
+          "discarded_claims": 581
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 8.3,
+          "error": null,
+          "normalized_claims": 6,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.2,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "REDUCTION_RATE",
+          "consensus_strength": 1.0,
+          "qualitative_confidence": "low"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "contradictions": 2,
+          "consensus_groups": 1
+        }
+      }
+    },
+    {
+      "source_id": "2021.naacl-main.10",
+      "outcome": "success",
+      "total_duration_ms": 417.4,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 113.0,
+          "error": null,
+          "chunks": 503,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 299.7,
+          "error": null,
+          "claims_extracted": 15,
+          "discarded_claims": 488
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 4.3,
+          "error": null,
+          "normalized_claims": 4,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "SCORE",
+          "consensus_strength": 1.0,
+          "qualitative_confidence": "low"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "contradictions": 3,
+          "consensus_groups": 1
+        }
+      }
+    },
+    {
+      "source_id": "2022.acl-long.1",
+      "outcome": "partial_success",
+      "total_duration_ms": 438.7,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 85.3,
+          "error": null,
+          "chunks": 579,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 344.6,
+          "error": null,
+          "claims_extracted": 20,
+          "discarded_claims": 559
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 8.7,
+          "error": null,
+          "normalized_claims": 0,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.0,
+          "error": null,
+          "belief_state_present": false,
+          "belief_metric": null,
+          "consensus_strength": null,
+          "qualitative_confidence": null
+        },
+        "contradiction": {
+          "status": "skipped",
+          "duration_ms": 0,
+          "error": null,
+          "skip_reason": "No normalized_claims to analyze",
+          "contradictions": 0,
+          "consensus_groups": 0
+        }
+      }
+    },
+    {
+      "source_id": "2022.emnlp-main.43",
+      "outcome": "partial_success",
+      "total_duration_ms": 476.2,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 86.4,
+          "error": null,
+          "chunks": 625,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 381.3,
+          "error": null,
+          "claims_extracted": 19,
+          "discarded_claims": 607
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 8.6,
+          "error": null,
+          "normalized_claims": 0,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.0,
+          "error": null,
+          "belief_state_present": false,
+          "belief_metric": null,
+          "consensus_strength": null,
+          "qualitative_confidence": null
+        },
+        "contradiction": {
+          "status": "skipped",
+          "duration_ms": 0,
+          "error": null,
+          "skip_reason": "No normalized_claims to analyze",
+          "contradictions": 0,
+          "consensus_groups": 0
+        }
+      }
+    },
+    {
+      "source_id": "2023.acl-long.16",
+      "outcome": "partial_success",
+      "total_duration_ms": 455.9,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 85.1,
+          "error": null,
+          "chunks": 620,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 365.4,
+          "error": null,
+          "claims_extracted": 11,
+          "discarded_claims": 609
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 5.4,
+          "error": null,
+          "normalized_claims": 0,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.0,
+          "error": null,
+          "belief_state_present": false,
+          "belief_metric": null,
+          "consensus_strength": null,
+          "qualitative_confidence": null
+        },
+        "contradiction": {
+          "status": "skipped",
+          "duration_ms": 0,
+          "error": null,
+          "skip_reason": "No normalized_claims to analyze",
+          "contradictions": 0,
+          "consensus_groups": 0
+        }
+      }
+    },
+    {
+      "source_id": "2103.00020",
+      "outcome": "success",
+      "total_duration_ms": 1481.6,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 320.5,
+          "error": null,
+          "chunks": 1759,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 1142.2,
+          "error": null,
+          "claims_extracted": 61,
+          "discarded_claims": 1702
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 18.4,
+          "error": null,
+          "normalized_claims": 20,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.3,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "ACCURACY",
+          "consensus_strength": 5.0,
+          "qualitative_confidence": "high"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.3,
+          "error": null,
+          "contradictions": 44,
+          "consensus_groups": 3
+        }
+      }
+    },
+    {
+      "source_id": "2203.02155",
+      "outcome": "success",
+      "total_duration_ms": 1275.9,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 247.3,
+          "error": null,
+          "chunks": 1450,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 1017.3,
+          "error": null,
+          "claims_extracted": 35,
+          "discarded_claims": 1420
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 11.0,
+          "error": null,
+          "normalized_claims": 9,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.2,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "ACCURACY",
+          "consensus_strength": 1.0,
+          "qualitative_confidence": "low"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "contradictions": 1,
+          "consensus_groups": 2
+        }
+      }
+    },
+    {
+      "source_id": "2204.02311",
+      "outcome": "success",
+      "total_duration_ms": 2005.9,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 388.7,
+          "error": null,
+          "chunks": 2327,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 1585.5,
+          "error": null,
+          "claims_extracted": 92,
+          "discarded_claims": 2245
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 31.1,
+          "error": null,
+          "normalized_claims": 23,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.3,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "ACCURACY",
+          "consensus_strength": 7.0,
+          "qualitative_confidence": "high"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.3,
+          "error": null,
+          "contradictions": 33,
+          "consensus_groups": 4
+        }
+      }
+    },
+    {
+      "source_id": "2205.01068",
+      "outcome": "success",
+      "total_duration_ms": 685.6,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 138.9,
+          "error": null,
+          "chunks": 879,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 539.6,
+          "error": null,
+          "claims_extracted": 20,
+          "discarded_claims": 861
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 6.9,
+          "error": null,
+          "normalized_claims": 2,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "PERPLEXITY",
+          "consensus_strength": 1.0,
+          "qualitative_confidence": "low"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.0,
+          "error": null,
+          "contradictions": 0,
+          "consensus_groups": 0
+        }
+      }
+    },
+    {
+      "source_id": "2206.07682",
+      "outcome": "success",
+      "total_duration_ms": 638.9,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 122.4,
+          "error": null,
+          "chunks": 754,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 508.5,
+          "error": null,
+          "claims_extracted": 22,
+          "discarded_claims": 733
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 7.9,
+          "error": null,
+          "normalized_claims": 3,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "PERPLEXITY",
+          "consensus_strength": 3.0,
+          "qualitative_confidence": "high"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.0,
+          "error": null,
+          "contradictions": 0,
+          "consensus_groups": 1
+        }
+      }
+    },
+    {
+      "source_id": "2210.11610",
+      "outcome": "success",
+      "total_duration_ms": 503.4,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 89.2,
+          "error": null,
+          "chunks": 683,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 404.0,
+          "error": null,
+          "claims_extracted": 27,
+          "discarded_claims": 658
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 10.0,
+          "error": null,
+          "normalized_claims": 3,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "ACCURACY",
+          "consensus_strength": 2.0,
+          "qualitative_confidence": "medium"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "contradictions": 1,
+          "consensus_groups": 1
+        }
+      }
+    },
+    {
+      "source_id": "2211.01786",
+      "outcome": "success",
+      "total_duration_ms": 1474.4,
+      "steps": {
+        "ingestion": {
+          "status": "success",
+          "duration_ms": 309.6,
+          "error": null,
+          "chunks": 1451,
+          "warnings": []
+        },
+        "extraction": {
+          "status": "success",
+          "duration_ms": 1162.5,
+          "error": null,
+          "claims_extracted": 7,
+          "discarded_claims": 1446
+        },
+        "normalization": {
+          "status": "success",
+          "duration_ms": 2.1,
+          "error": null,
+          "normalized_claims": 2,
+          "failed_normalizations": 0
+        },
+        "belief": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "belief_state_present": true,
+          "belief_metric": "BLEU",
+          "consensus_strength": 2.0,
+          "qualitative_confidence": "medium"
+        },
+        "contradiction": {
+          "status": "success",
+          "duration_ms": 0.1,
+          "error": null,
+          "contradictions": 1,
+          "consensus_groups": 1
+        }
+      }
+    }
+  ]
+}
