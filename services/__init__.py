@@ -1,1 +1,1 @@
-"""Deterministic service layer for Researcher-AI."""
+"""Deterministic service layer for ScholarOS."""

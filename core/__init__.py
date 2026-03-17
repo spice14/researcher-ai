@@ -1,5 +1,5 @@
 """
-Core package for Researcher-AI.
+Core package for ScholarOS.
 
 Provides foundational schemas, validators, and serialization utilities.
 """

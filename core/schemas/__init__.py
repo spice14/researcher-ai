@@ -1,5 +1,5 @@
 """
-Core schemas for Researcher-AI.
+Core schemas for ScholarOS.
 
 This module defines the structured backbone of the system,
 providing Pydantic models for:

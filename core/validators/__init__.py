@@ -1,5 +1,5 @@
 """
-Validators for Researcher-AI schemas.
+Validators for ScholarOS schemas.
 
 Provides validation logic beyond Pydantic's built-in capabilities:
 - Cross-schema validation

@@ -24,8 +24,8 @@ logger = logging.getLogger(__name__)
 
 _USER_AGENT = (
     "ResearcherAI/0.1 (metadata-enrichment; "
-    "https://github.com/spice14/researcher-ai; research use only; "
-    "mailto:researcher-ai@example.com)"
+    "https://github.com/spice14/ScholarOS; research use only; "
+    "mailto:ScholarOS@example.com)"
 )
 _TIMEOUT = 10.0  # seconds
 _LAST_REQUEST_TS: float = 0.0

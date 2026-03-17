@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 
 _USER_AGENT = (
     "ResearcherAI/0.1 (pdf-fallback; "
-    "https://github.com/spice14/researcher-ai; research use only)"
+    "https://github.com/spice14/ScholarOS; research use only)"
 )
 _LAST_REQUEST_TS: float = 0.0
 _MIN_INTERVAL: float = 1.0

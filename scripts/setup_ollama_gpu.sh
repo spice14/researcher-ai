@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# GPU-focused Ollama setup for Researcher-AI.
+# GPU-focused Ollama setup for ScholarOS.
 # - Verifies NVIDIA GPU visibility
 # - Installs zstd when possible
 # - Ensures Ollama service is running
@@ -12,7 +12,7 @@ MODEL_DEFAULT="qwen2.5:32b"
 OLLAMA_URL="http://localhost:11434"
 
 echo "============================================================"
-echo "Ollama GPU Setup for Researcher-AI"
+echo "Ollama GPU Setup for ScholarOS"
 echo "============================================================"
 echo
 

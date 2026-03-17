@@ -1,4 +1,4 @@
-"""LLM client infrastructure for Researcher-AI."""
+"""LLM client infrastructure for ScholarOS."""
 
 from core.llm.client import OllamaClient, LLMResponse
 

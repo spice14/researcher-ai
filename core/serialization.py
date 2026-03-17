@@ -1,5 +1,5 @@
 """
-Serialization and deserialization utilities for Researcher-AI schemas.
+Serialization and deserialization utilities for ScholarOS schemas.
 
 Provides deterministic, validated serialization to/from JSON and other formats.
 All serialization preserves full schema validation.

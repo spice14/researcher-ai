@@ -101,7 +101,7 @@ def _request_with_retry(url: str) -> requests.Response:
             response = requests.get(
                 url,
                 timeout=REQUEST_TIMEOUT,
-                headers={"User-Agent": "researcher-ai-brutal150/1.0"},
+                headers={"User-Agent": "ScholarOS-brutal150/1.0"},
             )
             LAST_REQUEST_TS = time.time()
             last_status = response.status_code

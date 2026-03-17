@@ -1,4 +1,4 @@
-"""ResearchDocument — canonical representation of a paper inside Researcher-AI.
+"""ResearchDocument — canonical representation of a paper inside ScholarOS.
 
 All ingestion pipelines (HTML, API, PDF) must normalize output into this
 single structure. Downstream consumers operate on ResearchDocument, never
