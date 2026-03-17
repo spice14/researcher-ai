@@ -1,13 +1,13 @@
-# Researcher-AI — System Design & Component Governance
+# ScholarOS — System Design & Component Governance
 
-This document defines the **formal engineering constraints, schemas, execution rules, and validation standards** governing Researcher-AI.
+This document defines the **formal engineering constraints, schemas, execution rules, and validation standards** governing ScholarOS.
 
 It exists to prevent architectural drift, eliminate hidden reasoning behavior, and ensure that all outputs remain:
 
-- Evidence-bound  
-- Inspectable  
-- Reproducible  
-- Scientifically defensible  
+- Evidence-bound
+- Inspectable
+- Reproducible
+- Scientifically defensible
 
 This document is normative. All components must conform.
 
@@ -31,6 +31,7 @@ If a component cannot produce structured, validated output, it is not considered
 All internal reasoning must operate over structured schemas.
 
 Unstructured text is permitted only:
+
 - At ingestion boundaries
 - At final artifact generation boundaries
 
@@ -63,10 +64,10 @@ If a task can be implemented deterministically, it must not rely on an LLM.
 
 LLMs are reserved for:
 
-- Abstraction  
-- Synthesis  
-- Interpretation under uncertainty  
-- Adversarial critique  
+- Abstraction
+- Synthesis
+- Interpretation under uncertainty
+- Adversarial critique
 
 ---
 
@@ -101,7 +102,7 @@ No reasoning is permitted before normalization.
 
 # 2. Core Epistemic Schemas
 
-These schemas define the structured backbone of Researcher-AI and are mandatory.
+These schemas define the structured backbone of ScholarOS and are mandatory.
 
 ---
 
@@ -246,9 +247,9 @@ Free-form “general research” execution paths are disallowed.
 
 LLM context must be constructed through:
 
-- Ranked retrieval  
-- Relevance filtering  
-- Explicit token budgeting  
+- Ranked retrieval
+- Relevance filtering
+- Explicit token budgeting
 
 Entire session histories must never be blindly forwarded to models.
 
@@ -274,9 +275,9 @@ Without normalization, semantic comparison is invalid.
 
 A contradiction requires:
 
-- Identical subject and predicate  
-- Identical ExperimentalContext identity  
-- Opposing polarity  
+- Identical subject and predicate
+- Identical ExperimentalContext identity
+- Opposing polarity
 
 Contradiction detection must operate solely on ExperimentalContext identity.
 Conditions must not be used for overlap inference.
@@ -293,10 +294,10 @@ conditional_divergence
 
 Consensus must be computed using explicit rules based on:
 
-- Number of independent supporting sources  
-- Methodological similarity  
-- Recency weighting  
-- Contradiction density  
+- Number of independent supporting sources
+- Methodological similarity
+- Recency weighting
+- Contradiction density
 
 All heuristic scoring functions must be documented in code.
 
@@ -333,10 +334,10 @@ Each critique item must cite evidence where applicable.
 
 The loop must terminate when:
 
-- No new contradicting claims are found  
-- Confidence stabilizes  
-- Iteration cap reached  
-- User intervention  
+- No new contradicting claims are found
+- Confidence stabilizes
+- Iteration cap reached
+- User intervention
 
 ---
 
@@ -346,10 +347,10 @@ The loop must terminate when:
 
 Extracted tables must pass:
 
-- Row/column consistency checks  
-- Numeric parsing validation  
-- Unit normalization  
-- Missing value detection  
+- Row/column consistency checks
+- Numeric parsing validation
+- Unit normalization
+- Missing value detection
 
 Failure must trigger:
 
@@ -363,10 +364,10 @@ extraction_confidence: "low"
 
 Every extracted metric must link to:
 
-- Dataset  
-- Evaluation method  
-- Model or approach  
-- Statistical significance (if available)  
+- Dataset
+- Evaluation method
+- Model or approach
+- Statistical significance (if available)
 
 Incomplete metadata must be explicitly labeled.
 
@@ -378,10 +379,10 @@ Numeric probability outputs are **prohibited unless calibrated**.
 
 System confidence must be **qualitative**, derived from:
 
-- Evidence count  
-- Source diversity  
-- Contradiction density  
-- Retrieval score aggregation  
+- Evidence count
+- Source diversity
+- Contradiction density
+- Retrieval score aggregation
 
 Threshold rules must be explicitly documented.
 
@@ -408,14 +409,14 @@ Observability is mandatory for reproducibility.
 
 **Minimum**
 
-- 16 GB RAM  
-- SSD storage  
-- CPU-based embedding fallback  
+- 16 GB RAM
+- SSD storage
+- CPU-based embedding fallback
 
 **Recommended**
 
-- 32 GB RAM  
-- Dedicated GPU (≥ 8 GB VRAM)  
+- 32 GB RAM
+- Dedicated GPU (≥ 8 GB VRAM)
 
 Degraded modes must declare capability limitations.
 
@@ -427,10 +428,10 @@ Each core capability must have measurable benchmarks.
 
 **Examples**
 
-- Literature Mapping → cluster coherence, human agreement  
-- Contradiction Detection → precision/recall on annotated data  
-- Hypothesis Quality → blind expert scoring  
-- Multimodal Extraction → numeric accuracy vs ground truth  
+- Literature Mapping → cluster coherence, human agreement
+- Contradiction Detection → precision/recall on annotated data
+- Hypothesis Quality → blind expert scoring
+- Multimodal Extraction → numeric accuracy vs ground truth
 
 Claims of rigor must be supported by metrics.
 
@@ -438,13 +439,13 @@ Claims of rigor must be supported by metrics.
 
 # 11. Explicit Non-Goals
 
-Researcher-AI does **not**:
+ScholarOS does **not**:
 
-- Replace researchers  
-- Resolve scientific disagreement autonomously  
-- Perform statistical meta-analysis  
-- Conduct experiments  
-- Guarantee funding success  
+- Replace researchers
+- Resolve scientific disagreement autonomously
+- Perform statistical meta-analysis
+- Conduct experiments
+- Guarantee funding success
 
 Human judgment remains authoritative.
 
@@ -452,13 +453,13 @@ Human judgment remains authoritative.
 
 # Conclusion
 
-Researcher-AI is designed as a **structured, modular research operating system**.
+ScholarOS is designed as a **structured, modular research operating system**.
 
 Its integrity depends on:
 
-- Strict schema enforcement  
-- Bounded agentic reasoning  
-- Provenance-first outputs  
-- Transparent execution traces  
+- Strict schema enforcement
+- Bounded agentic reasoning
+- Provenance-first outputs
+- Transparent execution traces
 
 Any component violating these principles must be revised before integration.

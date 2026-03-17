@@ -1,11 +1,11 @@
-# Researcher-AI — Core Capabilities
+# ScholarOS — Core Capabilities
 
-This document defines the **core functional capabilities** of **Researcher-AI**.
+This document defines the **core functional capabilities** of **ScholarOS**.
 
 These capabilities are **intentionally locked** for the initial system build.  
 They represent the highest-impact, longest-duration pain points in real research workflows and form a coherent, end-to-end research assistance loop.
 
-Researcher-AI is not designed to answer isolated questions.  
+ScholarOS is not designed to answer isolated questions.  
 It is designed to **support the structure of research thinking**: understanding a field, identifying disagreement, forming and testing hypotheses, extracting evidence, and producing formal research artifacts.
 
 ---
@@ -32,7 +32,7 @@ Rather than returning a flat list of “related papers,” this capability ident
 
 This capability answers the question:
 
-> *“What does this research space look like, and where does this work belong?”*
+> _“What does this research space look like, and where does this work belong?”_
 
 ### What It Does
 
@@ -79,7 +79,7 @@ This capability makes it explicit and structured.
 
 This capability answers the question:
 
-> *“What do researchers actually agree on, and what is still contested?”*
+> _“What do researchers actually agree on, and what is still contested?”_
 
 ### What It Does
 
@@ -122,6 +122,7 @@ This capability answers the question:
 This capability supports **hypothesis formation as an iterative, adversarial process**, rather than a one-shot generation task.
 
 It uses a selective multi-agent design:
+
 - A **Hypothesis Agent** proposes literature-grounded hypotheses
 - A **Critic Agent** actively challenges them using counter-evidence
 
@@ -129,7 +130,7 @@ This mirrors real research practice: ideas improve through critique, not uncheck
 
 This capability answers the question:
 
-> *“Is this hypothesis novel, defensible, and worth pursuing?”*
+> _“Is this hypothesis novel, defensible, and worth pursuing?”_
 
 ### What It Does
 
@@ -178,7 +179,7 @@ This capability surfaces that evidence explicitly.
 
 This capability answers the question:
 
-> *“What concrete results does this paper actually report?”*
+> _“What concrete results does this paper actually report?”_
 
 ### What It Does
 
@@ -222,7 +223,7 @@ This capability is intentionally positioned **after hypothesis critique**, ensur
 
 This capability answers the question:
 
-> *“How do I turn this idea into a formal, fundable research proposal?”*
+> _“How do I turn this idea into a formal, fundable research proposal?”_
 
 ### What It Does
 
@@ -262,4 +263,3 @@ This capability answers the question:
 ## Capability Integration
 
 The five capabilities form a **closed research loop**:
-

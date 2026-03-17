@@ -1,10 +1,10 @@
 # Core Schemas & Validators
 
-This module provides the **structured backbone** of Researcher-AI, implementing the foundational schemas and validation logic that enforce epistemic rigor across the system.
+This module provides the **structured backbone** of ScholarOS, implementing the foundational schemas and validation logic that enforce epistemic rigor across the system.
 
 ## Overview
 
-All intermediate reasoning in Researcher-AI operates over these typed representations. Unstructured text is permitted only at ingestion and artifact generation boundaries.
+All intermediate reasoning in ScholarOS operates over these typed representations. Unstructured text is permitted only at ingestion and artifact generation boundaries.
 
 ## Components
 
@@ -17,6 +17,7 @@ Production-grade Pydantic models implementing:
 - **Hypothesis Schema** - Testable propositions with explicit assumptions
 
 All schemas enforce:
+
 - Type safety
 - Required field validation
 - Constraint verification
@@ -74,6 +75,7 @@ EvidenceRecord(
 ```
 
 **Constraints:**
+
 - IDs must be non-empty
 - Page numbers >= 1
 - Extraction model version required
@@ -95,6 +97,7 @@ Claim(
 ```
 
 **Constraints:**
+
 - Claims must be atomic (compound claims decomposed)
 - At least one piece of evidence required
 - Subject-predicate-object must form coherent statement
@@ -119,6 +122,7 @@ Hypothesis(
 ```
 
 **Constraints:**
+
 - No hypothesis without explicit assumptions
 - Variables must be declared
 - Revision history must be sequential
@@ -234,6 +238,7 @@ pytest --cov=core --cov-report=html
 ## Design Decisions
 
 ### Why Pydantic?
+
 - Strong type safety
 - Automatic validation
 - JSON Schema generation
@@ -241,12 +246,14 @@ pytest --cov=core --cov-report=html
 - Industry standard for data validation
 
 ### Why Separate Validators?
+
 - Business logic separate from structure
 - Cross-schema validation
 - Flexible validation rules
 - Clear error reporting
 
 ### Why Qualitative Confidence?
+
 - Numeric probabilities prohibited unless calibrated (per SYSTEM_GUIDELINES.md)
 - Confidence derived from evidence count, source diversity, retrieval scores
 - Avoids false precision

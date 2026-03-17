@@ -1,7 +1,7 @@
 # AGENTS.md — Implementation Rules for AI Coding Assistants
 
 This file defines **strict behavioral and architectural constraints** for AI coding agents
-(e.g., GitHub Copilot, ChatGPT, Claude, etc.) contributing to **Researcher-AI**.
+(e.g., GitHub Copilot, ChatGPT, Claude, etc.) contributing to **ScholarOS**.
 
 The goal is to ensure that automated code generation:
 
@@ -277,7 +277,7 @@ Demo output alone does NOT count.
 
 # Final Directive
 
-AI agents contributing to Researcher-AI must behave like:
+AI agents contributing to ScholarOS must behave like:
 
 **careful systems engineers working on scientific infrastructure**  
 —not like chatbot demo generators.
