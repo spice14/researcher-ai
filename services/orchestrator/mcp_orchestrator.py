@@ -243,13 +243,265 @@ class MCPOrchestrator:
 
         return pruned
     
+    def execute_dag(
+        self,
+        dag,
+        initial_payload: Dict[str, Any],
+        *,
+        session_id: Optional[str] = None,
+        user_input: str = "dag_execution",
+        persist_trace: bool = True,
+        pause_at: Optional[str] = None,
+    ) -> ExecutionTrace:
+        """Execute a DAG-based workflow with conditional branching.
+
+        Args:
+            dag: DAGDefinition with nodes and dependencies
+            initial_payload: Starting input
+            pause_at: Optional tool name to pause before executing
+
+        Returns:
+            ExecutionTrace with full provenance
+        """
+        from services.orchestrator.dag import DAGDefinition
+
+        errors = dag.validate()
+        if errors:
+            raise ValueError(f"Invalid DAG: {errors}")
+
+        execution_order = dag.topological_sort()
+        session_id = session_id or str(uuid.uuid4())[:8]
+        started_at = datetime.now(timezone.utc)
+        trace_entries: List[TraceEntry] = []
+        outputs: Dict[str, Dict[str, Any]] = {"__initial__": initial_payload.copy()}
+
+        self._paused_state: Optional[Dict[str, Any]] = None
+
+        session = Session(
+            session_id=session_id,
+            user_input=user_input,
+            active_paper_ids=[],
+            hypothesis_ids=[],
+            phase="dag_init",
+            created_at=started_at,
+            updated_at=started_at,
+        )
+        self._session_store.save(session)
+
+        for sequence, task_id in enumerate(execution_order):
+            node = dag.nodes[task_id]
+
+            # Pause support
+            if pause_at and node.tool == pause_at:
+                self._paused_state = {
+                    "dag": dag,
+                    "remaining_tasks": execution_order[sequence:],
+                    "outputs": outputs,
+                    "session_id": session_id,
+                    "started_at": started_at.isoformat(),
+                    "trace_entries": trace_entries,
+                    "user_input": user_input,
+                }
+                session = session.model_copy(update={
+                    "phase": f"paused:{task_id}",
+                    "updated_at": datetime.now(timezone.utc),
+                })
+                self._session_store.save(session)
+                break
+
+            # Conditional check
+            if node.condition is not None:
+                dep_outputs = {dep: outputs.get(dep, {}) for dep in node.depends_on}
+                merged = {}
+                for d in dep_outputs.values():
+                    merged.update(d)
+                if not node.condition(merged):
+                    outputs[task_id] = {"skipped": True, "reason": "condition_not_met"}
+                    continue
+
+            # Build input from dependencies
+            step_input = {}
+            if node.depends_on:
+                for dep in node.depends_on:
+                    dep_output = outputs.get(dep, {})
+                    step_input.update(dep_output)
+            else:
+                step_input = initial_payload.copy()
+
+            # Merge static params
+            step_input.update(node.params)
+
+            # Execute tool
+            tool = self._registry.get(node.tool)
+            manifest = tool.manifest()
+            pruned = self._prune_payload_for_schema(step_input, manifest.input_schema)
+
+            input_hash = hash_payload(pruned)
+            step_start = time.time()
+            try:
+                result = tool.call(pruned)
+                status = "success"
+                error_msg = None
+            except Exception as e:
+                status = "error"
+                error_msg = str(e)
+                result = {}
+
+            step_duration = (time.time() - step_start) * 1000
+            output_hash = hash_payload(result)
+
+            trace_entries.append(TraceEntry(
+                sequence=sequence,
+                tool=node.tool,
+                input_hash=input_hash,
+                output_hash=output_hash,
+                timestamp=datetime.now(timezone.utc),
+                status=status,
+                error_message=error_msg,
+                duration_ms=step_duration,
+                phase=task_id,
+            ))
+
+            if status == "error":
+                raise RuntimeError(f"DAG task '{task_id}' (tool={node.tool}) failed: {error_msg}")
+
+            outputs[task_id] = result
+            session = session.model_copy(update={
+                "phase": task_id,
+                "updated_at": datetime.now(timezone.utc),
+            })
+            self._session_store.save(session)
+
+        # Final output is from the last executed task
+        last_task = execution_order[-1] if execution_order else "__initial__"
+        if self._paused_state:
+            # Use last completed task before pause
+            completed = [t for t in execution_order if t in outputs]
+            last_task = completed[-1] if completed else "__initial__"
+
+        final_output = outputs.get(last_task, initial_payload)
+        completed_at = datetime.now(timezone.utc)
+
+        trace = ExecutionTrace(
+            session_id=session_id,
+            started_at=started_at,
+            completed_at=completed_at,
+            entries=trace_entries,
+            final_output_hash=hash_payload(final_output),
+            final_output=final_output,
+            pipeline_definition=[dag.nodes[t].tool for t in execution_order],
+        )
+
+        if persist_trace:
+            try:
+                self._trace_store.save(trace)
+            except Exception as exc:
+                warn(f"Trace persistence failed: {exc}")
+
+        return trace
+
+    def resume_pipeline(self) -> Optional[ExecutionTrace]:
+        """Resume a paused DAG execution."""
+        if not hasattr(self, '_paused_state') or self._paused_state is None:
+            return None
+
+        state = self._paused_state
+        self._paused_state = None
+
+        dag = state["dag"]
+        remaining = state["remaining_tasks"]
+        outputs = state["outputs"]
+        session_id = state["session_id"]
+        trace_entries = state["trace_entries"]
+        started_at = datetime.fromisoformat(state["started_at"])
+
+        initial_payload = outputs.get("__initial__", {})
+
+        session = self._session_store.get(session_id)
+        if session is None:
+            return None
+
+        for sequence_offset, task_id in enumerate(remaining):
+            node = dag.nodes[task_id]
+
+            if node.condition is not None:
+                dep_outputs = {dep: outputs.get(dep, {}) for dep in node.depends_on}
+                merged = {}
+                for d in dep_outputs.values():
+                    merged.update(d)
+                if not node.condition(merged):
+                    outputs[task_id] = {"skipped": True}
+                    continue
+
+            step_input = {}
+            if node.depends_on:
+                for dep in node.depends_on:
+                    step_input.update(outputs.get(dep, {}))
+            else:
+                step_input = initial_payload.copy()
+            step_input.update(node.params)
+
+            tool = self._registry.get(node.tool)
+            manifest = tool.manifest()
+            pruned = self._prune_payload_for_schema(step_input, manifest.input_schema)
+
+            step_start = time.time()
+            try:
+                result = tool.call(pruned)
+                status = "success"
+                error_msg = None
+            except Exception as e:
+                status = "error"
+                error_msg = str(e)
+                result = {}
+
+            step_duration = (time.time() - step_start) * 1000
+
+            trace_entries.append(TraceEntry(
+                sequence=len(trace_entries),
+                tool=node.tool,
+                input_hash=hash_payload(pruned),
+                output_hash=hash_payload(result),
+                timestamp=datetime.now(timezone.utc),
+                status=status,
+                error_message=error_msg,
+                duration_ms=step_duration,
+                phase=task_id,
+            ))
+
+            if status == "error":
+                raise RuntimeError(f"DAG task '{task_id}' failed on resume: {error_msg}")
+
+            outputs[task_id] = result
+            session = session.model_copy(update={
+                "phase": task_id,
+                "updated_at": datetime.now(timezone.utc),
+            })
+            self._session_store.save(session)
+
+        last_task = remaining[-1] if remaining else "__initial__"
+        final_output = outputs.get(last_task, initial_payload)
+        completed_at = datetime.now(timezone.utc)
+
+        trace = ExecutionTrace(
+            session_id=session_id,
+            started_at=started_at,
+            completed_at=completed_at,
+            entries=trace_entries,
+            final_output_hash=hash_payload(final_output),
+            final_output=final_output,
+            pipeline_definition=[dag.nodes[t].tool for t in dag.topological_sort()],
+        )
+
+        return trace
+
     def validate_pipeline(self, pipeline: List[str]) -> bool:
         """
         Check if pipeline can execute (all tools exist).
-        
+
         Args:
             pipeline: List of tool names
-        
+
         Returns:
             True if valid, False otherwise
         """
