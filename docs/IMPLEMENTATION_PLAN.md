@@ -1,4 +1,4 @@
-# Researcher-AI: Implementation Plan
+# ScholarOS: Implementation Plan
 
 > Derived exclusively from `Design.md`, `capabilities.md`, and `README.md`.
 
@@ -21,7 +21,7 @@
 ### 0.1 Repository Structure
 
 ```
-researcher-ai/
+ScholarOS/
 ├── core/
 │   ├── schemas/          # All shared data contracts
 │   ├── mcp/              # MCP protocol interfaces
@@ -46,15 +46,15 @@ researcher-ai/
 
 ### 0.2 Infrastructure Components
 
-| Component | Technology | Purpose |
-|---|---|---|
-| Vector store | Chroma | Semantic retrieval over paper chunks |
-| Metadata DB | SQLite | Papers, sessions, hypotheses, artifacts |
-| Session state | Redis or in-process dict | Active execution state |
-| Trace store | JSON / Langfuse | Full execution provenance |
-| PDF parsing | PyMuPDF or pdfplumber | PDF ingestion |
-| Embeddings | Local sentence-transformers | Chunk vectorization |
-| LLM calls | Ollama / local model | Summarization, hypothesis, critique |
+| Component     | Technology                  | Purpose                                 |
+| ------------- | --------------------------- | --------------------------------------- |
+| Vector store  | Chroma                      | Semantic retrieval over paper chunks    |
+| Metadata DB   | SQLite                      | Papers, sessions, hypotheses, artifacts |
+| Session state | Redis or in-process dict    | Active execution state                  |
+| Trace store   | JSON / Langfuse             | Full execution provenance               |
+| PDF parsing   | PyMuPDF or pdfplumber       | PDF ingestion                           |
+| Embeddings    | Local sentence-transformers | Chunk vectorization                     |
+| LLM calls     | Ollama / local model        | Summarization, hypothesis, critique     |
 
 ### 0.3 MCP Protocol Interface (Applied to Every Service)
 
@@ -89,30 +89,35 @@ Each `/call` response wraps output in an `ExecutionTrace`:
 ### 1.1 Schemas to Define
 
 **Paper**
+
 ```
 paper_id, title, authors, abstract, doi, arxiv_id,
 pdf_path, ingestion_timestamp, chunk_ids[]
 ```
 
 **Chunk**
+
 ```
 chunk_id, paper_id, text, page_number, embedding_id,
 chunk_type (sentence | paragraph | caption | table)
 ```
 
 **Claim**
+
 ```
 claim_id, paper_id, chunk_id, text, claim_type,
 metric_refs[], condition_refs[], confidence, extraction_method
 ```
 
 **NormalizedClaim**
+
 ```
 normalized_claim_id, canonical_text, source_claim_ids[],
 domain, metric, conditions{}, evidence_strength
 ```
 
 **ClusterMap** (Literature Mapping output)
+
 ```
 map_id, seed_paper_id, clusters[{
   cluster_id, label, representative_paper_ids[],
@@ -121,6 +126,7 @@ map_id, seed_paper_id, clusters[{
 ```
 
 **ContradictionReport**
+
 ```
 report_id, claim_cluster_id, consensus_claims[],
 contradiction_pairs[{claim_a, claim_b, evidence_a[], evidence_b[]}],
@@ -128,6 +134,7 @@ uncertainty_markers[]
 ```
 
 **Hypothesis**
+
 ```
 hypothesis_id, statement, rationale, assumptions[],
 supporting_citations[], known_risks[], confidence_score,
@@ -135,24 +142,28 @@ grounding_claim_ids[], iteration_number
 ```
 
 **Critique**
+
 ```
 critique_id, hypothesis_id, counter_evidence[],
 weak_assumptions[], suggested_revisions[], severity
 ```
 
 **Proposal**
+
 ```
 proposal_id, hypothesis_id, novelty_statement, motivation,
 methodology_outline, expected_outcomes, references[]
 ```
 
 **ExtractionResult** (Multimodal)
+
 ```
 result_id, paper_id, page_number, artifact_type (table | figure | metric),
 raw_content, normalized_data{}, caption, provenance
 ```
 
 **Session**
+
 ```
 session_id, user_input, active_paper_ids[], hypothesis_ids[],
 phase, created_at, updated_at
@@ -180,6 +191,7 @@ Implemented in strict order. Each service is independently testable and exposes 
 **Purpose:** Convert raw PDFs into indexed, retrievable chunks.
 
 **Steps:**
+
 1. Accept PDF file path or URL
 2. Parse PDF → extract raw text per page using PyMuPDF
 3. Sentence-tokenize text → produce `Chunk` records
@@ -190,6 +202,7 @@ Implemented in strict order. Each service is independently testable and exposes 
 8. Return `Paper` schema with `chunk_ids[]`
 
 **Failure modes to handle:**
+
 - Corrupt or password-protected PDF → log error, return structured failure
 - Embedding model unavailable → fail hard, no silent fallback
 - Duplicate paper (same DOI/arxiv_id) → return existing paper_id, skip re-indexing
@@ -203,6 +216,7 @@ Implemented in strict order. Each service is independently testable and exposes 
 **Purpose:** Semantic retrieval over indexed content.
 
 **Steps:**
+
 1. Accept a query string + optional paper_id filter + top_k parameter
 2. Embed query using same local model as ingestion
 3. Query Chroma for nearest neighbors
@@ -220,6 +234,7 @@ Implemented in strict order. Each service is independently testable and exposes 
 **Purpose:** Build a semantic, clustered literature map from a seed paper or topic.
 
 **Steps:**
+
 1. Accept seed `paper_id` or topic string
 2. Use RAG Service to retrieve top-N related papers
 3. Collect chunk embeddings for each related paper → aggregate to paper-level embedding (mean pool)
@@ -230,6 +245,7 @@ Implemented in strict order. Each service is independently testable and exposes 
 8. Log LLM call with prompt version, model, token usage, trace_id
 
 **Constraints:**
+
 - LLM call is for labeling only — no reasoning
 - Clustering is deterministic (fixed random seed)
 - Minimum cluster size configurable
@@ -244,6 +260,7 @@ Implemented in strict order. Each service is independently testable and exposes 
 **Purpose:** Extract structured claims from text chunks.
 
 **Steps:**
+
 1. Accept `paper_id` + `chunk_ids[]` (or all chunks for a paper)
 2. For each chunk, apply rule-based extraction first:
    - Named metric patterns (accuracy, F1, BLEU, MAE, etc.)
@@ -265,6 +282,7 @@ Implemented in strict order. Each service is independently testable and exposes 
 **Purpose:** Group semantically equivalent claims across papers into `NormalizedClaim` clusters.
 
 **Steps:**
+
 1. Accept `claim_ids[]`
 2. Embed each claim text
 3. Cluster claim embeddings (cosine similarity threshold)
@@ -281,6 +299,7 @@ Implemented in strict order. Each service is independently testable and exposes 
 **Purpose:** Identify where normalized claims agree, conflict, or are inconclusive.
 
 **Steps:**
+
 1. Accept `normalized_claim_ids[]`
 2. Group claims by domain + metric (deterministic grouping)
 3. For each group, compare condition sets (controlled by `ExperimentalContext` identity — not overlap)
@@ -301,6 +320,7 @@ Implemented in strict order. Each service is independently testable and exposes 
 **Purpose:** Extract tables, figures, and numeric metrics from PDFs as structured data.
 
 **Steps:**
+
 1. Accept `paper_id` + optional page constraint
 2. Use pdfplumber (or equivalent) for table extraction → parse cell data
 3. Use PDF layout analysis to identify figure regions + captions
@@ -319,6 +339,7 @@ Implemented in strict order. Each service is independently testable and exposes 
 **Purpose:** Convert a validated hypothesis + evidence into a structured research artifact.
 
 **Steps:**
+
 1. Accept `hypothesis_id` + `supporting_claim_ids[]` + optional constraints (funding agency, word limit)
 2. Retrieve hypothesis + critiques + evidence from store
 3. Structure sections: novelty statement, motivation, methodology outline, expected outcomes
@@ -342,11 +363,13 @@ Agents operate only on structured schemas. No free-form reasoning outputs.
 **Purpose:** Propose testable, literature-grounded hypotheses.
 
 **Inputs (structured):**
+
 - `ClusterMap` (from Contextual Mapping)
 - `ContradictionReport` (identifies gaps and conflicts)
 - Optional: user constraints (scope, domain, feasibility)
 
 **Algorithm:**
+
 1. Identify candidate gaps: contradiction pairs with no consensus + high-evidence contradiction
 2. For each gap, construct a structured hypothesis prompt including:
    - Contradiction summary (structured, not prose)
@@ -371,11 +394,13 @@ Agents operate only on structured schemas. No free-form reasoning outputs.
 **Purpose:** Challenge hypotheses using counter-evidence.
 
 **Inputs (structured):**
+
 - `hypothesis_id`
 - Access to RAG Service (counter-evidence retrieval)
 - `ContradictionReport`
 
 **Algorithm:**
+
 1. Retrieve hypothesis assumptions and supporting claims
 2. For each assumption: query RAG for counter-evidence
 3. For each supporting claim: search `ContradictionReport` for contradictions
@@ -492,13 +517,13 @@ Every service and agent emits:
 
 ### 5.3 Evaluation Metrics
 
-| Metric | What it measures |
-|---|---|
-| Claim extraction yield | Claims extracted / expected claims per paper |
-| Normalization precision | Collapsed claims that are truly equivalent |
-| Contradiction recall | Contradictions found / known contradictions in ground truth |
-| Hypothesis grounding rate | % of hypotheses with non-empty `grounding_claim_ids` |
-| Proposal completeness | % of required sections present and non-empty |
+| Metric                    | What it measures                                            |
+| ------------------------- | ----------------------------------------------------------- |
+| Claim extraction yield    | Claims extracted / expected claims per paper                |
+| Normalization precision   | Collapsed claims that are truly equivalent                  |
+| Contradiction recall      | Contradictions found / known contradictions in ground truth |
+| Hypothesis grounding rate | % of hypotheses with non-empty `grounding_claim_ids`        |
+| Proposal completeness     | % of required sections present and non-empty                |
 
 ### 5.4 Provenance Audit
 
@@ -515,35 +540,35 @@ Outputs failing provenance audit are flagged, not silently passed.
 
 > Do not begin Step N+1 until Step N has passing tests and schema validation.
 
-| Step | Component | Dependency |
-|---|---|---|
-| 1 | Core schemas + validators | None |
-| 2 | MCP base interface + `ExecutionTrace` | Schemas |
-| 3 | Ingestion Service | MCP interface |
-| 4 | RAG Service | Ingestion |
-| 5 | Claim Extraction Service | RAG, Schemas |
-| 6 | Normalization Service | Extraction |
-| 7 | Contradiction & Consensus Engine | Normalization |
-| 8 | Contextual Mapping Service | RAG |
-| 9 | Hypothesis Agent | Mapping, Contradiction |
-| 10 | Critic Agent | Hypothesis, RAG |
-| 11 | Hypothesis-Critique Loop | Both agents |
-| 12 | Multimodal Extraction Service | Ingestion |
-| 13 | Proposal/Artifact Service | Hypothesis, Critique |
-| 14 | Orchestrator (DAG) | All services + agents |
-| 15 | Observability + evaluation tooling | Orchestrator |
+| Step | Component                             | Dependency             |
+| ---- | ------------------------------------- | ---------------------- |
+| 1    | Core schemas + validators             | None                   |
+| 2    | MCP base interface + `ExecutionTrace` | Schemas                |
+| 3    | Ingestion Service                     | MCP interface          |
+| 4    | RAG Service                           | Ingestion              |
+| 5    | Claim Extraction Service              | RAG, Schemas           |
+| 6    | Normalization Service                 | Extraction             |
+| 7    | Contradiction & Consensus Engine      | Normalization          |
+| 8    | Contextual Mapping Service            | RAG                    |
+| 9    | Hypothesis Agent                      | Mapping, Contradiction |
+| 10   | Critic Agent                          | Hypothesis, RAG        |
+| 11   | Hypothesis-Critique Loop              | Both agents            |
+| 12   | Multimodal Extraction Service         | Ingestion              |
+| 13   | Proposal/Artifact Service             | Hypothesis, Critique   |
+| 14   | Orchestrator (DAG)                    | All services + agents  |
+| 15   | Observability + evaluation tooling    | Orchestrator           |
 
 ---
 
 ## Testing Requirements per Phase
 
-| Phase | Required Tests |
-|---|---|
-| Schemas | Field presence, type validation, rejection of invalid inputs |
+| Phase        | Required Tests                                                          |
+| ------------ | ----------------------------------------------------------------------- |
+| Schemas      | Field presence, type validation, rejection of invalid inputs            |
 | Each service | Unit tests, schema compliance, failure modes, determinism across 2 runs |
-| Each agent | Schema output compliance, loop bound enforcement, grounding non-empty |
-| Orchestrator | DAG execution, retry logic, task isolation, trace completeness |
-| End-to-end | Full pipeline on 1 synthetic paper, provenance audit passes |
+| Each agent   | Schema output compliance, loop bound enforcement, grounding non-empty   |
+| Orchestrator | DAG execution, retry logic, task isolation, trace completeness          |
+| End-to-end   | Full pipeline on 1 synthetic paper, provenance audit passes             |
 
 ---
 

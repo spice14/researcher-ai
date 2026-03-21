@@ -1,11 +1,11 @@
 version: "3.9"
 
-name: researcher-ai-local
+name: ScholarOS-local
 
 services:
   chroma:
     image: chromadb/chroma:0.5.23
-    container_name: researcher-ai-chroma
+    container_name: ScholarOS-chroma
     restart: unless-stopped
     ports:
       - "${CHROMA_PORT:-8001}:8000"
@@ -17,7 +17,7 @@ services:
 
   redis:
     image: redis:7-alpine
-    container_name: researcher-ai-redis
+    container_name: ScholarOS-redis
     restart: unless-stopped
     command: ["redis-server", "--save", "60", "1", "--appendonly", "yes"]
     ports:
@@ -27,7 +27,7 @@ services:
 
   ollama:
     image: ollama/ollama:0.6.0
-    container_name: researcher-ai-ollama
+    container_name: ScholarOS-ollama
     restart: unless-stopped
     ports:
       - "${OLLAMA_PORT:-11434}:11434"

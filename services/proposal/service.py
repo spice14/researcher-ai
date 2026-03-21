@@ -51,11 +51,14 @@ def _deterministic_id(seed: str) -> str:
 
 
 class ProposalService:
-    """Deterministic proposal generation from structured inputs.
+    """Proposal generation from structured inputs.
 
     Assembles proposal sections from hypothesis, claims, critiques
-    and references without any LLM involvement.
+    and references. Supports optional LLM-backed generation and LaTeX export.
     """
+
+    def __init__(self, llm_client=None) -> None:
+        self._llm = llm_client
 
     def generate(self, request: ProposalRequest) -> ProposalResult:
         """Generate a structured proposal from validated hypothesis and evidence.
@@ -93,8 +96,23 @@ class ProposalService:
             self._build_references(request),
         ]
 
+        # LLM-backed generation (if requested and available)
+        if request.use_llm and self._llm is not None:
+            sections = self._build_sections_with_llm(request, sections)
+
         full_markdown = self._assemble_markdown(proposal_id, request, sections)
         references = self._collect_references(request)
+
+        # LaTeX export
+        latex_output = None
+        if request.export_format == "latex":
+            from services.proposal.latex_renderer import render_proposal
+            latex_output = render_proposal(
+                title=request.statement[:120],
+                sections=[{"heading": s.heading, "content": s.content} for s in sections],
+                references=references,
+                evidence_tables=request.evidence_tables or [],
+            )
 
         return ProposalResult(
             proposal_id=proposal_id,
@@ -103,7 +121,47 @@ class ProposalService:
             full_markdown=full_markdown,
             references=references,
             warnings=warnings,
+            latex_output=latex_output,
+            evidence_tables=request.evidence_tables or [],
         )
+
+    def _build_sections_with_llm(self, request: ProposalRequest, fallback_sections: list) -> list:
+        """Attempt LLM-backed section generation; fall back to deterministic on failure."""
+        from services.proposal.llm_sections import LLMSectionGenerator
+        gen = LLMSectionGenerator(self._llm)
+
+        try:
+            novelty_content = gen.generate_novelty(
+                request.statement,
+                request.supporting_claims,
+                request.critiques,
+            )
+            fallback_sections[0] = SectionDraft(
+                section=fallback_sections[0].section,
+                heading=fallback_sections[0].heading,
+                content=novelty_content,
+                citations_used=fallback_sections[0].citations_used,
+            )
+        except Exception:
+            pass
+
+        try:
+            method_content = gen.generate_methodology(
+                request.statement,
+                request.assumptions,
+                {"independent": [], "dependent": []},
+                request.evidence_tables,
+            )
+            fallback_sections[2] = SectionDraft(
+                section=fallback_sections[2].section,
+                heading=fallback_sections[2].heading,
+                content=method_content,
+                citations_used=fallback_sections[2].citations_used,
+            )
+        except Exception:
+            pass
+
+        return fallback_sections
 
     def _build_novelty(self, req: ProposalRequest) -> SectionDraft:
         """Build the novelty statement section."""

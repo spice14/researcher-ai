@@ -52,6 +52,18 @@ class ProposalRequest(BaseModel):
         default_factory=dict,
         description="Optional constraints (e.g., funding_agency, word_limit, format)",
     )
+    evidence_tables: List[Dict] = Field(
+        default_factory=list,
+        description="Evidence tables extracted from PDF (Phase 4)",
+    )
+    use_llm: bool = Field(
+        default=False,
+        description="Use LLM-backed section generation when available",
+    )
+    export_format: str = Field(
+        default="md",
+        description="Output format: 'md' (Markdown) or 'latex'",
+    )
 
 
 class SectionDraft(BaseModel):
@@ -77,4 +89,12 @@ class ProposalResult(BaseModel):
     )
     warnings: List[str] = Field(
         default_factory=list, description="Non-fatal generation warnings"
+    )
+    latex_output: Optional[str] = Field(
+        None,
+        description="LaTeX-formatted proposal document (when export_format='latex')",
+    )
+    evidence_tables: List[Dict] = Field(
+        default_factory=list,
+        description="Evidence tables embedded in the proposal",
     )

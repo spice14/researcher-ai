@@ -137,3 +137,56 @@ Respond with a JSON object with exactly these fields:
 }}"""
 
 CRITIC_EVALUATE_PROMPT_VERSION = "critic_evaluate_v1.0.0"
+
+
+# ───────────────────────────────────────────────────────────────────
+# Proposal Section Prompts (Phase 4)
+# ───────────────────────────────────────────────────────────────────
+
+PROPOSAL_NOVELTY_PROMPT = """\
+Write a compelling research novelty statement for the following hypothesis.
+
+HYPOTHESIS: {hypothesis}
+SUPPORTING CLAIMS: {claims}
+IDENTIFIED GAPS: {gaps}
+
+Write 2-3 focused paragraphs. Be specific and grounded in the evidence."""
+
+PROPOSAL_NOVELTY_PROMPT_VERSION = "proposal_novelty_v1.0.0"
+
+PROPOSAL_METHODOLOGY_PROMPT = """\
+Write a methodology section for the following research proposal.
+
+HYPOTHESIS: {hypothesis}
+ASSUMPTIONS: {assumptions}
+INDEPENDENT VARIABLES: {independent_vars}
+DEPENDENT VARIABLES: {dependent_vars}
+
+Describe a concrete experimental design, evaluation metrics, and validation approach in 2-3 paragraphs."""
+
+PROPOSAL_METHODOLOGY_PROMPT_VERSION = "proposal_methodology_v1.0.0"
+
+PROPOSAL_OUTCOMES_PROMPT = """\
+Write an expected outcomes section for the following research proposal.
+
+HYPOTHESIS: {hypothesis}
+KNOWN RISKS: {risks}
+
+Write 2 paragraphs: (1) predicted outcomes and significance, (2) risk mitigation strategies."""
+
+PROPOSAL_OUTCOMES_PROMPT_VERSION = "proposal_outcomes_v1.0.0"
+
+# ───────────────────────────────────────────────────────────────────
+# Cluster Label Prompt (Phase 2)
+# ───────────────────────────────────────────────────────────────────
+
+CLUSTER_LABEL_PROMPT = """\
+Given the following representative excerpts from a cluster of research papers, \
+generate a concise 3-7 word label that captures the research theme.
+
+EXCERPTS:
+{excerpts}
+
+Respond with ONLY the label text, no punctuation, no quotes."""
+
+CLUSTER_LABEL_PROMPT_VERSION = "cluster_label_v1.0.0"

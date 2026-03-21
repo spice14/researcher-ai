@@ -311,7 +311,8 @@ class TestMultimodalTool:
         assert m.name == "multimodal"
         assert m.deterministic is True
         assert "paper_id" in m.input_schema["required"]
-        assert "chunks" in m.input_schema["required"]
+        # chunks is now optional (pdf_path can be used instead)
+        assert "chunks" in m.input_schema["properties"] or "pdf_path" in m.input_schema["properties"]
 
     def test_extract_table(self):
         tool = self._make_tool()

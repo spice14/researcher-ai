@@ -46,9 +46,17 @@ class MultimodalTool(MCPTool):
                     "page_constraint": {
                         "type": "integer",
                         "description": "Optional: restrict extraction to a specific page"
+                    },
+                    "pdf_path": {
+                        "type": "string",
+                        "description": "Optional: path to PDF for direct PyMuPDF extraction"
+                    },
+                    "link_to_claims": {
+                        "type": "boolean",
+                        "description": "Whether to link extracted metrics to claim IDs"
                     }
                 },
-                "required": ["paper_id", "chunks"]
+                "required": ["paper_id"]
             },
             output_schema={
                 "type": "object",
@@ -81,11 +89,28 @@ class MultimodalTool(MCPTool):
         paper_id = payload.get("paper_id")
         chunks = payload.get("chunks", [])
         page_constraint = payload.get("page_constraint")
+        pdf_path = payload.get("pdf_path")
+        link_to_claims = payload.get("link_to_claims", False)
 
         if not paper_id:
             raise ValueError("paper_id is required")
 
         warnings = []
+
+        # Use PDF path for direct PyMuPDF extraction if provided
+        if pdf_path:
+            results = self._service.extract_from_pdf(
+                pdf_path=pdf_path,
+                paper_id=paper_id,
+                link_to_claims=link_to_claims,
+            )
+            return {
+                "paper_id": paper_id,
+                "results": results,
+                "extraction_count": len(results),
+                "warnings": warnings,
+            }
+
         if not chunks:
             warnings.append("empty chunk list provided; no artifacts extracted")
             return {

@@ -40,6 +40,8 @@ class LoopConfig:
 
     max_iterations: int = 5
     confidence_threshold: float = 0.8
+    convergence_delta: float = 0.01  # Stop if delta < this for 2 consecutive iterations
+    convergence_patience: int = 2    # Consecutive iterations below delta required to stop
 
 
 @dataclass
@@ -123,6 +125,9 @@ class HypothesisCritiqueLoop:
             return result
 
         # Steps 2..N: Critique-revise loop
+        prev_confidence = hypothesis.confidence_score or 0.0
+        low_delta_count = 0
+
         for iteration in range(2, self._config.max_iterations + 1):
             logger.info("Loop iteration %d: critiquing hypothesis", iteration)
 
@@ -189,9 +194,21 @@ class HypothesisCritiqueLoop:
             })
 
             # Check confidence threshold
-            if (hypothesis.confidence_score or 0) >= self._config.confidence_threshold:
+            new_confidence = hypothesis.confidence_score or 0.0
+            if new_confidence >= self._config.confidence_threshold:
                 result.stopped_reason = "confidence_threshold_met"
                 break
+
+            # Convergence detection: stop if delta < threshold for patience iterations
+            delta = abs(new_confidence - prev_confidence)
+            if delta < self._config.convergence_delta:
+                low_delta_count += 1
+                if low_delta_count >= self._config.convergence_patience:
+                    result.stopped_reason = "converged"
+                    break
+            else:
+                low_delta_count = 0
+            prev_confidence = new_confidence
         else:
             result.stopped_reason = "max_iterations_reached"
 

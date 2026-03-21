@@ -12,10 +12,12 @@ from services.ingestion.service import IngestionService
 
 class IngestionTool(MCPTool):
     """MCP wrapper for ingestion service."""
-    
-    def __init__(self):
-        """Initialize with internal service instance."""
+
+    def __init__(self, embedding_service=None, vector_store=None):
+        """Initialize with internal service instance and optional embedding/vector store."""
         self._service = IngestionService()
+        self._embedding_service = embedding_service
+        self._vector_store = vector_store
     
     def manifest(self) -> MCPManifest:
         """Define ingestion tool interface."""
@@ -105,6 +107,33 @@ class IngestionTool(MCPTool):
         
         result = self._service.ingest_text(request)
         
+        # Persist embeddings to vector store if available (Phase 1)
+        if self._embedding_service is not None and self._vector_store is not None:
+            try:
+                from services.embedding.schemas import EmbeddingRequest
+                from services.vectorstore.schemas import VectorAddRequest
+
+                texts = [c.text for c in result.chunks]
+                emb_result = self._embedding_service.embed(EmbeddingRequest(texts=texts))
+                add_req = VectorAddRequest(
+                    collection="chunks",
+                    ids=[c.chunk_id for c in result.chunks],
+                    embeddings=emb_result.embeddings,
+                    documents=texts,
+                    metadatas=[
+                        {
+                            "source_id": c.source_id,
+                            "start_char": str(c.start_char),
+                            "end_char": str(c.end_char),
+                        }
+                        for c in result.chunks
+                    ],
+                )
+                self._vector_store.add_embeddings(add_req)
+            except Exception as exc:
+                import logging
+                logging.getLogger(__name__).warning("Embedding persistence failed: %s", exc)
+
         # Return as explicit dict (schema matches output_schema)
         return {
             "source_id": result.source_id,

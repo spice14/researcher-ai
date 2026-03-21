@@ -64,6 +64,9 @@ class ClusterMap(BaseModel):
         default_factory=list,
         description="Evidence snippets explaining cluster labels and grouping",
     )
+    paper_count: int = Field(default=0, description="Total number of papers processed")
+    noise_paper_ids: List[str] = Field(default_factory=list, description="Papers not assigned to any cluster")
+    similarity_score: Optional[float] = Field(None, ge=0.0, le=1.0, description="Average inter-cluster similarity")
 
     @field_validator("map_id")
     @classmethod
