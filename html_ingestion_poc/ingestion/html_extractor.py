@@ -641,6 +641,31 @@ _STRATEGY_MAP: dict[IdentifierType, Type[_BaseHTMLStrategy]] = {
     IdentifierType.ACL: ACLHTMLExtractor,
 }
 
+# _URL_DOMAIN_MAP is built lazily after stub classes are defined (see bottom of file)
+
+
+def _url_to_strategy(url: str) -> Type[_BaseHTMLStrategy]:
+    """Dispatch to a strategy class based on URL domain."""
+    url_lower = url.lower()
+    for domain, cls in _get_url_domain_map():
+        if domain in url_lower:
+            return cls
+    return GenericHTMLExtractor
+
+
+def _get_url_domain_map():
+    """Return URL domain → strategy map (built lazily after all classes are defined)."""
+    return [
+        ("arxiv.org", ArxivHTMLExtractor),
+        ("pmc.ncbi.nlm.nih.gov", PMCHTMLExtractor),
+        ("aclanthology.org", ACLHTMLExtractor),
+        ("proceedings.mlr.press", PMLRHTMLExtractor),
+        ("nature.com", NatureHTMLExtractor),
+        ("link.springer.com", SpringerHTMLExtractor),
+        ("science.org", ScienceHTMLExtractor),
+        ("sciencemag.org", ScienceHTMLExtractor),
+    ]
+
 
 class HTMLExtractor:
     """Top-level HTML extractor — auto-selects strategy from ResolvedSource."""
@@ -648,7 +673,19 @@ class HTMLExtractor:
     def __init__(self) -> None:
         self._strategies: dict[IdentifierType, _BaseHTMLStrategy] = {}
 
-    def _get_strategy(self, id_type: IdentifierType) -> _BaseHTMLStrategy:
+    def _get_strategy(self, resolved_or_id_type) -> _BaseHTMLStrategy:
+        """Get strategy from ResolvedSource (URL-based dispatch) or IdentifierType."""
+        # URL-based dispatch when passed a ResolvedSource
+        if hasattr(resolved_or_id_type, "html_url"):
+            resolved = resolved_or_id_type
+            url = resolved.html_url or ""
+            cls = _url_to_strategy(url) if url else _STRATEGY_MAP.get(
+                resolved.identifier_type, GenericHTMLExtractor
+            )
+            return cls()
+
+        # Legacy: IdentifierType-based dispatch
+        id_type = resolved_or_id_type
         if id_type not in self._strategies:
             cls = _STRATEGY_MAP.get(id_type, GenericHTMLExtractor)
             self._strategies[id_type] = cls()
@@ -670,3 +707,25 @@ class HTMLExtractor:
             resolved.html_url,
         )
         return strategy.extract(resolved)
+
+
+# ── Publisher-specific stubs (Phase N additions) ───────────────────────────
+
+class NatureHTMLExtractor(GenericHTMLExtractor):
+    """Springer Nature HTML extractor (stub — uses generic extraction)."""
+    pass
+
+
+class ScienceHTMLExtractor(GenericHTMLExtractor):
+    """AAAS Science HTML extractor (stub — uses generic extraction)."""
+    pass
+
+
+class SpringerHTMLExtractor(GenericHTMLExtractor):
+    """Springer Link HTML extractor (stub — uses generic extraction)."""
+    pass
+
+
+class PMLRHTMLExtractor(GenericHTMLExtractor):
+    """PMLR (Proceedings of Machine Learning Research) extractor (stub)."""
+    pass

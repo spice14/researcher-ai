@@ -13,9 +13,12 @@ from services.rag.service import RAGService
 class RAGTool(MCPTool):
     """MCP wrapper for RAG retrieval service."""
 
-    def __init__(self):
-        """Initialize with internal service instance."""
-        self._service = RAGService()
+    def __init__(self, vector_store=None, embedding_service=None):
+        """Initialize with optional semantic backend services."""
+        self._service = RAGService(
+            vector_store=vector_store,
+            embedding_service=embedding_service,
+        )
 
     def manifest(self) -> MCPManifest:
         """Define RAG tool interface."""

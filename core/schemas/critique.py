@@ -1,7 +1,7 @@
 """Critique schema for adversarial hypothesis review."""
 
 from enum import Enum
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -26,6 +26,10 @@ class Critique(BaseModel):
     weak_assumptions: List[str] = Field(default_factory=list, description="Assumptions judged weak")
     suggested_revisions: List[str] = Field(default_factory=list, description="Concrete revision suggestions")
     severity: CritiqueSeverity = Field(..., description="Critique severity")
+    confidence_rationale: Optional[str] = Field(
+        None,
+        description="Rationale explaining the confidence level of this critique",
+    )
 
     @field_validator("critique_id", "hypothesis_id")
     @classmethod

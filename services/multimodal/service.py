@@ -292,3 +292,87 @@ class MultimodalExtractionService:
             })
 
         return results
+
+    def extract_from_pdf(
+        self,
+        pdf_path: str,
+        paper_id: str,
+        link_to_claims: bool = False,
+        claim_ids: Optional[List[str]] = None,
+    ) -> List[Dict]:
+        """Extract tables and metrics directly from a PDF using PyMuPDF.
+
+        Args:
+            pdf_path: Path to the PDF file
+            paper_id: Paper identifier for provenance
+            link_to_claims: Whether to link extracted metrics to claim IDs
+            claim_ids: Optional list of claim IDs to link to
+
+        Returns:
+            List of extraction result dicts
+        """
+        try:
+            import fitz  # PyMuPDF
+        except ImportError:
+            import logging as _logging
+            _logging.getLogger(__name__).warning("PyMuPDF not available; install with: pip install PyMuPDF")
+            return []
+
+        import logging as _logging
+        results: List[Dict] = []
+        claim_ids = claim_ids or []
+
+        try:
+            doc = fitz.open(pdf_path)
+        except Exception as exc:
+            _logging.getLogger(__name__).error("Failed to open PDF %s: %s", pdf_path, exc)
+            return []
+
+        for page_num, page in enumerate(doc, start=1):
+            page_text = page.get_text("text")
+            page_chunks = [{"text": page_text, "page": page_num, "chunk_id": f"{paper_id}_p{page_num}"}]
+            page_results = self.extract(paper_id, page_chunks)
+
+            if link_to_claims and claim_ids:
+                for r in page_results:
+                    if r.get("artifact_type") == ArtifactType.METRIC.value:
+                        r["linked_claim_ids"] = claim_ids[:3]
+
+            results.extend(page_results)
+
+            # PyMuPDF native table detection
+            try:
+                tables = page.find_tables()
+                for t_idx, table in enumerate(tables):
+                    header = table.header.names if table.header else []
+                    rows = table.extract()
+                    if not rows:
+                        continue
+                    result_id = _make_result_id(paper_id, page_num, "pymupdf_table", t_idx)
+                    col_names = header or (rows[0] if rows else [])
+                    data_rows = rows[1:] if header else rows
+                    entry: Dict = {
+                        "result_id": result_id,
+                        "paper_id": paper_id,
+                        "page_number": page_num,
+                        "artifact_type": ArtifactType.TABLE.value,
+                        "raw_content": rows,
+                        "normalized_data": {
+                            "headers": col_names,
+                            "rows": [dict(zip(col_names, r)) for r in data_rows],
+                        },
+                        "caption": None,
+                        "provenance": {
+                            "source_id": paper_id,
+                            "page": page_num,
+                            "extraction_model_version": "pymupdf_v1",
+                        },
+                    }
+                    if link_to_claims and claim_ids:
+                        entry["linked_claim_ids"] = claim_ids[:3]
+                    results.append(entry)
+            except Exception:
+                pass  # find_tables not available in all PyMuPDF versions
+
+        doc.close()
+        return results
