@@ -219,3 +219,5 @@ archive/
 run_minimal_e2e.py
 pytest_cache
 researcher_ai
+references
+.claude
